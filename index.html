@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>DrawBot Control Panel</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/tether.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+      .iconspace-lg{
+        margin: 0px 20px;
+      }
+      .iconspace-sm{
+        margin: 0px 10px;
+      }
+      .navbar-height{
+        height: 60px;
+      }
+      .glyph-height{
+        font-size:1.5em;
+      }
+      .panel-margin{
+        margin: 20px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-height">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">DrawBot</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active iconspace-lg"><a href="#" data-toggle="tooltip" data-placement="bottom" data-delay="0" title="Home"><span class="glyph-height glyphicon glyphicon-home"></span></a></li>
+          <li class="iconspace-lg"><a href="#" data-toggle="tooltip" data-placement="bottom" data-delay="0" title="Draw"><span class="glyph-height glyphicon glyphicon-pencil"></span></a></li>
+          <li class="iconspace-lg"><a href="#" data-toggle="tooltip" data-placement="bottom" data-delay="0" title="Upload"><span class="glyph-height glyphicon glyphicon-upload"></span></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="iconspace-sm"><a href="#" data-toggle="tooltip" data-placement="bottom" data-delay="0" title="WiFi"><span class="glyph-height glyphicon glyphicon-signal"></span></a></li>
+          <li class="iconspace-sm"><a href="#" data-toggle="tooltip" data-placement="bottom" data-delay="0" title="Settings"><span class="glyph-height glyphicon glyphicon-cog"></span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row panel-margin">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+              Panel content<br><br>
+              More stuff<br><br>
+              Even more<br><br>
+              Hello!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- JavaScript Section -->
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('a[data-toggle=tooltip]').tooltip();
+    });
+  </script>
+  </body>
+</html>

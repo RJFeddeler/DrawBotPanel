@@ -1,83 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>DrawBot Control Panel</title>
+	<head>
+	    <!-- Required meta tags -->
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- <script src="/js/tether.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-    <!-- <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script> -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	    <!-- Font Awesome CSS -->
+	    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <style type="text/css">
-      .iconspace-lg{
-        margin: 0px 20px;
-      }
-      .iconspace-sm{
-        margin: 0px 10px;
-      }
-      .navbar-height{
-        height: 60px;
-      }
-      .glyph-big-blue{
-        color: #428bca;
-        font-size:1.5em;
-      }
-      .panel-margin{
-        margin: 20px 0px;
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-inverse navbar-height">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#" style="color:#428bca">DrawBot</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="active iconspace-lg"><a href="#" data-toggle="tooltip" data-placement="bottom" data-delay="0" data-html="true" title="<font color='#428bca'>Home</font>"><span class="glyph-big-blue glyphicon glyphicon-home"></span></a></li>
-          <li class="iconspace-lg"><a href="#" data-toggle="tooltip" data-placement="bottom" data-delay="0" data-html="true" title="<font color='#428bca'>Draw</font>"><span class="glyph-big-blue glyphicon glyphicon-pencil"></span></a></li>
-          <li class="iconspace-lg"><a href="#" data-toggle="tooltip" data-placement="bottom" data-delay="0" data-html="true" title="<font color='#428bca'>Upload</font>"><span class="glyph-big-blue glyphicon glyphicon-upload"></span></a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="iconspace-sm"><a href="#" data-toggle="tooltip" data-placement="bottom" data-delay="0" data-html="true" title="<font color='#428bca'>WiFi</font>"><span class="glyph-big-blue glyphicon glyphicon-signal"></span></a></li>
-          <li class="iconspace-sm"><a href="#" data-toggle="tooltip" data-placement="bottom" data-delay="0" data-html="true" title="<font color='#428bca'>Settings</font>"><span class="glyph-big-blue glyphicon glyphicon-cog"></span></a></li>
-        </ul>
-      </div>
-    </nav>
+	    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>-->
 
-    <div class="container-fluid">
-      <div class="row panel-margin">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content<br><br>
-              More stuff<br><br>
-              Even more<br><br>
-              Hello!
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        <style type="text/css">
+        	.bg-color{
+        		background-color: #e0f0ff;
+        	}
+			.iconspace-lg{
+				margin: 0px 20px;
+			}
+			.iconspace-sm{
+				margin: 0px 10px;
+			}
+			.glyph-blue{
+				color: #428bca;
+			}
+			.popover {
+    			background: #222222!important;
+			}
+			.popover.bottom title:before {
+				border-bottom-color: #d9534f;
+			}
+			.box-shadow{
+				box-shadow: 5px 5px 15px #888888;
+			}
+			.mt-card {
+				margin-top: 47px !important;
+			}
+	    </style>
+	</head>
+	<body style="background-color: #7aa7cf;">
+		<nav class="navbar navbar-expand-lg navbar-dark rounded" style="background-color: #222222;">
+	        <a class="navbar-brand" href="#" style="color:#428bca">DrawBot</a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    			<span class="navbar-toggler-icon"></span>
+  			</button>
+  			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	        	<div class="navbar-nav">
+		        	<a class="nav-item nav-link iconspace-lg active" href="#" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<font color='#428bca'>Home</font>"><i class="fa fa-home fa-2x fa-fw glyph-blue "></i></a>
+		        	<a class="nav-item nav-link iconspace-lg" href="#" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<font color='#428bca'>Draw</font>"><i class="fa fa-pencil-square-o fa-2x fa-fw glyph-blue"></i></a>
+		        	<a class="nav-item nav-link iconspace-lg" href="#" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<font color='#428bca'>Upload</font>"><i class="fa fa-upload fa-2x fa-fw glyph-blue"></i></a>
+		        </div>
+		        <div class="navbar-nav ml-auto">
+		        	<a class="nav-item nav-link iconspace-sm" href="#" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<font color='#428bca'>WiFi</font>"><i class="fa fa-wifi fa-2x fa-fw glyph-blue"></i></a>
+				 	<a class="nav-item nav-link iconspace-sm" href="#" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<font color='#428bca'>Settings</font>"><i class="fa fa-cog fa-2x fa-fw glyph-blue"></i></a>
+				</div>
+			</div>
+		</nav>
 
-  <!-- JavaScript Section -->
-  <script type="text/javascript">
-    $(document).ready(function(){
-        $('a[data-toggle=tooltip]').tooltip();
-    });
-  </script>
-  </body>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-10">
+			  		<div class="card bg-light border-secondary mt-card box-shadow" style="width: 100%;">
+						<div class="card-body">
+							<p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						</div>
+					</div>
+					<div class="card bg-light mt-card box-shadow" style="width: 100%;">
+						<div class="card-body">
+							<p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<!--
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.19.1/js/vendor/jquery.ui.widget.js" integrity="sha256-CvqMlHtDX8dDgshwl03tVwvzncqqMKN0FLzZrNap4+I=" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.19.1/js/jquery.iframe-transport.js" integrity="sha256-9umGTFRck4NDqGn89GS+qtjN9frcgKaIQvR4Nq3yJbQ=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.19.1/js/jquery.fileupload.js" integrity="sha256-JBs/UTfhY8RkCwyn7zMxTDLcINzVqW/RzOqwdaPgh34=" crossorigin="anonymous"></script>
+-->
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+	    		<!-- JavaScript Section -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('a[data-toggle=popover]').popover();
+			});
+		</script>
+
+		<script type="text/javascript">
+			$(window).scroll(function() {
+			  var scroll = $(window).scrollTop();
+				$(".zoom-me img").css({
+					width: (100 + scroll/5)  + "%",
+					top: -(scroll/10)  + "%"
+				});
+			});
+		</script>
+	</body>
 </html>

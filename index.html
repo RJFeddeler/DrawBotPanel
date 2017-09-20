@@ -10,24 +10,49 @@
     <!-- Font Awesome CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     
+    <!-- JQuery, Popper, and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
+    <!-- Robot State Object and Enums -->
+    <script type="text/javascript" src="js/state_data.js"></script>
+
     <style type="text/css">
       .shadow { box-shadow: 8px 8px 10px #606060; }
+      .shadow2 { box-shadow: 0px 3px 2px #222222; }
 
       .margin-lg { margin: 0px 20px; }
       .margin-sm { margin: 0px 10px; }
       .margin-no { margin: 0px 0px; }
-      .trim { margin: 0px 0px; padding: 0px 0px; }
+      .trim { margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; }
       .lineheight-sm { line-height: 1em; }
 
       .card-gap { margin-top: 48px!important; }
-      .list-name { color: white; }
-      .list-divider {}
+      .card-title-grad {  background: -webkit-linear-gradient(to left, #d53369 , #cbad6d); /* Chrome 10-25, Safari 5.1-6 */
+                          background: linear-gradient(to left, #d53369 , #cbad6d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                        }
+      .card-title-stripe { height: 3em; background: repeating-linear-gradient(
+                            45deg,
+                            #288ade,
+                            #288ade 40px,
+                            #0275d8 40px,
+                            #0275d8 80px );
+                          }
+      .font-sm { font-size: 0.8em; }
+
+      .list-name { color: white; text-align: right; }
+      .list-name-size { min-width: 50%; max-width: 50%; padding-right: 20px; }
+      .list-divider { color: #B0B0B0; padding-left: 8px; padding-right: 8px; }
       .list-value { color: #007bff; }
-      .list-units {}
+      .list-value-size { min-width: 50%; max-width: 50%; }
+      .list-units { color: #222222; padding-left: 3px; }
+
+      .unit-percent {}
+      .unit-length {}
+      .unit-speed {}
+      .unit-storage {}
+      .unit-sigstrength {}
 
       .popover { background: #007bff!important; }
       .popover.bs-popover-bottom .arrow::after { border-bottom-color: #007bff!important; }
@@ -36,7 +61,7 @@
   <body>
 
     <!-- NavBar code -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow2">
       <a class="navbar-brand" href="#">DrawBot</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -58,53 +83,56 @@
     <div class="container card-gap">
       <div class="row">
 
-
+        <!-- Card: General Status -->
         <div class="col-lg-4">
           <div class="card bg-primary shadow">
+            <div class="card-header card-title-stripe text-white text-center shadow2">
+              <h4>System</h4>
+            </div>
             <div class="card-body">
-              <div class="d-flex justify-content-start">
-                <div class="list-group">
+              <div class="d-flex">
+                    <!-- Names List Group -->
+                <div class="list-group list-name-size">
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Robot State</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Robot State:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Drawing Speed</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Drawing Speed:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Movement Speed</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Movement Speed:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Print Area</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Print Area:</div>
                   </a>
                 </div>
 
-                <div class="list-group ml-auto">
+                <!-- Values List Group -->
+                <div class="list-group list-value-size">
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">Online</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idRobotState"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">5</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idDrawingSpeed"></div>
+                      <div class="list-units unit-speed font-sm"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">10</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idMovementSpeed"></div>
+                      <div class="list-units unit-speed font-sm"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">250 x 200</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idPrintAreaWidth"></div>
+                      <div class="list-units unit-length font-sm"></div>
+                      <div class="card-list list-divider font-sm" id="idPrintAreaSeparator"></div>
+                      <div class="card-list list-value font-sm" id="idPrintAreaHeight"></div>
+                      <div class="list-units unit-length font-sm"></div>
                     </div>
                   </a>
                 </div>
@@ -114,62 +142,61 @@
         </div>
 
 
-        <div class="col-lg-3">
+        <!-- Card: SD Card Status -->
+        <div class="col-lg-4">
           <div class="card bg-primary shadow">
+            <div class="card-header card-title-stripe text-white text-center shadow2">
+              <h4>Memory Card</h4>
+            </div>
             <div class="card-body">
-              <div class="d-flex justify-content-start">
-                <div class="list-group">
+              <div class="d-flex">
+                <!-- Names List Group -->
+                <div class="list-group list-name-size">
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Card Type</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Card Type:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Label</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Label:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Capacity</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Capacity:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Used Space</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Used Space:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Free Space</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Free Space:</div>
                   </a>
                 </div>
 
-                <div class="list-group ml-auto">
+                <!-- Values List Group -->
+                <div class="list-group list-value-size">
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">MicroSD</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idMemCardType"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">SDFiles</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idMemCardLabel"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">2048</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idMemCardCapacity"></div>
+                      <div class="list-units unit-storage font-sm"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">512</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idMemCardUsedSpace"></div>
+                      <div class="list-units unit-storage font-sm"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">1536</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idMemCardFreeSpace"></div>
+                      <div class="list-units unit-storage font-sm"></div>
                     </div>
                   </a>
                 </div>
@@ -179,112 +206,177 @@
         </div>
 
 
-        <div class="col-lg-5">
+        <!-- Card: WiFi Settings -->
+        <div class="col-lg-4">
           <div class="card bg-primary shadow">
+            <div class="card-header card-title-stripe text-white text-center shadow2">
+              <h4>Network</h4>
+            </div>
             <div class="card-body">
-              <div class="d-flex justify-content-start">
-                <div class="list-group">
+              <div class="d-flex">
+                <!-- Names List Group -->
+                <div class="list-group list-name-size">
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Connection Status</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Connection Status:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Mode</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Mode:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">SSID</div>
-                    </div>
+                    <div class="card-list list-name font-sm">SSID:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Signal Strength</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Signal Strength:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Security</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Security:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">DHCP</div>
-                    </div>
+                    <div class="card-list list-name font-sm">DHCP:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">IP Address</div>
-                    </div>
+                    <div class="card-list list-name font-sm">IP Address:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Netmask</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Netmask:</div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-name">Gateway</div>
-                    </div>
+                    <div class="card-list list-name font-sm">Gateway:</div>
                   </a>
                 </div>
 
-                <div class="list-group ml-auto">
+                <!-- Values List Group -->
+                <div class="list-group list-value-size">
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">Connected</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idWifiStatus"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">AP</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idWifiMode"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">ASUS_RFKF_5G</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idWifiSSID"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">90</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idWifiSignalStrength"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">WPA2</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idWifiSecurity"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">Enabled</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idWifiDHCP"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">192.168.0.100</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idWifiIP"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">255.255.255.0</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idWifiNetmask"></div>
                     </div>
                   </a>
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start">
-                      <div class="card-list list-value">192.168.0.1</div>
+                    <div class="d-flex justify-content-start ml-2">
+                      <div class="card-list list-value font-sm" id="idWifiGateway"></div>
                     </div>
                   </a>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
+
+    <!-- Initialize state for testing -->
+    <script type="text/javascript">
+      state.robotState = 2;
+      state.drawSpeed = 5;
+      state.moveSpeed = 10;
+      state.printAreaWidth = 250;
+      state.printAreaHeight = 200;
+      state.memCardType = 4;
+      state.memCardLabel = "SDLabel";
+      state.memCardCapacity = 2048;
+      state.memCardFreeSpace = 512;
+      state.wifiStatus = 2;
+      state.wifiMode = 2;
+      state.wifiSSID = "ASUS_RFKF_5G";
+      state.wifiSignalStrength = 90;
+      state.wifiSecurity = 4;
+      state.wifiDHCP = 1;
+      state.wifiIP = "192.168.0.100";
+      state.wifiNetmask = "255.255.255.0";
+     state. wifiGateway = "192.168.0.1";
+    </script>
+
+    <!-- Fill in data from state object  -->
+    <script>
+      document.getElementById("idRobotState").innerHTML = (RobotStateEnum.properties[state.robotState] === undefined ? "&nbsp" : RobotStateEnum.properties[state.robotState].display);
+      document.getElementById("idRobotState").style.color = (RobotStateEnum.properties[state.robotState] === undefined ? "#007bff" : RobotStateEnum.properties[state.robotState].color);
+      document.getElementById("idDrawingSpeed").innerHTML = (state.drawSpeed == "" ? "&nbsp" : state.drawSpeed);
+      document.getElementById("idMovementSpeed").innerHTML = (state.moveSpeed == "" ? "&nbsp" : state.moveSpeed);
+      document.getElementById("idPrintAreaWidth").innerHTML = (state.printAreaWidth == "" ? "&nbsp" : state.printAreaWidth);
+      document.getElementById("idPrintAreaSeparator").innerHTML = (state.printAreaWidth == "" ? "&nbsp" : "x");
+      document.getElementById("idPrintAreaHeight").innerHTML = (state.printAreaHeight == "" ? "&nbsp" : state.printAreaHeight);
+
+      document.getElementById("idMemCardType").innerHTML = (MemCardTypeEnum.properties[state.memCardType] === undefined ? "&nbsp" : MemCardTypeEnum.properties[state.memCardType].display);
+      document.getElementById("idMemCardLabel").innerHTML = (state.memCardLabel == "" ? "&nbsp" : state.memCardLabel);
+      document.getElementById("idMemCardCapacity").innerHTML = (state.memCardCapacity == "" ? "&nbsp" : state.memCardCapacity);
+      document.getElementById("idMemCardUsedSpace").innerHTML = (((state.memCardCapacity == "") || (state.memCardFreeSpace == "")) ? "&nbsp" : (state.memCardCapacity - state.memCardFreeSpace));
+      document.getElementById("idMemCardFreeSpace").innerHTML = (state.memCardFreeSpace == "" ? "&nbsp" : state.memCardFreeSpace);
+
+      document.getElementById("idWifiStatus").innerHTML = (WifiStatusEnum.properties[state.wifiStatus] === undefined ? "&nbsp" : WifiStatusEnum.properties[state.wifiStatus].display);
+      document.getElementById("idWifiStatus").style.color = (WifiStatusEnum.properties[state.wifiStatus] === undefined ? "#007bff" : WifiStatusEnum.properties[state.wifiStatus].color);
+      document.getElementById("idWifiMode").innerHTML = (WifiModeEnum.properties[state.wifiMode] === undefined ? "&nbsp" : WifiModeEnum.properties[state.wifiMode].display);
+      document.getElementById("idWifiSSID").innerHTML = (state.wifiSSID == "" ? "&nbsp" : state.wifiSSID);
+      document.getElementById("idWifiSignalStrength").innerHTML = (state.wifiSignalStrength == "" ? "&nbsp" : state.wifiSignalStrength);
+      document.getElementById("idWifiSecurity").innerHTML = (WifiSecurityEnum.properties[state.wifiSecurity] === undefined ? "&nbsp" : WifiSecurityEnum.properties[state.wifiSecurity].display);
+      document.getElementById("idWifiDHCP").innerHTML = (BooleanEnum.properties[state.wifiDHCP] === undefined ? "&nbsp" : BooleanEnum.properties[state.wifiDHCP].display_alt1);
+      document.getElementById("idWifiDHCP").style.color = (BooleanEnum.properties[state.wifiDHCP] === undefined ? "#007bff" : BooleanEnum.properties[state.wifiDHCP].color);
+      document.getElementById("idWifiIP").innerHTML = (state.wifiIP == "" ? "&nbsp" : state.wifiIP);
+      document.getElementById("idWifiNetmask").innerHTML = (state.wifiNetmask == "" ? "&nbsp" : state.wifiNetmask);
+      document.getElementById("idWifiGateway").innerHTML = (state.wifiGateway == "" ? "&nbsp" : state.wifiGateway);
+    </script>
+
+    <!-- Display value units  -->
+    <script>
+      var elements = document.getElementsByClassName("unit-percent");
+      var count = elements.length;
+      for (i = 0; i < count; i++) {
+        elements[i].innerHTML = "<small>%</small>";
+      }
+
+      elements = document.getElementsByClassName("unit-length");
+      count = elements.length;
+      for (i = 0; i < count; i++) {
+        elements[i].innerHTML = "<small>mm</small>";
+      }
+
+      elements = document.getElementsByClassName("unit-speed");
+      count = elements.length;
+      for (i = 0; i < count; i++) {
+        elements[i].innerHTML = "<small>mm/s</small>";
+      }
+
+      elements = document.getElementsByClassName("unit-storage");
+      count = elements.length;
+      for (i = 0; i < count; i++) {
+        elements[i].innerHTML = "<small>MB</small>";
+      }
+    </script>
 
     <!-- Choose File... -->
 <!--<form class="was-validated">

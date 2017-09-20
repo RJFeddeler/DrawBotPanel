@@ -18,6 +18,7 @@
     <!-- Robot State Object and Enums -->
     <script type="text/javascript" src="js/state_data.js"></script>
 
+    <!-- CSS Design Classes -->
     <style type="text/css">
       .shadow { box-shadow: 8px 8px 10px #606060; }
       .shadow2 { box-shadow: 0px 3px 2px #222222; }
@@ -28,10 +29,9 @@
       .trim { margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; }
       .lineheight-sm { line-height: 1em; }
 
-      .card-gap { margin-top: 48px!important; }
-      .card-title-grad {  background: -webkit-linear-gradient(to left, #d53369 , #cbad6d); /* Chrome 10-25, Safari 5.1-6 */
-                          background: linear-gradient(to left, #d53369 , #cbad6d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-                        }
+      .card-gap-top { margin-top: 48px!important; }
+      .card-gap-bottom { margin-bottom: 20px; }
+      .card-height-full { height: 100%; }
       .card-title-stripe { height: 3em; background: repeating-linear-gradient(
                             45deg,
                             #288ade,
@@ -58,8 +58,8 @@
       .popover.bs-popover-bottom .arrow::after { border-bottom-color: #007bff!important; }
       </style>
   </head>
-  <body>
 
+  <body>
     <!-- NavBar code -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow2">
       <a class="navbar-brand" href="#">DrawBot</a>
@@ -80,135 +80,157 @@
     </nav>
 
     <!-- Content Cards code -->
-    <div class="container card-gap">
+    <div class="container card-gap-top">
       <div class="row">
 
-        <!-- Card: General Status -->
         <div class="col-lg-4">
-          <div class="card bg-primary shadow">
-            <div class="card-header card-title-stripe text-white text-center shadow2">
-              <h4>System</h4>
-            </div>
-            <div class="card-body">
-              <div class="d-flex">
+          <div class="row">
+
+            <!-- Card: System -->
+            <div class="col">
+              <div class="card bg-primary card-gap-bottom shadow">
+                <div class="card-header card-title-stripe text-white text-center shadow2">
+                  <h4>System</h4>
+                </div>
+                <div class="card-body">
+                  <div class="d-flex">
+                        <!-- Names List Group -->
+                    <div class="list-group list-name-size">
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
+                        <div class="card-list list-name font-sm">DrawBot State:</div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
+                        <div class="card-list list-name font-sm">Drawing Speed:</div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
+                        <div class="card-list list-name font-sm">Movement Speed:</div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
+                        <div class="card-list list-name font-sm">Print Area:</div>
+                      </a>
+                    </div> <!-- end list group (Names) -->
+
+                    <!-- Values List Group -->
+                    <div class="list-group list-value-size">
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
+                        <div class="d-flex justify-content-start ml-2">
+                          <div class="card-list list-value font-sm" id="idRobotState"></div>
+                        </div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
+                        <div class="d-flex justify-content-start ml-2">
+                          <div class="card-list list-value font-sm" id="idDrawingSpeed"></div>
+                          <div class="list-units unit-speed font-sm"></div>
+                        </div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
+                        <div class="d-flex justify-content-start ml-2">
+                          <div class="card-list list-value font-sm" id="idMovementSpeed"></div>
+                          <div class="list-units unit-speed font-sm"></div>
+                        </div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
+                        <div class="d-flex justify-content-start ml-2">
+                          <div class="card-list list-value font-sm" id="idPrintAreaWidth"></div>
+                          <div class="list-units unit-length font-sm"></div>
+                          <div class="card-list list-divider font-sm" id="idPrintAreaSeparator"></div>
+                          <div class="card-list list-value font-sm" id="idPrintAreaHeight"></div>
+                          <div class="list-units unit-length font-sm"></div>
+                        </div>
+                      </a>
+                    </div> <!-- end list group (Values) -->
+                  </div> <!-- end flexbox (Names & Values) -->
+                </div> <!-- end card body (System) -->
+              </div> <!-- end card (System) -->
+            </div> <!-- end col (Card: System) -->
+
+          </div> <!-- end row (Top Card: System) -->
+          <div class="row">
+
+            <!-- Card: SD Card -->
+            <div class="col">
+              <div class="card bg-primary card-gap-bottom shadow">
+                <div class="card-header card-title-stripe text-white text-center shadow2">
+                  <h4>Memory Card</h4>
+                </div>
+                <div class="card-body">
+                  <div class="d-flex">
                     <!-- Names List Group -->
-                <div class="list-group list-name-size">
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="card-list list-name font-sm">Robot State:</div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="card-list list-name font-sm">Drawing Speed:</div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="card-list list-name font-sm">Movement Speed:</div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="card-list list-name font-sm">Print Area:</div>
-                  </a>
-                </div>
+                    <div class="list-group list-name-size">
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
+                        <div class="card-list list-name font-sm">Card Type:</div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
+                        <div class="card-list list-name font-sm">Label:</div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
+                        <div class="card-list list-name font-sm">Capacity:</div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
+                        <div class="card-list list-name font-sm">Used Space:</div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
+                        <div class="card-list list-name font-sm">Free Space:</div>
+                      </a>
+                    </div> <!-- end list group (Names) -->
 
-                <!-- Values List Group -->
-                <div class="list-group list-value-size">
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start ml-2">
-                      <div class="card-list list-value font-sm" id="idRobotState"></div>
-                    </div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start ml-2">
-                      <div class="card-list list-value font-sm" id="idDrawingSpeed"></div>
-                      <div class="list-units unit-speed font-sm"></div>
-                    </div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start ml-2">
-                      <div class="card-list list-value font-sm" id="idMovementSpeed"></div>
-                      <div class="list-units unit-speed font-sm"></div>
-                    </div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start ml-2">
-                      <div class="card-list list-value font-sm" id="idPrintAreaWidth"></div>
-                      <div class="list-units unit-length font-sm"></div>
-                      <div class="card-list list-divider font-sm" id="idPrintAreaSeparator"></div>
-                      <div class="card-list list-value font-sm" id="idPrintAreaHeight"></div>
-                      <div class="list-units unit-length font-sm"></div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                    <!-- Values List Group -->
+                    <div class="list-group list-value-size">
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
+                        <div class="d-flex justify-content-start ml-2">
+                          <div class="card-list list-value font-sm" id="idMemCardType"></div>
+                        </div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
+                        <div class="d-flex justify-content-start ml-2">
+                          <div class="card-list list-value font-sm" id="idMemCardLabel"></div>
+                        </div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
+                        <div class="d-flex justify-content-start ml-2">
+                          <div class="card-list list-value font-sm" id="idMemCardCapacity"></div>
+                          <div class="list-units unit-storage font-sm"></div>
+                        </div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
+                        <div class="d-flex justify-content-start ml-2">
+                          <div class="card-list list-value font-sm" id="idMemCardUsedSpace"></div>
+                          <div class="list-units unit-storage font-sm"></div>
+                        </div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
+                        <div class="d-flex justify-content-start ml-2">
+                          <div class="card-list list-value font-sm" id="idMemCardFreeSpace"></div>
+                          <div class="list-units unit-storage font-sm"></div>
+                        </div>
+                      </a>
+                    </div> <!-- end list group (Values) -->
+                  </div> <!-- end flexbox (Names & Values) -->
+                </div> <!-- end card body (Memory Card) -->
+              </div> <!-- end card (Memory Card) -->
+            </div> <!-- end col (Card: Memory Card) -->
 
+          </div> <!-- end row (Bottom Card: Memory Card) -->
+        </div> <!-- end col (Cards: System and Memory Card) -->
 
-        <!-- Card: SD Card Status -->
-        <div class="col-lg-4">
-          <div class="card bg-primary shadow">
+        <div class="col-lg-8">
+          <div class="card bg-primary card-gap-bottom card-height-full shadow">
             <div class="card-header card-title-stripe text-white text-center shadow2">
-              <h4>Memory Card</h4>
+              <h4>Preview</h4>
             </div>
             <div class="card-body">
               <div class="d-flex">
-                <!-- Names List Group -->
-                <div class="list-group list-name-size">
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="card-list list-name font-sm">Card Type:</div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="card-list list-name font-sm">Label:</div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="card-list list-name font-sm">Capacity:</div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="card-list list-name font-sm">Used Space:</div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
-                    <div class="card-list list-name font-sm">Free Space:</div>
-                  </a>
-                </div>
-
-                <!-- Values List Group -->
-                <div class="list-group list-value-size">
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start ml-2">
-                      <div class="card-list list-value font-sm" id="idMemCardType"></div>
-                    </div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start ml-2">
-                      <div class="card-list list-value font-sm" id="idMemCardLabel"></div>
-                    </div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start ml-2">
-                      <div class="card-list list-value font-sm" id="idMemCardCapacity"></div>
-                      <div class="list-units unit-storage font-sm"></div>
-                    </div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start ml-2">
-                      <div class="card-list list-value font-sm" id="idMemCardUsedSpace"></div>
-                      <div class="list-units unit-storage font-sm"></div>
-                    </div>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim">
-                    <div class="d-flex justify-content-start ml-2">
-                      <div class="card-list list-value font-sm" id="idMemCardFreeSpace"></div>
-                      <div class="list-units unit-storage font-sm"></div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+              </div> <!-- end flexbox (Card Content) -->
+            </div> <!-- end card body (Preview) -->
+          </div> <!-- end card (Preview) -->
+        </div> <!-- end col (Card: Preview) -->
+      </div> <!-- end row (Full Row: System, Memory Card, and Preview) -->
 
 
-        <!-- Card: WiFi Settings -->
+      <div class="row">
+        <!-- Card: Network -->
         <div class="col-lg-4">
-          <div class="card bg-primary shadow">
+          <div class="card bg-primary card-gap-bottom shadow">
             <div class="card-header card-title-stripe text-white text-center shadow2">
               <h4>Network</h4>
             </div>
@@ -243,7 +265,7 @@
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lineheight-sm trim active">
                     <div class="card-list list-name font-sm">Gateway:</div>
                   </a>
-                </div>
+                </div> <!-- end list group (Names) -->
 
                 <!-- Values List Group -->
                 <div class="list-group list-value-size">
@@ -292,13 +314,42 @@
                       <div class="card-list list-value font-sm" id="idWifiGateway"></div>
                     </div>
                   </a>
-                </div>
-              </div>
+                </div> <!-- end list group (Values) -->
+              </div> <!-- end flexbox (Names & Values) -->
+            </div> <!-- end card body (Network) -->
+          </div> <!-- end card (Network) -->
+        </div> <!-- end col (Card: Network) -->
+
+        <!-- Card: Progress -->
+        <div class="col-lg-6">
+          <div class="card bg-primary card-gap-bottom shadow">
+            <div class="card-header card-title-stripe text-white text-center shadow2">
+              <h4>Progress</h4>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            <div class="card-body">
+              <div class="d-flex">
+              </div> <!-- end flexbox () -->
+            </div> <!-- end card body (Progress) -->
+          </div> <!-- end card (Progress) -->
+        </div> <!-- end col (Card: Progress) -->
+
+        <!-- Card: Arms -->
+        <div class="col-lg-2">
+          <div class="card bg-primary card-gap-bottom shadow">
+            <div class="card-header card-title-stripe text-white text-center shadow2">
+              <h4>Arms</h4>
+            </div>
+            <div class="card-body">
+              <div class="d-flex">
+              </div> <!-- end flexbox () -->
+            </div> <!-- end card body (Arms) -->
+          </div> <!-- end card (Arms) -->
+        </div> <!-- end col (Card: Arms) -->
+
+      </div> <!-- end full row (Card: Network, Progress, and Arms) -->
+
+
+    </div> <!-- end container (All Cards) -->
 
     <!-- Initialize state for testing -->
     <script type="text/javascript">

@@ -512,7 +512,7 @@
 
                                                             <div role="tab">
                                                                 <a class="dropdown-item" href="#filemanager-submenu-view" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-view">View Options <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
-                                                                <span class="collapse hide" role="tabpanel" id="filemanager-submenu-view" data-parent="#dropdown-accordion">
+                                                                <span class="stay-open collapse hide" role="tabpanel" id="filemanager-submenu-view" data-parent="#dropdown-accordion">
                                                                     <a class="dropdown-item" href="#">Details</a>
                                                                     <a class="dropdown-item" href="#">Preview (Large)</a>
                                                                     <a class="dropdown-item" href="#">Preview (Medium)</a>
@@ -523,7 +523,7 @@
 
                                                             <div role="tab">
                                                                 <a class="dropdown-item" href="#filemanager-submenu-sort" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-sort">Sort by <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
-                                                                <span class="collapse hide" role="tabpanel" id="filemanager-submenu-sort" data-parent="#dropdown-accordion">
+                                                                <span class="stay-open collapse hide" role="tabpanel" id="filemanager-submenu-sort" data-parent="#dropdown-accordion">
                                                                     <a class="dropdown-item" href="#">Date</a>
                                                                     <a class="dropdown-item" href="#">File Size</a>
                                                                     <a class="dropdown-item" href="#">Dimensions</a>
@@ -533,7 +533,7 @@
 
                                                             <div role="tab">
                                                                 <a class="dropdown-item" href="#filemanager-submenu-search" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-search">Search <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
-                                                                <span class="collapse hide" role="tabpanel" id="filemanager-submenu-search" data-parent="#dropdown-accordion">
+                                                                <span class="stay-open collapse hide" role="tabpanel" id="filemanager-submenu-search" data-parent="#dropdown-accordion">
                                                                     Search Box
                                                                 </span>
                                                             </div>
@@ -632,7 +632,7 @@
             $(function() {
                 $("div.dropdown-menu").on("click", "[data-keepOpenOnClick]", function(e) {
                     e.stopPropagation();
-                    $( this ).collapse('toggle');
+                    $(this).siblings( ".stay-open" ).collapse('toggle');
                 });
             });
 

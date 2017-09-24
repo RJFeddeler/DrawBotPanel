@@ -18,6 +18,9 @@
         <!-- Robot State Object and Enums -->
         <script type="text/javascript" src="js/state_data.js"></script>
 
+        <!-- File list and descriptions to populate file manager -->
+        <script type="text/javascript" src="js/file_list.js"></script>
+
         <!-- CSS Design Classes - General -->
         <style type="text/css">
             .shadow { box-shadow: 8px 8px 10px #606060; }
@@ -71,15 +74,24 @@
 
         <!-- CSS Design Classes - Draw -->
         <style type="text/css">
-            .draw-filemanager { padding-top: 20px; overflow-y: scroll; }
-            .draw-freedraw {}
+            .draw-freedraw a { color: white; opacity: 0.6; }
+            .draw-freedraw a:hover { color: white; opacity: 1.0; }
+            .draw-freedraw i { margin-right: 20px; }
+
+            .icon-links a { color: white; opacity: 0.6; }
+            .icon-links a:hover { color: white; opacity: 1.0; }
+
+            .icon-links-pos { top: -52px; position: relative; margin-right: 0; }
+
+            .dropdown-menu a { color: #aaa; background-color: #fff}
+            .dropdown-menu a:hover { color: #222; background-color: #f8f8f8; }
+
+            #filemanager-heading .draw-filemanager {}
+            #filemanager-body .draw-filemanager {}
 
             #file { margin-right: 25px; }
-
             #file .shortcut {}
-
             #file .shortcut a { margin-right: 10px; }
-
             #file .card { width: 100%; background: #ffffff; text-align: center; float: left; position: relative; border-radius: 5px; padding: 0 10px; margin-top: 45px; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3); }
             #file .display-shortcuts:hover .thumb { top: -21%; }
             #file .card .thumb {
@@ -102,7 +114,6 @@
               transition: 0.3s cubic-bezier(0.67, -0.12, 0.45, 1.5);
               box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
             }
-            #file .card #one { background-image: url("images/preview/monalisa.png"); }
             #file .card .shortcut { height: 40px; margin: 40px auto 0 auto; }
             #file .card .shortcut i { opacity: 0.6; }
             #file .card .shortcut i:hover { opacity: 1.0; }
@@ -111,10 +122,6 @@
             #file .card .descrip1 { margin: 0px; font-size: 0.8em; line-height: 20px; opacity: 0.8; }
             #file .card .descrip2 { margin: 10px 1px 1px 1px; font-size: 0.6em; line-height: 15px; opacity: 0.8; }
             #file .card .btn-draw { margin-bottom: 10px; }
-
-            #freedraw a { color: white; opacity: 0.6; }
-            #freedraw a:hover { color: white; opacity: 1.0; }
-            #freedraw i { margin-right: 20px; }
         </style>
 
         <!-- CSS Design Classes - Upload -->
@@ -318,7 +325,7 @@
                         <div class="col-lg-8 card-height-full-pad">
                             <div class="card home-preview bg-primary card-height-full shadow">
                                 <div class="card-header card-title-stripe text-white text-center shadow2">
-                                    <h5>Preview</h5>
+                                    <h5 id="appendTEST">Preview</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="d-flex">
@@ -454,207 +461,67 @@
                         <div class="col-lg-12">
 
                             <div id="accordion" role="tablist">
-                                <div class="card bg-primary shadow">
-                                    <span data-toggle="collapse" href="#accordion-filemanager">
-                                        <div class="card-header card-title-stripe text-white text-center shadow2" role="tab" id="accordion-filemanager-heading">
+                                <div class="card draw-filemanager bg-primary shadow">
+                                    <span data-toggle="collapse" href="#filemanager-body">
+                                        <div class="card-header card-title-stripe text-white text-center shadow2" role="tab" id="filemanager-heading">
                                             <h5>File Manager</h5>
                                         </div>
                                     </span>
 
-                                    <div id="accordion-filemanager" class="collapse show" role="tabpanel" data-parent="#accordion">
+                                    <div class="collapse show" role="tabpanel" data-parent="#accordion" id="filemanager-body">
                                         <div class="card-body">
-                                            <div class="d-flex draw-filemanager">
-                                                <div class="card-deck justify-content-center">
-                                                    <div id="file">
-                                                        <div class="card">
-                                                            <span class="display-shortcuts">
-                                                            <div class="thumb" id="one"></div>
-                                                            <div class="shortcut">
-                                                                <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
+                                            <div class="row">
+                                                <div class="col icon-links icon-links-pos">
+                                                    <div class="d-flex pull-right">
+                                                        <a href="#" class="ml-3"><i class="fa fa-search fa-lg fa-fw"></i></a>
+                                                        <div class="btn-group">
+                                                            <a href="#" class="ml-3" data-toggle="dropdown"><i class="fa fa-sort-amount-desc fa-lg fa-fw"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <h6 class="dropdown-header">Sort by</h6>
+                                                                <a class="dropdown-item" href="#">Name</a>
+                                                                <a class="dropdown-item" href="#">Date</a>
+                                                                <a class="dropdown-item" href="#">File Size</a>
+                                                                <a class="dropdown-item" href="#">Dimensions</a>
+                                                                <a class="dropdown-item" href="#">Time</a>
                                                             </div>
-                                                            </span>
-                                                            <h4>MonaLisa</h4>
-                                                            <hr/>
-                                                            <p class="descrip1">100mm x 50mm</p>
-                                                            <p class="descrip1">January 1, 2017</p>
-                                                            <p class="descrip1">1.27 MB</p>
-                                                            <hr/>
-                                                            <p class="descrip2">Drawing Time: 23 Min</p>
-                                                            <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
                                                         </div>
-                                                    </div>
-
-                                                    <div id="file">
-                                                        <div class="card">
-                                                            <span class="display-shortcuts">
-                                                            <div class="thumb" id="one"></div>
-                                                            <div class="shortcut">
-                                                                <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
+                                                        <div class="btn-group">
+                                                            <a href="#" class="ml-3" data-toggle="dropdown"><i class="fa fa-sliders fa-lg fa-fw"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <h6 class="dropdown-header">View Options</h6>
+                                                                <a class="dropdown-item" href="#">Details</a>
+                                                                <a class="dropdown-item" href="#">Preview (Large)</a>
+                                                                <a class="dropdown-item" href="#">Preview (Medium)</a>
+                                                                <a class="dropdown-item" href="#">Preview (Small)</a>
+                                                                <a class="dropdown-item" href="#">Name</a>
                                                             </div>
-                                                            </span>
-                                                            <h4>MonaLisa</h4>
-                                                            <hr/>
-                                                            <p class="descrip1">100mm x 50mm</p>
-                                                            <p class="descrip1">January 1, 2017</p>
-                                                            <p class="descrip1">1.27 MB</p>
-                                                            <hr/>
-                                                            <p class="descrip2">Drawing Time: 23 Min</p>
-                                                            <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
                                                         </div>
+                                                        <a href="#" class="ml-3"><i class="fa fa-refresh fa-lg fa-fw"></i></a>
+                                                        <!-- <a href="#" class="dropdown-pos dropdown-link" data-toggle="dropdown"><i class="fa fa-chevron-down fa-lg"></i></a>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="#">Refresh</a>
+                                                            <a class="dropdown-item" href="#">Refresh</a>
+                                                        </div> -->
                                                     </div>
-
-                                                    <div id="file">
-                                                        <div class="card">
-                                                            <span class="display-shortcuts">
-                                                            <div class="thumb" id="one"></div>
-                                                            <div class="shortcut">
-                                                                <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                            </div>
-                                                            </span>
-                                                            <h4>MonaLisa</h4>
-                                                            <hr/>
-                                                            <p class="descrip1">100mm x 50mm</p>
-                                                            <p class="descrip1">January 1, 2017</p>
-                                                            <p class="descrip1">1.27 MB</p>
-                                                            <hr/>
-                                                            <p class="descrip2">Drawing Time: 23 Min</p>
-                                                            <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="file">
-                                                        <div class="card">
-                                                            <span class="display-shortcuts">
-                                                            <div class="thumb" id="one"></div>
-                                                            <div class="shortcut">
-                                                                <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                            </div>
-                                                            </span>
-                                                            <h4>MonaLisa</h4>
-                                                            <hr/>
-                                                            <p class="descrip1">100mm x 50mm</p>
-                                                            <p class="descrip1">January 1, 2017</p>
-                                                            <p class="descrip1">1.27 MB</p>
-                                                            <hr/>
-                                                            <p class="descrip2">Drawing Time: 23 Min</p>
-                                                            <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div id="file">
-                                                        <div class="card">
-                                                            <span class="display-shortcuts">
-                                                            <div class="thumb" id="one"></div>
-                                                            <div class="shortcut">
-                                                                <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                            </div>
-                                                            </span>
-                                                            <h4>MonaLisa</h4>
-                                                            <hr/>
-                                                            <p class="descrip1">100mm x 50mm</p>
-                                                            <p class="descrip1">January 1, 2017</p>
-                                                            <p class="descrip1">1.27 MB</p>
-                                                            <hr/>
-                                                            <p class="descrip2">Drawing Time: 23 Min</p>
-                                                            <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="file">
-                                                        <div class="card">
-                                                            <span class="display-shortcuts">
-                                                            <div class="thumb" id="one"></div>
-                                                            <div class="shortcut">
-                                                                <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                            </div>
-                                                            </span>
-                                                            <h4>MonaLisa</h4>
-                                                            <hr/>
-                                                            <p class="descrip1">100mm x 50mm</p>
-                                                            <p class="descrip1">January 1, 2017</p>
-                                                            <p class="descrip1">1.27 MB</p>
-                                                            <hr/>
-                                                            <p class="descrip2">Drawing Time: 23 Min</p>
-                                                            <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="file">
-                                                        <div class="card">
-                                                            <span class="display-shortcuts">
-                                                            <div class="thumb" id="one"></div>
-                                                            <div class="shortcut">
-                                                                <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                            </div>
-                                                            </span>
-                                                            <h4>MonaLisa</h4>
-                                                            <hr/>
-                                                            <p class="descrip1">100mm x 50mm</p>
-                                                            <p class="descrip1">January 1, 2017</p>
-                                                            <p class="descrip1">1.27 MB</p>
-                                                            <hr/>
-                                                            <p class="descrip2">Drawing Time: 23 Min</p>
-                                                            <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="file">
-                                                        <div class="card">
-                                                            <span class="display-shortcuts">
-                                                            <div class="thumb" id="one"></div>
-                                                            <div class="shortcut">
-                                                                <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                                <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                            </div>
-                                                            </span>
-                                                            <h4>MonaLisa</h4>
-                                                            <hr/>
-                                                            <p class="descrip1">100mm x 50mm</p>
-                                                            <p class="descrip1">January 1, 2017</p>
-                                                            <p class="descrip1">1.27 MB</p>
-                                                            <hr/>
-                                                            <p class="descrip2">Drawing Time: 23 Min</p>
-                                                            <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                        </div>
-                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="card-deck justify-content-center" id="file-container">
+                                                    <!-- Filled by javascript function: generateFileList() -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="card bg-primary shadow">
-                                    <div class="card-header card-title-stripe text-white text-center shadow2" id="accordion-freedraw-heading" role="tab">
-                                        <span class="collapsed" data-toggle="collapse" href="#accordion-freedraw">
+                                <div class="card draw-freedraw bg-primary shadow">
+                                    <div class="card-header card-title-stripe text-white text-center shadow2" id="freedraw-heading" role="tab">
+                                        <span class="collapsed" data-toggle="collapse" href="#freedraw-body">
                                             <h5>Free Draw</h5>
                                         </span>
                                     </div>
-                                    <div class="collapse" id="accordion-freedraw" role="tabpanel" data-parent="#accordion">
-                                        <div class="card-body" id="freedraw">
+                                    <div class="collapse white-links" role="tabpanel" data-parent="#accordion" id="freedraw-body">
+                                        <div class="card-body">
                                             <div class="btn-group btn-group-sm mr-4" data-toggle="buttons">
                                                 <label class="btn btn-secondary active">
                                                     <input type="radio" name="options" id="opt-position-absolute" autocomplete="off" checked> Absolute
@@ -676,223 +543,8 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-
-
-
-
-                        <!--
-                        
-                            <div class="card bg-primary shadow">
-                                <div class="card-header card-title-stripe text-white text-center shadow2">
-                                    <h4>File Manager</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex draw-filemanager">
-                                        <div class="card-deck justify-content-center">
-                                            <div id="file">
-                                                <div class="card">
-                                                    <span class="display-shortcuts">
-                                                    <div class="thumb" id="one"></div>
-                                                    <div class="shortcut">
-                                                        <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                    </div>
-                                                    </span>
-                                                    <h4>MonaLisa</h4>
-                                                    <hr/>
-                                                    <p class="descrip1">100mm x 50mm</p>
-                                                    <p class="descrip1">January 1, 2017</p>
-                                                    <p class="descrip1">1.27 MB</p>
-                                                    <hr/>
-                                                    <p class="descrip2">Drawing Time: 23 Min</p>
-                                                    <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                </div>
-                                            </div>
-
-                                            <div id="file">
-                                                <div class="card">
-                                                    <span class="display-shortcuts">
-                                                    <div class="thumb" id="one"></div>
-                                                    <div class="shortcut">
-                                                        <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                    </div>
-                                                    </span>
-                                                    <h4>MonaLisa</h4>
-                                                    <hr/>
-                                                    <p class="descrip1">100mm x 50mm</p>
-                                                    <p class="descrip1">January 1, 2017</p>
-                                                    <p class="descrip1">1.27 MB</p>
-                                                    <hr/>
-                                                    <p class="descrip2">Drawing Time: 23 Min</p>
-                                                    <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                </div>
-                                            </div>
-
-                                            <div id="file">
-                                                <div class="card">
-                                                    <span class="display-shortcuts">
-                                                    <div class="thumb" id="one"></div>
-                                                    <div class="shortcut">
-                                                        <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                    </div>
-                                                    </span>
-                                                    <h4>MonaLisa</h4>
-                                                    <hr/>
-                                                    <p class="descrip1">100mm x 50mm</p>
-                                                    <p class="descrip1">January 1, 2017</p>
-                                                    <p class="descrip1">1.27 MB</p>
-                                                    <hr/>
-                                                    <p class="descrip2">Drawing Time: 23 Min</p>
-                                                    <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                </div>
-                                            </div>
-
-                                            <div id="file">
-                                                <div class="card">
-                                                    <span class="display-shortcuts">
-                                                    <div class="thumb" id="one"></div>
-                                                    <div class="shortcut">
-                                                        <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                    </div>
-                                                    </span>
-                                                    <h4>MonaLisa</h4>
-                                                    <hr/>
-                                                    <p class="descrip1">100mm x 50mm</p>
-                                                    <p class="descrip1">January 1, 2017</p>
-                                                    <p class="descrip1">1.27 MB</p>
-                                                    <hr/>
-                                                    <p class="descrip2">Drawing Time: 23 Min</p>
-                                                    <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                </div>
-                                            </div>
-
-
-                                            <div id="file">
-                                                <div class="card">
-                                                    <span class="display-shortcuts">
-                                                    <div class="thumb" id="one"></div>
-                                                    <div class="shortcut">
-                                                        <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                    </div>
-                                                    </span>
-                                                    <h4>MonaLisa</h4>
-                                                    <hr/>
-                                                    <p class="descrip1">100mm x 50mm</p>
-                                                    <p class="descrip1">January 1, 2017</p>
-                                                    <p class="descrip1">1.27 MB</p>
-                                                    <hr/>
-                                                    <p class="descrip2">Drawing Time: 23 Min</p>
-                                                    <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                </div>
-                                            </div>
-
-                                            <div id="file">
-                                                <div class="card">
-                                                    <span class="display-shortcuts">
-                                                    <div class="thumb" id="one"></div>
-                                                    <div class="shortcut">
-                                                        <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                    </div>
-                                                    </span>
-                                                    <h4>MonaLisa</h4>
-                                                    <hr/>
-                                                    <p class="descrip1">100mm x 50mm</p>
-                                                    <p class="descrip1">January 1, 2017</p>
-                                                    <p class="descrip1">1.27 MB</p>
-                                                    <hr/>
-                                                    <p class="descrip2">Drawing Time: 23 Min</p>
-                                                    <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                </div>
-                                            </div>
-
-                                            <div id="file">
-                                                <div class="card">
-                                                    <span class="display-shortcuts">
-                                                    <div class="thumb" id="one"></div>
-                                                    <div class="shortcut">
-                                                        <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                    </div>
-                                                    </span>
-                                                    <h4>MonaLisa</h4>
-                                                    <hr/>
-                                                    <p class="descrip1">100mm x 50mm</p>
-                                                    <p class="descrip1">January 1, 2017</p>
-                                                    <p class="descrip1">1.27 MB</p>
-                                                    <hr/>
-                                                    <p class="descrip2">Drawing Time: 23 Min</p>
-                                                    <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                </div>
-                                            </div>
-
-                                            <div id="file">
-                                                <div class="card">
-                                                    <span class="display-shortcuts">
-                                                    <div class="thumb" id="one"></div>
-                                                    <div class="shortcut">
-                                                        <a href="#" id="file-copy"><i class="fa fa-clone fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-refactor"><i class="fa fa-cogs fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-rename"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>
-                                                        <a href="#" id="file-delete"><i class="fa fa-trash fa-md fa-fw"></i></a>
-                                                    </div>
-                                                    </span>
-                                                    <h4>MonaLisa</h4>
-                                                    <hr/>
-                                                    <p class="descrip1">100mm x 50mm</p>
-                                                    <p class="descrip1">January 1, 2017</p>
-                                                    <p class="descrip1">1.27 MB</p>
-                                                    <hr/>
-                                                    <p class="descrip2">Drawing Time: 23 Min</p>
-                                                    <button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="card draw-freedraw bg-primary shadow">
-                                <div class="card-header card-title-stripe text-white text-center shadow2">
-                                    <h4>Free Draw</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="btn-group btn-group-sm" data-toggle="buttons">
-                                            <label class="btn btn-secondary active">
-                                                <input type="radio" name="options" id="opt-position-absolute" autocomplete="off" checked> Absolute
-                                            </label>
-                                            <label class="btn btn-secondary">
-                                                <input type="radio" name="options" id="opt-position-relative" autocomplete="off"> Relative
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-
                     </div>
                 </div> <!-- end tab-pane (Draw) -->
 
@@ -911,84 +563,6 @@
             </div>
         </div>
 
-        <!-- Initialize state for testing -->
-        <script type="text/javascript">
-            state.robotState = 2;
-            state.drawSpeed = 5;
-            state.moveSpeed = 10;
-            state.printAreaWidth = 250;
-            state.printAreaHeight = 200;
-            state.memCardType = 4;
-            state.memCardLabel = "SDLabel";
-            state.memCardCapacity = 2048;
-            state.memCardFreeSpace = 512;
-            state.wifiStatus = 2;
-            state.wifiMode = 2;
-            state.wifiSSID = "ASUS_RFKF_5G";
-            state.wifiSignalStrength = 90;
-            state.wifiSecurity = 4;
-            state.wifiDHCP = 1;
-            state.wifiIP = "192.168.0.100";
-            state.wifiNetmask = "255.255.255.0";
-            state.wifiGateway = "192.168.0.1";
-        </script>
-
-        <!-- Fill in data from state object  -->
-        <script>
-            document.getElementById("idRobotState").innerHTML = (RobotStateEnum.properties[state.robotState] === undefined ? "&nbsp" : RobotStateEnum.properties[state.robotState].display);
-            document.getElementById("idRobotState").style.color = (RobotStateEnum.properties[state.robotState] === undefined ? "#007bff" : RobotStateEnum.properties[state.robotState].color);
-            document.getElementById("idDrawingSpeed").innerHTML = (state.drawSpeed == "" ? "&nbsp" : state.drawSpeed);
-            document.getElementById("idMovementSpeed").innerHTML = (state.moveSpeed == "" ? "&nbsp" : state.moveSpeed);
-            document.getElementById("idPrintAreaWidth").innerHTML = (state.printAreaWidth == "" ? "&nbsp" : state.printAreaWidth);
-            document.getElementById("idPrintAreaSeparator").innerHTML = (state.printAreaWidth == "" ? "&nbsp" : "x");
-            document.getElementById("idPrintAreaHeight").innerHTML = (state.printAreaHeight == "" ? "&nbsp" : state.printAreaHeight);
-
-            document.getElementById("idMemCardType").innerHTML = (MemCardTypeEnum.properties[state.memCardType] === undefined ? "&nbsp" : MemCardTypeEnum.properties[state.memCardType].display);
-            document.getElementById("idMemCardLabel").innerHTML = (state.memCardLabel == "" ? "&nbsp" : state.memCardLabel);
-            document.getElementById("idMemCardCapacity").innerHTML = (state.memCardCapacity == "" ? "&nbsp" : state.memCardCapacity);
-            document.getElementById("idMemCardUsedSpace").innerHTML = (((state.memCardCapacity == "") || (state.memCardFreeSpace == "")) ? "&nbsp" : (state.memCardCapacity - state.memCardFreeSpace));
-            document.getElementById("idMemCardFreeSpace").innerHTML = (state.memCardFreeSpace == "" ? "&nbsp" : state.memCardFreeSpace);
-
-            document.getElementById("idWifiStatus").innerHTML = (WifiStatusEnum.properties[state.wifiStatus] === undefined ? "&nbsp" : WifiStatusEnum.properties[state.wifiStatus].display);
-            document.getElementById("idWifiStatus").style.color = (WifiStatusEnum.properties[state.wifiStatus] === undefined ? "#007bff" : WifiStatusEnum.properties[state.wifiStatus].color);
-            document.getElementById("idWifiMode").innerHTML = (WifiModeEnum.properties[state.wifiMode] === undefined ? "&nbsp" : WifiModeEnum.properties[state.wifiMode].display);
-            document.getElementById("idWifiSSID").innerHTML = (state.wifiSSID == "" ? "&nbsp" : state.wifiSSID);
-            document.getElementById("idWifiSignalStrength").innerHTML = (state.wifiSignalStrength == "" ? "&nbsp" : state.wifiSignalStrength);
-            document.getElementById("idWifiSecurity").innerHTML = (WifiSecurityEnum.properties[state.wifiSecurity] === undefined ? "&nbsp" : WifiSecurityEnum.properties[state.wifiSecurity].display);
-            document.getElementById("idWifiDHCP").innerHTML = (BooleanEnum.properties[state.wifiDHCP] === undefined ? "&nbsp" : BooleanEnum.properties[state.wifiDHCP].display_alt1);
-            document.getElementById("idWifiDHCP").style.color = (BooleanEnum.properties[state.wifiDHCP] === undefined ? "#007bff" : BooleanEnum.properties[state.wifiDHCP].color);
-            document.getElementById("idWifiIP").innerHTML = (state.wifiIP == "" ? "&nbsp" : state.wifiIP);
-            document.getElementById("idWifiNetmask").innerHTML = (state.wifiNetmask == "" ? "&nbsp" : state.wifiNetmask);
-            document.getElementById("idWifiGateway").innerHTML = (state.wifiGateway == "" ? "&nbsp" : state.wifiGateway);
-        </script>
-
-        <!-- Display value units  -->
-        <script>
-            var elements = document.getElementsByClassName("unit-percent");
-            var count = elements.length;
-            for (i = 0; i < count; i++) {
-                elements[i].innerHTML = "<small>%</small>";
-            }
-
-            elements = document.getElementsByClassName("unit-length");
-            count = elements.length;
-            for (i = 0; i < count; i++) {
-                elements[i].innerHTML = "<small>mm</small>";
-            }
-
-            elements = document.getElementsByClassName("unit-speed");
-            count = elements.length;
-            for (i = 0; i < count; i++) {
-                elements[i].innerHTML = "<small>mm/s</small>";
-            }
-
-            elements = document.getElementsByClassName("unit-storage");
-            count = elements.length;
-            for (i = 0; i < count; i++) {
-                elements[i].innerHTML = "<small>MB</small>";
-            }
-        </script>
-
         <!-- Choose File... -->
         <!--
         <form class="was-validated">
@@ -1000,75 +574,190 @@
         -->
 
         <script type="text/javascript">
-            $(function () {
-                var showPopover = function () {
-                    $(this).popover('show');
-                }
-                , hidePopover = function () {
-                    $(this).popover('hide');
-                };
+            $(document).ready(function(){
+                $('a[data-toggle=popover]').popover();
 
-                $('#nav-home').popover({
-                            html: true,
-                            content: "<font color='white'>Home</font>",
-                            trigger: 'hover',
-                            placement:'bottom'
-                })
-                $('#nav-draw').popover({
-                            html: true,
-                            content: "<font color='white'>Draw</font>",
-                            trigger: 'hover',
-                            placement:'bottom'
-                })
-                $('#nav-upload').popover({
-                            html: true,
-                            content: "<font color='white'>Upload</font>",
-                            trigger: 'hover',
-                            placement:'bottom'
-                })
-                $('#nav-wifi').popover({
-                            html: true,
-                            content: "<font color='white'>Wifi</font>",
-                            trigger: 'hover',
-                            placement:'bottom'
-                })
-                $('#nav-settings').popover({
-                            html: true,
-                            content: "<font color='white'>Settings</font>",
-                            trigger: 'hover',
-                            placement:'bottom'
-                })
-                $('#file-copy').popover({
-                            html: true,
-                            content: "<font color='white'>Copy</font>",
-                            trigger: 'hover',
-                            placement:'bottom'
-                })
-                $('#file-refactor').popover({
-                            html: true,
-                            content: "<font color='white'>Refactor</font>",
-                            trigger: 'hover',
-                            placement:'bottom'
-                })
-                $('#file-rename').popover({
-                            html: true,
-                            content: "<font color='white'>Rename</font>",
-                            trigger: 'hover',
-                            placement:'bottom'
-                })
-                $('#file-delete').popover({
-                            html: true,
-                            content: "<font color='white'>Delete</font>",
-                            trigger: 'hover',
-                            placement:'bottom'
-                })
+                fillTestData();
+                fillStateVariables();
+                fillStateUnits();
+
+                generateFileList();
+            });
+
+            $(function () {
+                var showPopover = function () { $(this).popover('show'); }
+                , hidePopover = function () { $(this).popover('hide'); };
+
+                $('#nav-home').popover({ html: true, content: "<font color='white'>Home</font>", trigger: 'hover', placement:'bottom' })
+                $('#nav-draw').popover({ html: true, content: "<font color='white'>Draw</font>", trigger: 'hover', placement:'bottom' })
+                $('#nav-upload').popover({ html: true, content: "<font color='white'>Upload</font>", trigger: 'hover', placement:'bottom' })
+                $('#nav-wifi').popover({ html: true, content: "<font color='white'>Wifi</font>", trigger: 'hover', placement:'bottom' })
+                $('#nav-settings').popover({ html: true, content: "<font color='white'>Settings</font>", trigger: 'hover', placement:'bottom' })
+
+                for (i = 1; i <= fileList.count; i++) {
+                    $('#file-copy-' + i).popover({ html: true, content: "<font color='white'>Copy</font>", trigger: 'hover', placement:'bottom' })
+                    $('#file-refactor-' + i).popover({ html: true, content: "<font color='white'>Refactor</font>", trigger: 'hover', placement:'bottom' })
+                    $('#file-rename-' + i).popover({ html: true, content: "<font color='white'>Rename</font>", trigger: 'hover', placement:'bottom' })
+                    $('#file-delete-' + i).popover({ html: true, content: "<font color='white'>Delete</font>", trigger: 'hover', placement:'bottom' })
+                }
             });
         </script>
 
         <script type="text/javascript">
-            $(document).ready(function(){
-                $('a[data-toggle=popover]').popover();
-            });
+            /* Initialize state for testing */
+            function fillTestData() {
+                state.robotState = 2;
+                state.drawSpeed = 5;
+                state.moveSpeed = 10;
+                state.printAreaWidth = 250;
+                state.printAreaHeight = 200;
+                state.memCardType = 4;
+                state.memCardLabel = "SDLabel";
+                state.memCardCapacity = 2048;
+                state.memCardFreeSpace = 512;
+                state.wifiStatus = 2;
+                state.wifiMode = 2;
+                state.wifiSSID = "ASUS_RFKF_5G";
+                state.wifiSignalStrength = 90;
+                state.wifiSecurity = 4;
+                state.wifiDHCP = 1;
+                state.wifiIP = "192.168.0.100";
+                state.wifiNetmask = "255.255.255.0";
+                state.wifiGateway = "192.168.0.1";
+            }
+
+            /* Fill in data from state object */
+            function fillStateVariables() {
+                document.getElementById("idRobotState").innerHTML = (RobotStateEnum.properties[state.robotState] === undefined ? "&nbsp" : RobotStateEnum.properties[state.robotState].display);
+                document.getElementById("idRobotState").style.color = (RobotStateEnum.properties[state.robotState] === undefined ? "#007bff" : RobotStateEnum.properties[state.robotState].color);
+                document.getElementById("idDrawingSpeed").innerHTML = (state.drawSpeed == "" ? "&nbsp" : state.drawSpeed);
+                document.getElementById("idMovementSpeed").innerHTML = (state.moveSpeed == "" ? "&nbsp" : state.moveSpeed);
+                document.getElementById("idPrintAreaWidth").innerHTML = (state.printAreaWidth == "" ? "&nbsp" : state.printAreaWidth);
+                document.getElementById("idPrintAreaSeparator").innerHTML = (state.printAreaWidth == "" ? "&nbsp" : "x");
+                document.getElementById("idPrintAreaHeight").innerHTML = (state.printAreaHeight == "" ? "&nbsp" : state.printAreaHeight);
+
+                document.getElementById("idMemCardType").innerHTML = (MemCardTypeEnum.properties[state.memCardType] === undefined ? "&nbsp" : MemCardTypeEnum.properties[state.memCardType].display);
+                document.getElementById("idMemCardLabel").innerHTML = (state.memCardLabel == "" ? "&nbsp" : state.memCardLabel);
+                document.getElementById("idMemCardCapacity").innerHTML = (state.memCardCapacity == "" ? "&nbsp" : state.memCardCapacity);
+                document.getElementById("idMemCardUsedSpace").innerHTML = (((state.memCardCapacity == "") || (state.memCardFreeSpace == "")) ? "&nbsp" : (state.memCardCapacity - state.memCardFreeSpace));
+                document.getElementById("idMemCardFreeSpace").innerHTML = (state.memCardFreeSpace == "" ? "&nbsp" : state.memCardFreeSpace);
+
+                document.getElementById("idWifiStatus").innerHTML = (WifiStatusEnum.properties[state.wifiStatus] === undefined ? "&nbsp" : WifiStatusEnum.properties[state.wifiStatus].display);
+                document.getElementById("idWifiStatus").style.color = (WifiStatusEnum.properties[state.wifiStatus] === undefined ? "#007bff" : WifiStatusEnum.properties[state.wifiStatus].color);
+                document.getElementById("idWifiMode").innerHTML = (WifiModeEnum.properties[state.wifiMode] === undefined ? "&nbsp" : WifiModeEnum.properties[state.wifiMode].display);
+                document.getElementById("idWifiSSID").innerHTML = (state.wifiSSID == "" ? "&nbsp" : state.wifiSSID);
+                document.getElementById("idWifiSignalStrength").innerHTML = (state.wifiSignalStrength == "" ? "&nbsp" : state.wifiSignalStrength);
+                document.getElementById("idWifiSecurity").innerHTML = (WifiSecurityEnum.properties[state.wifiSecurity] === undefined ? "&nbsp" : WifiSecurityEnum.properties[state.wifiSecurity].display);
+                document.getElementById("idWifiDHCP").innerHTML = (BooleanEnum.properties[state.wifiDHCP] === undefined ? "&nbsp" : BooleanEnum.properties[state.wifiDHCP].display_alt1);
+                document.getElementById("idWifiDHCP").style.color = (BooleanEnum.properties[state.wifiDHCP] === undefined ? "#007bff" : BooleanEnum.properties[state.wifiDHCP].color);
+                document.getElementById("idWifiIP").innerHTML = (state.wifiIP == "" ? "&nbsp" : state.wifiIP);
+                document.getElementById("idWifiNetmask").innerHTML = (state.wifiNetmask == "" ? "&nbsp" : state.wifiNetmask);
+                document.getElementById("idWifiGateway").innerHTML = (state.wifiGateway == "" ? "&nbsp" : state.wifiGateway);
+            }
+
+            /* Insert value unit types */
+            function fillStateUnits() {
+                var elements = document.getElementsByClassName("unit-percent");
+                var count = elements.length;
+                for (i = 0; i < count; i++) { elements[i].innerHTML = "<small>%</small>"; }
+
+                elements = document.getElementsByClassName("unit-length");
+                count = elements.length;
+                for (i = 0; i < count; i++) { elements[i].innerHTML = "<small>mm</small>"; }
+
+                elements = document.getElementsByClassName("unit-speed");
+                count = elements.length;
+                for (i = 0; i < count; i++) { elements[i].innerHTML = "<small>mm/s</small>"; }
+
+                elements = document.getElementsByClassName("unit-storage");
+                count = elements.length;
+                for (i = 0; i < count; i++) { elements[i].innerHTML = "<small>MB</small>"; }
+            }
+
+            /* Create cards for files in the file manager */
+            function generateFileList() {
+                var fileHTML;
+                for (i = 0; i < fileList.count; i++) {
+                    var month;
+                    switch (fileList.file[i].date.month) {
+                        case 1:
+                            month = "January"
+                            break;
+                        case 2:
+                            month = "February"
+                            break;
+                        case 3:
+                            month = "March"
+                            break;
+                        case 4:
+                            month = "April"
+                            break;
+                        case 5:
+                            month = "May"
+                            break;
+                        case 6:
+                            month = "June"
+                            break;
+                        case 7:
+                            month = "July"
+                            break;
+                        case 8:
+                            month = "August"
+                            break;
+                        case 9:
+                            month = "September"
+                            break;
+                        case 10:
+                            month = "October"
+                            break;
+                        case 11:
+                            month = "November"
+                            break;
+                        case 12:
+                            month = "December"
+                            break;
+                        default:
+                            month = "Invalid"
+                            break;
+                    }
+
+                    var drawTime = 0;
+                    if ((state.drawSpeed > 0) && (state.moveSpeed > 0)) {
+                        (fileList.file[i].lineLength / state.drawSpeed) + (fileList.file[i].moveLength / state.moveSpeed);
+                    }
+
+                    var formattedDate;
+                    if ((month === "Invalid") || (fileList.file[i].date.day < 1) || (fileList.file[i].date.day > 31)) {
+                        formattedDate = "Invalid Date!";
+                    } else {
+                        formattedDate = month + " " + fileList.file[i].date.day + ", " + fileList.file[i].date.year;
+                    }
+
+                    fileHTML =  '<div id="file">' +
+                                    '<div class="card">' +
+                                        '<span class="display-shortcuts">' +
+                                            '<div class="thumb" style="background-image: url(\'images/preview/' + fileList.file[i].image + '\')"></div>' +
+                                            '<div class="shortcut">' +
+                                                '<a href="#" id="file-copy-' + (i + 1) + '"><i class="fa fa-clone fa-md fa-fw"></i></a>' +
+                                                '<a href="#" id="file-refactor-' + (i + 1) + '"><i class="fa fa-cogs fa-md fa-fw"></i></a>' +
+                                                '<a href="#" id="file-rename-' + (i + 1) + '"><i class="fa fa-i-cursor fa-md fa-fw"></i></a>' +
+                                                '<a href="#" id="file-delete-' + (i + 1) + '"><i class="fa fa-trash fa-md fa-fw"></i></a>' +
+                                            '</div>' +
+                                        '</span>' +
+                                        '<h4>' + fileList.file[i].fname + '</h4>' +
+                                        '<hr/>' +
+                                        '<p class="descrip1">' + fileList.file[i].width + 'mm x ' + fileList.file[i].height + 'mm</p>' +
+                                        '<p class="descrip1">' + formattedDate + '</p>' +
+                                        '<p class="descrip1">' + fileList.file[i].fileSize + 'MB</p>' +
+                                        '<hr/>' +
+                                        '<p class="descrip2">Drawing Time: ' + drawTime +' Min</p>' +
+                                        '<button type="button" class="btn btn-outline-primary btn-draw">Draw!</button>' +
+                                    '</div>' +
+                                '</div>';
+
+                    $("#file-container").append(fileHTML);
+                }
+            }
         </script>
     </body>
 </html>

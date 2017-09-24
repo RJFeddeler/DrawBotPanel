@@ -26,6 +26,9 @@
             .shadow { box-shadow: 8px 8px 10px #606060; }
             .shadow2 { box-shadow: 0px 3px 2px #222222; }
 
+            .hidden { display: none; }
+            .not-hidden {}
+
             .margin-lg { margin: 0px 20px; }
             .margin-sm { margin: 0px 10px; }
             .margin-no { margin: 0px 0px; }
@@ -74,15 +77,17 @@
 
         <!-- CSS Design Classes - Draw -->
         <style type="text/css">
+            /* Top level card for Free Draw */
             .draw-freedraw a { color: white; opacity: 0.6; }
             .draw-freedraw a:hover { color: white; opacity: 1.0; }
             .draw-freedraw i { margin-right: 20px; }
 
+            /* Used on Col before <a> of first dropdown item */
             .icon-links a { color: white; opacity: 0.6; }
             .icon-links a:hover { color: white; opacity: 1.0; }
-
             .icon-links-pos { top: -52px; position: relative; margin-right: 0; }
 
+            /* Built in dropdown container */
             .dropdown-menu a { color: #aaa; background-color: #fff}
             .dropdown-menu a:hover { color: #222; background-color: #f8f8f8; }
 
@@ -325,7 +330,7 @@
                         <div class="col-lg-8 card-height-full-pad">
                             <div class="card home-preview bg-primary card-height-full shadow">
                                 <div class="card-header card-title-stripe text-white text-center shadow2">
-                                    <h5 id="appendTEST">Preview</h5>
+                                    <h5>Preview</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="d-flex">
@@ -458,55 +463,85 @@
 
                 <div class="tab-pane pane-draw" id="Draw" role="tabpanel">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-md-12">
 
                             <div id="accordion" role="tablist">
                                 <div class="card draw-filemanager bg-primary shadow">
                                     <span data-toggle="collapse" href="#filemanager-body">
                                         <div class="card-header card-title-stripe text-white text-center shadow2" role="tab" id="filemanager-heading">
-                                            <h5>File Manager</h5>
+                                            <h5 id="hahaha">File Manager</h5>
                                         </div>
                                     </span>
 
                                     <div class="collapse show" role="tabpanel" data-parent="#accordion" id="filemanager-body">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col icon-links icon-links-pos">
-                                                    <div class="d-med-flex pull-right hidden-md-lg">
-                                                        <a href="#" class="ml-3"><i class="fa fa-search fa-lg fa-fw"></i></a>
-                                                        <div class="btn-group">
-                                                            <a href="#" class="ml-3" data-toggle="dropdown"><i class="fa fa-sort-amount-desc fa-lg fa-fw"></i></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <h6 class="dropdown-header">Sort by</h6>
-                                                                <a class="dropdown-item" href="#">Name</a>
-                                                                <a class="dropdown-item" href="#">Date</a>
-                                                                <a class="dropdown-item" href="#">File Size</a>
-                                                                <a class="dropdown-item" href="#">Dimensions</a>
-                                                                <a class="dropdown-item" href="#">Time</a>
-                                                            </div>
+
+                                                <div class="col icon-links icon-links-pos" id="filemanager-menu-lg">
+                                                    <a href="#" class="ml-3"><i class="fa fa-search fa-lg fa-fw"></i></a>
+                                                    <div class="btn-group">
+                                                        <a href="#" class="ml-3" data-toggle="dropdown"><i class="fa fa-sort-amount-desc fa-lg fa-fw"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <h6 class="dropdown-header">Sort by</h6>
+                                                            <a class="dropdown-item" href="#">Name</a>
+                                                            <a class="dropdown-item" href="#">Date</a>
+                                                            <a class="dropdown-item" href="#">File Size</a>
+                                                            <a class="dropdown-item" href="#">Dimensions</a>
+                                                            <a class="dropdown-item" href="#">Time</a>
                                                         </div>
-                                                        <div class="btn-group">
-                                                            <a href="#" class="ml-3" data-toggle="dropdown"><i class="fa fa-sliders fa-lg fa-fw"></i></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <h6 class="dropdown-header">View Options</h6>
-                                                                <a class="dropdown-item" href="#">Details</a>
-                                                                <a class="dropdown-item" href="#">Preview (Large)</a>
-                                                                <a class="dropdown-item" href="#">Preview (Medium)</a>
-                                                                <a class="dropdown-item" href="#">Preview (Small)</a>
-                                                                <a class="dropdown-item" href="#">Name</a>
-                                                            </div>
-                                                        </div>
-                                                        <a href="#" class="ml-3"><i class="fa fa-refresh fa-lg fa-fw"></i></a>
-                                                        <!-- <a href="#" class="dropdown-pos dropdown-link" data-toggle="dropdown"><i class="fa fa-chevron-down fa-lg"></i></a>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Refresh</a>
-                                                            <a class="dropdown-item" href="#">Refresh</a>
-                                                        </div> -->
                                                     </div>
-                                                    <div class="d-sm-flex pull-right">
-                                                        <a href="#"><i class="fa fa-chevron-down fa-lg fa-fw"></i></a>
+                                                    <div class="btn-group">
+                                                        <a href="#" class="ml-3" data-toggle="dropdown"><i class="fa fa-sliders fa-lg fa-fw"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <h6 class="dropdown-header">View Options</h6>
+                                                            <a class="dropdown-item" href="#">Details</a>
+                                                            <a class="dropdown-item" href="#">Preview (Large)</a>
+                                                            <a class="dropdown-item" href="#">Preview (Medium)</a>
+                                                            <a class="dropdown-item" href="#">Preview (Small)</a>
+                                                            <a class="dropdown-item" href="#">Name</a>
+                                                        </div>
+                                                    </div>
+                                                    <a href="#" class="ml-3"><i class="fa fa-refresh fa-lg fa-fw"></i></a>
+                                                </div>
+
+                                                <div class="col icon-links icon-links-pos" id="filemanager-menu-sm">
+                                                    <a href="#" class="ml-3" data-toggle="dropdown"><i class="fa fa-chevron-down fa-lg fa-fw"></i></a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" href="#">Refresh</a>
+                                                        <div id="dropdown-accordion" role="tablist">
+
+                                                            <div role="tab">
+                                                                <a class="dropdown-item" href="#filemanager-submenu-view" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-view">View Options <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
+                                                                <span class="collapse hide" role="tabpanel" id="filemanager-submenu-view" data-parent="#dropdown-accordion">
+                                                                    <a class="dropdown-item" href="#">Details</a>
+                                                                    <a class="dropdown-item" href="#">Preview (Large)</a>
+                                                                    <a class="dropdown-item" href="#">Preview (Medium)</a>
+                                                                    <a class="dropdown-item" href="#">Preview (Small)</a>
+                                                                    <a class="dropdown-item" href="#">Name</a>
+                                                                </span>
+                                                            </div>
+
+                                                            <div role="tab">
+                                                                <a class="dropdown-item" href="#filemanager-submenu-sort" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-sort">Sort by <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
+                                                                <span class="collapse hide" role="tabpanel" id="filemanager-submenu-sort" data-parent="#dropdown-accordion">
+                                                                    <a class="dropdown-item" href="#">Date</a>
+                                                                    <a class="dropdown-item" href="#">File Size</a>
+                                                                    <a class="dropdown-item" href="#">Dimensions</a>
+                                                                    <a class="dropdown-item" href="#">Time</a>
+                                                                </span>
+                                                            </div>
+
+                                                            <div role="tab">
+                                                                <a class="dropdown-item" href="#filemanager-submenu-search" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-search">Search <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
+                                                                <span class="collapse hide" role="tabpanel" id="filemanager-submenu-search" data-parent="#dropdown-accordion">
+                                                                    Search Box
+                                                                </span>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                             <div class="row">
                                                 <div class="card-deck justify-content-center" id="file-container">
@@ -585,8 +620,35 @@
                 fillStateUnits();
 
                 generateFileList();
+                showCorrectFilemanagerMenu();
             });
 
+            
+            $(window).resize(function(){
+                showCorrectFilemanagerMenu();
+            });
+
+            /* Keep dropdown menus open when opening sub-lists */
+            $(function() {
+                $("div.dropdown-menu").on("click", "[data-keepOpenOnClick]", function(e) {
+                    e.stopPropagation();
+                    $( this ).collapse('toggle');
+                });
+            });
+
+            /* Shrink or expand the filemanager menu depending on the window size */
+            function showCorrectFilemanagerMenu() {
+                if ($(window).width() < 4024) { ///////////////////////////// CHANGE TO LOWER NUMBER!!!!
+                    $('#filemanager-menu-lg').addClass("hidden");
+                    $('#filemanager-menu-sm').removeClass("hidden");
+                }
+                else {
+                    $('#filemanager-menu-sm').addClass("hidden");
+                    $('#filemanager-menu-lg').removeClass("hidden");
+                }
+            }
+
+            /* Turn on popovers for all elements with a tooltip */
             $(function () {
                 var showPopover = function () { $(this).popover('show'); }
                 , hidePopover = function () { $(this).popover('hide'); };

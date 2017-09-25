@@ -89,14 +89,15 @@
  
             /* Built in dropdown container */
             .dropdown-toggle::after { display: none; }
-            
             .dropdown-menu a { color: #222; opacity: 0.4; background-color: #fff}
             .dropdown-menu a:hover { color: #222; background-color: #f8f8f8; }
             .dropdown-item:active { background-color: #f8f8f8; }
             .dropdown-item:hover a { color: #222; opacity: 1.0; }
             .dropdown-menu:hover a:hover { color: #222; opacity: 1.0; text-decoration: none; }
-            .dropdown-submenu.dropdown-item a { opacity: 0.5; }
-            .dropdown-submenu.dropdown-item a:hover { opacity: 1.0; }
+            /*.dropdown-submenu.dropdown-item a { opacity: 0.5; }*/
+            /*.dropdown-submenu.dropdown-item a:hover { opacity: 1.0; }*/
+            /*.dropdown-menu > .interaction > a { color: red; }*/
+            .dropdown-item:hover ul>li>a { color: #222; opacity: 0.4; }
             
 
             .search-sm { width: 150px; height: 20px; }
@@ -549,46 +550,28 @@
                                                 </div>
 
                                                 <div class="col icon-links icon-links-pos" id="filemanager-menu-sm">
-                                                    <a href="#" class="dropdown-toggle ml-3" data-toggle="dropdown"><i class="fa fa-chevron-down fa-lg fa-fw"></i></a>
-                                                    <div class="dropdown-menu shadow2">
+                                                    <a href="#" class="dropdown-toggle ml-3" data-toggle="dropdown"><i class="fa fa-bars fa-lg fa-fw"></i></a>
+                                                    <ul class="dropdown-menu shadow2">
                                                         <li class="dropdown-item">
-                                                            <a tabindex="-1" href="#"><i class="fa fa-refresh fa-xs fa-fw"></i> Refresh</a>
+                                                            <a href="#"><i class="fa fa-refresh fa-xs fa-fw"></i> Refresh</a>
                                                         </li>
                                                         <li class="dropdown-item dropdown-submenu">
-                                                            <a tabindex="-1" href="#"><i class="fa fa-sliders fa-xs fa-fw"></i> View</a>
+                                                            <a href="#"><i class="fa fa-sliders fa-xs fa-fw"></i> View</a>
                                                             <ul class="dropdown-menu shadow2">
-                                                                <li>
-                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="status">Details</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Preview Large</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Preview Med</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Preview Small</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Name</a>
-                                                                </li>
+                                                                <li><a href="#" class="dropdown-item interaction">Details</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Preview Large</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Preview Med</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Preview Small</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Name</a></li>
                                                             </ul>
                                                         </li>
                                                         <li class="dropdown-item dropdown-submenu">
-                                                            <a tabindex="-1" href="#"><i class="fa fa-sort-amount-desc fa-xs fa-fw"></i> Sort</a>
+                                                            <a href="#"><i class="fa fa-sort-amount-desc fa-xs fa-fw"></i> Sort</a>
                                                             <ul class="dropdown-menu shadow2">
-                                                                <li>
-                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="status">Date</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">File Size</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Dimensions</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Time</a>
-                                                                </li>
+                                                                <li><a href="#" class="dropdown-item interaction">Date</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">File Size</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Dimensions</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Time</a></li>
                                                             </ul>
                                                         </li>
                                                         <li class="dropdown-item">
@@ -598,7 +581,7 @@
                                                             </div>
 
                                                         </li>
-                                                    </div>
+                                                    </ul>
                                                 </div>
 
 

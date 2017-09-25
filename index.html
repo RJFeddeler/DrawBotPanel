@@ -94,6 +94,40 @@
             #filemanager-heading .draw-filemanager {}
             #filemanager-body .draw-filemanager {}
 
+            .dropdown-submenu { position: relative }
+            .dropdown-submenu>.dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-top: -6px;
+                margin-left: -1px;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+            }
+            .dropdown-submenu:hover>.dropdown-menu { display: block }
+            .dropdown-submenu>a:after {
+                display: block;
+                content: " ";
+                float: right;
+                width: 0;
+                height: 0;
+                border-color: transparent;
+                border-style: solid;
+                border-width: 5px 0 5px 5px;
+                border-left-color: #ccc;
+                margin-top: 5px;
+                margin-right: -10px;
+            }
+            .dropdown-submenu:hover>a:after { border-left-color: #ccc }
+            .dropdown-submenu.pull-left { float: none }
+            .dropdown-submenu.pull-left>.dropdown-menu {
+                left: -100%;
+                margin-left: 10px;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+            }
+
             #file { margin-right: 25px; }
             #file .shortcut {}
             #file .shortcut a { margin-right: 10px; }
@@ -505,42 +539,58 @@
                                                 </div>
 
                                                 <div class="col icon-links icon-links-pos" id="filemanager-menu-sm">
-                                                    <a href="#" class="ml-3" data-toggle="dropdown"><i class="fa fa-chevron-down fa-lg fa-fw"></i></a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Refresh</a>
-                                                        <div id="dropdown-accordion" role="tablist">
-
-                                                            <div role="tab">
-                                                                <a class="dropdown-item" href="#filemanager-submenu-view" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-view">View Options <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
-                                                                <span class="stay-open collapse hide" role="tabpanel" id="filemanager-submenu-view" data-parent="#dropdown-accordion">
-                                                                    <a class="dropdown-item" href="#">Details</a>
-                                                                    <a class="dropdown-item" href="#">Preview (Large)</a>
-                                                                    <a class="dropdown-item" href="#">Preview (Medium)</a>
-                                                                    <a class="dropdown-item" href="#">Preview (Small)</a>
-                                                                    <a class="dropdown-item" href="#">Name</a>
-                                                                </span>
+                                                    <a href="#" class="dropdown-toggle ml-3" data-toggle="dropdown"><i class="fa fa-chevron-down fa-lg fa-fw"></i></a>
+                                                    <div class="dropdown-menu">
+                                                        <li class="dropdown-item">
+                                                            <a tabindex="-1" href="#">Refresh</a>
+                                                        </li>
+                                                        <li class="dropdown-item dropdown-submenu">
+                                                            <a tabindex="-1" href="#">View</a>
+                                                            <ul class="dropdown-menu">
+                                                                <li>
+                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="status">Details</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Preview Large</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Preview Med</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Preview Small</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Name</a>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="dropdown-item dropdown-submenu">
+                                                            <a tabindex="-1" href="#">Sort</a>
+                                                            <ul class="dropdown-menu">
+                                                                <li>
+                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="status">Date</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">File Size</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Dimensions</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="compare">Time</a>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="dropdown-item">
+                                                            <a id="keep-search-open" data-keepOpenOnClick data-toggle="collapse" href="#collapseSearch">Search</a>
+                                                            <div class="collapse hide mt-3 text-center" id="collapseSearch">
+                                                                <button class="btn btn-primary btn-sm">Search Me!</button>
                                                             </div>
-
-                                                            <div role="tab">
-                                                                <a class="dropdown-item" href="#filemanager-submenu-sort" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-sort">Sort by <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
-                                                                <span class="stay-open collapse hide" role="tabpanel" id="filemanager-submenu-sort" data-parent="#dropdown-accordion">
-                                                                    <a class="dropdown-item" href="#">Date</a>
-                                                                    <a class="dropdown-item" href="#">File Size</a>
-                                                                    <a class="dropdown-item" href="#">Dimensions</a>
-                                                                    <a class="dropdown-item" href="#">Time</a>
-                                                                </span>
-                                                            </div>
-
-                                                            <div role="tab">
-                                                                <a class="dropdown-item" href="#filemanager-submenu-search" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-search">Search <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
-                                                                <span class="stay-open collapse hide" role="tabpanel" id="filemanager-submenu-search" data-parent="#dropdown-accordion">
-                                                                    Search Box
-                                                                </span>
-                                                            </div>
-
-                                                        </div>
+                                                        </li>
                                                     </div>
                                                 </div>
+
+
 
                                             </div>
                                             <div class="row">
@@ -628,11 +678,15 @@
                 showCorrectFilemanagerMenu();
             });
 
-            /* Keep dropdown menus open when opening sub-lists */
+            /* Keep dropdown menu open when opening search bar */
             $(function() {
-                $("div.dropdown-menu").on("click", "[data-keepOpenOnClick]", function(e) {
+                $(".dropdown-item").on("click", "[data-keepOpenOnClick]", function(e) {
+                    e.preventDefault();
                     e.stopPropagation();
-                    $(this).siblings( ".stay-open" ).collapse('toggle');
+                    //element = document.getElementById("keep-search-open");
+                    //$("collapseSearch").collapse("show");
+                    //$(this).collapse('show');
+                    $(this).siblings( "#collapseSearch" ).collapse('toggle');
                 });
             });
 

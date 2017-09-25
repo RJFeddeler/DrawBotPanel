@@ -86,10 +86,20 @@
             .icon-links a { color: white; opacity: 0.6; }
             .icon-links a:hover { color: white; opacity: 1.0; }
             .icon-links-pos { top: -52px; position: relative; margin-right: 0; }
-
+ 
             /* Built in dropdown container */
-            .dropdown-menu a { color: #aaa; background-color: #fff}
+            .dropdown-toggle::after { display: none; }
+            
+            .dropdown-menu a { color: #222; opacity: 0.4; background-color: #fff}
             .dropdown-menu a:hover { color: #222; background-color: #f8f8f8; }
+            .dropdown-item:active { background-color: #f8f8f8; }
+            .dropdown-item:hover a { color: #222; opacity: 1.0; }
+            .dropdown-menu:hover a:hover { color: #222; opacity: 1.0; text-decoration: none; }
+            .dropdown-submenu.dropdown-item a { opacity: 0.5; }
+            .dropdown-submenu.dropdown-item a:hover { opacity: 1.0; }
+            
+
+            .search-sm { width: 150px; height: 20px; }
 
             #filemanager-heading .draw-filemanager {}
             #filemanager-body .draw-filemanager {}
@@ -104,7 +114,7 @@
                 -moz-border-radius: 4px;
                 border-radius: 4px;
             }
-            .dropdown-submenu:hover>.dropdown-menu { display: block }
+            .dropdown-submenu:hover>.dropdown-menu { display: block; }
             .dropdown-submenu>a:after {
                 display: block;
                 content: " ";
@@ -540,13 +550,13 @@
 
                                                 <div class="col icon-links icon-links-pos" id="filemanager-menu-sm">
                                                     <a href="#" class="dropdown-toggle ml-3" data-toggle="dropdown"><i class="fa fa-chevron-down fa-lg fa-fw"></i></a>
-                                                    <div class="dropdown-menu">
+                                                    <div class="dropdown-menu shadow2">
                                                         <li class="dropdown-item">
-                                                            <a tabindex="-1" href="#">Refresh</a>
+                                                            <a tabindex="-1" href="#"><i class="fa fa-refresh fa-xs fa-fw"></i> Refresh</a>
                                                         </li>
                                                         <li class="dropdown-item dropdown-submenu">
-                                                            <a tabindex="-1" href="#">View</a>
-                                                            <ul class="dropdown-menu">
+                                                            <a tabindex="-1" href="#"><i class="fa fa-sliders fa-xs fa-fw"></i> View</a>
+                                                            <ul class="dropdown-menu shadow2">
                                                                 <li>
                                                                     <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="status">Details</a>
                                                                 </li>
@@ -565,8 +575,8 @@
                                                             </ul>
                                                         </li>
                                                         <li class="dropdown-item dropdown-submenu">
-                                                            <a tabindex="-1" href="#">Sort</a>
-                                                            <ul class="dropdown-menu">
+                                                            <a tabindex="-1" href="#"><i class="fa fa-sort-amount-desc fa-xs fa-fw"></i> Sort</a>
+                                                            <ul class="dropdown-menu shadow2">
                                                                 <li>
                                                                     <a href="#" bypass class="dropdown-item interaction" data-module="git" data-action="status">Date</a>
                                                                 </li>
@@ -582,10 +592,11 @@
                                                             </ul>
                                                         </li>
                                                         <li class="dropdown-item">
-                                                            <a id="keep-search-open" data-keepOpenOnClick data-toggle="collapse" href="#collapseSearch">Search</a>
-                                                            <div class="collapse hide mt-3 text-center" id="collapseSearch">
-                                                                <button class="btn btn-primary btn-sm">Search Me!</button>
+                                                            <div class="input-group search-sm">
+                                                                <input class="form-control trim" type="text" placeholder="Search query...">
+                                                                <span class="input-group-addon trim" id="searchBox"><i class="fa fa-search fa-xs fa-fw"></i></span>
                                                             </div>
+
                                                         </li>
                                                     </div>
                                                 </div>

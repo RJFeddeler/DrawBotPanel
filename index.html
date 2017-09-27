@@ -36,7 +36,6 @@
         <style type="text/css">
             .shadow { box-shadow: 8px 8px 10px #606060; }
             .shadow2 { box-shadow: 0px 3px 2px #222222; }
-            .shadow3 { box-shadow: 3px 3px 2px #222222; }
 
             .hidden { display: none; }
 
@@ -45,14 +44,53 @@
             .margin-no { margin: 0px 0px; }
             .trim { margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; }
             .lineheight-sm { line-height: 1em; }
+            .font-sm { font-size: 0.7em; }
 
+            .card { margin-bottom: 20px; padding-bottom: 30px; }
             .card-gap-top { margin-top: 48px; }
             .card-height-full-pad { padding-bottom: 20px; }
             .card-height-full { height: 100%; padding-bottom: 20px; }
             .card-title-stripe { padding-top: 0.5em; height: 2.5em; background: repeating-linear-gradient(45deg, #288ade, #288ade 40px, #0275d8 40px, #0275d8 80px); }
-            .font-sm { font-size: 0.7em; }
 
-            .card { margin-bottom: 20px; padding-bottom: 30px; }
+            .alert-red { background-color: #f8d7da; box-shadow: 0px 0px 25px 10px #e02222; }
+            .alert-blue { background-color: #bcdaf6; box-shadow: 0px 0px 25px 10px #2482e0; }
+            .alert-green { background-color: #d5f6d5; box-shadow: 0px 0px 25px 10px #31d331; }
+            .alert-yellow { background-color: #ffffe6; box-shadow: 0px 0px 25px 10px #ffff4d; }
+            .alert-orange { background-color: #f9e6d2; box-shadow: 0px 0px 25px 10px #e08224; }
+
+            .alert-heading { font-size: 1.2em; font-weight: bold; }
+            .alert-body { font-size: 1.0em; }
+            .alert-common hr { width: 70%; }
+            .alert-common {
+                position: absolute;
+                z-index: 1000;
+                left: 25%; width: 50%; height: 75px;
+                top: 55%;
+                opacity: 0;
+                animation-name: alert-anim;
+                animation-duration: 4s;
+            }
+
+            /* Standard syntax */
+            @keyframes alert-anim {
+                0%   {top:55%; opacity:0;}
+                25%  {top:50%; opacity:1;}
+                75%  {top:50%; opacity:1;}
+                100% {top:55%; opacity:0;}
+            }
+
+            /* Safari 4.0 - 8.0 */
+            @-webkit-keyframes alert-anim {
+                0%   {top:55%; opacity:0;}
+                25%  {top:50%; opacity:1;}
+                75%  {top:50%; opacity:1;}
+                100% {top:55%; opacity:0;}
+            }
+
+            /*.transform-active {
+                opacity: 0;
+                top: 55%;
+            }*/
         </style>
 
         <!-- CSS Design Classes - Navbar -->
@@ -241,7 +279,6 @@
                 cursor: inherit;
                 display: block;
             }
-
         </style>
 
         <!-- CSS Design Classes - Wifi -->
@@ -642,6 +679,22 @@
                 </div> <!-- end tab-pane (Draw) -->
 
                 <div class="tab-pane pane-upload" id="Upload" role="tabpanel">
+                    <div class="alert-common alert-red transform text-center rounded">
+                        <p class="alert-heading mb-0">ERROR</p><center><hr class="trim"/></center><p class="alert-body mt-2">Incompatible file type.</p>
+                    </div>
+                    <div class="alert-common alert-blue transform text-center rounded hidden">
+                        <p class="alert-heading mb-0">NOTE</p><center><hr class="trim"/></center><p class="alert-body mt-2">I like you.</p>
+                    </div>
+                    <div class="alert-common alert-green transform text-center rounded hidden">
+                        <p class="alert-heading mb-0">SUCCESS</p><center><hr class="trim"/></center><p class="alert-body mt-2">The selected file has been loaded.</p>
+                    </div>
+                    <div class="alert-common alert-yellow transform text-center rounded hidden">
+                        <p class="alert-heading mb-0">WARNING</p><center><hr class="trim"/></center><p class="alert-body mt-2">Something may have gone wrong.</p>
+                    </div>
+                    <div class="alert-common alert-orange transform text-center rounded hidden">
+                        <p class="alert-heading mb-0">UNKNOWN</p><center><hr class="trim hr"/></center><p class="alert-body mt-2">This is your president speaking.</p>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-7">
                             <div class="card bg-primary shadow pb-0" id="upload-viewport">
@@ -762,7 +815,7 @@
                                                                 <button class="btn btn-icon-white"><i class="fa fa-play-circle fa-4x fa-fw"></i></button>
                                                                 <button class="btn btn-icon-white"><i class="fa fa-stop-circle fa-2x fa-fw"></i></button>-->
                                                                 <a href="#" class="btn btn-icon-white"><i class="fa fa-pause-circle fa-2x fa-fw"></i></a>
-                                                                <a href="#" class="btn btn-icon-white"><i class="fa fa-play-circle fa-4x fa-fw"></i></a>
+                                                                <a href="#" class="btn btn-icon-white" id="btn-upload-start"><i class="fa fa-play-circle fa-4x fa-fw"></i></a>
                                                                 <a href="#" class="btn btn-icon-white"><i class="fa fa-stop-circle fa-2x fa-fw"></i></a>
                                                             </div>
                                                         </div>
@@ -828,7 +881,6 @@
             });
 
             $(function() {
-
                 // We can attach the `fileselect` event to all file inputs on the page
                 $(document).on('change', ':file', function() {
                 var input = $(this),
@@ -854,6 +906,21 @@
                 });
             });
 
+            function readFileForUpload() {
+                var textType = /text.*/;
+
+                if (file.type.match(textType)) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        fileDisplayArea.innerText = reader.result;
+                    }
+
+                    reader.readAsText(file);
+                }
+                else {}
+            }
+
             /* Shrink or expand the filemanager menu depending on the window size */
             function showCorrectFilemanagerMenu() {
                 if ($(window).width() < 1024) {
@@ -868,6 +935,10 @@
 
             /* Turn on popovers for all elements with a tooltip */
             $(function () {
+                $("#btn-upload-start").click(function(){
+                    $('.transform').toggleClass('transform-active');
+                });
+
                 var showPopover = function () { $(this).popover('show'); }
                 , hidePopover = function () { $(this).popover('hide'); };
 

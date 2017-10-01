@@ -20,33 +20,14 @@ var App = (function () {
 
             var options = GetOptions();
 
-            options.generateNewSolution = Queens.GenerateRandomPositions;
-            options.generateNeighbor    = Queens.GenerateNeighbor;
-            options.acceptNeighbor      = Queens.AcceptNeighbor;
+            options.generateNewSolution = Drawbot.GenerateRandomPositions;
+            options.generateNeighbor    = Drawbot.GenerateNeighbor;
+            options.acceptNeighbor      = Drawbot.AcceptNeighbor;
 
-            Draw.Initialize();
-            Graph.Initialize((options.initialTemperature - options.freezingTemperature) / options.coolingFactor, Constants.MAX_POSSIBLE_ATTACKS);
-            Console.Initialize();
+            Drawing.Initialize();
+            Energy_Graph.Initialize((options.initialTemperature - options.freezingTemperature) / options.coolingFactor, Constants.MAX_POSSIBLE_ATTACKS);
             SimulatedAnnealing.Initialize(options);
-            Draw.DrawBoard(Queens.GetCurrentPositions());
-            Console.Print('System energy: ', SimulatedAnnealing.GetCurrentEnergy());
-            Graph.Point(SimulatedAnnealing.GetCurrentEnergy());
-
-            var lines = [];
-
-            for (i = 0; i < 10; i++) {
-                lines[i] = new Line((i * 2) + 1, (i * 2) + 1);
-                lines[i].addPoint((i * 2) + 2, (i * 2) + 1);
-                lines[i].addPoint((i * 2) + 2, (i * 2) + 2);
-                lines[i].addPoint((i * 2) + 1, (i * 2) + 2);
-                lines[i].addPoint((i * 2) + 1, (i * 2) + 1);
-            }
-
-            var linesLength = 0.0;
-
-            for (i = 0; i < lines.length; i++) {
-                linesLength += lines[i].getLength();
-            }
+            Energy_Graph.Point(SimulatedAnnealing.GetCurrentEnergy());
 
             intervalId = setInterval(function () {
                 var done = SimulatedAnnealing.Step();
@@ -68,4 +49,4 @@ var App = (function () {
             alreadyRunning = true;
         }
     };
-})();
+});

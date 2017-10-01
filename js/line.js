@@ -1,6 +1,7 @@
 function Line(startX, startY) {
 	this.startPoint = new Point(startX, startY);
 	this.endPoint = this.startPoint;
+	this.closed = false;
 	this.offset = 0;
 
 	this.addPoint = function(x, y) {
@@ -8,16 +9,6 @@ function Line(startX, startY) {
 
 		this.endPoint.next = point;
 		this.endPoint = this.endPoint.next;
-	}
-
-	this.isLoop = function() {
-		if (this.startPoint.x === this.endPoint.x) {
-			if (this.startPoint.y === this.endPoint.y) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	this.getLength = function() {
@@ -30,5 +21,16 @@ function Line(startX, startY) {
 		}
 
 		return length;
+	}
+
+	this.isClosed = function() {
+		if (this.closed)
+			return true;
+
+		return false;
+	}
+
+	this.setClosed = function(value) {
+		this.closed = value;
 	}
 }

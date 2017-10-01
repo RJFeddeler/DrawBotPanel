@@ -15,21 +15,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
-        <!-- AI Components -->
-        <script language="JavaScript" src="scripts/constants.js"></script>
-        <script language="JavaScript" src="scripts/point.js"></script>
-        <script language="JavaScript" src="scripts/line.js"></script>
-        <script language="JavaScript" src="scripts/drawing.js"></script>
-        <script language="JavaScript" src="scripts/simulated_annealing.js"></script>
-        <script language="JavaScript" src="scripts/queens.js"></script>
-        <script language="JavaScript" src="scripts/energy_graph.js"></script>
-        <script language="JavaScript" src="scripts/drawing_graph.js"></script>
-        <script language="JavaScript" src="scripts/application.js"></script>
+        <!-- Load program scripts and objects -->
+        <script language="JavaScript" src="js/point.js"></script>
+        <script language="JavaScript" src="js/line.js"></script>
+        <script language="JavaScript" src="js/energy_graph.js"></script>
+        <script language="JavaScript" src="js/drawing.js"></script>
+        <script language="JavaScript" src="js/simulated_annealing.js"></script>
+        <script language="JavaScript" src="js/drawbot.js"></script>
+        <script language="JavaScript" src="js/application.js"></script>
 
-        <!-- Robot State Object and Enums -->
         <script type="text/javascript" src="js/state_data.js"></script>
-
-        <!-- File list and descriptions to populate file manager -->
         <script type="text/javascript" src="js/file_list.js"></script>
 
         <!-- CSS Design Classes - General -->
@@ -195,9 +190,9 @@
                 border-radius: 4px;
             }
 
+            #file-container { height: 315px; overflow-y: scroll; }
+
             #file { margin-right: 25px; }
-            #file .shortcut {}
-            #file .shortcut a { margin-right: 10px; }
             #file .card { width: 100%; background: #ffffff; text-align: center; float: left; position: relative; border-radius: 5px; padding: 0 10px; margin-top: 45px; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3); }
             #file .display-shortcuts:hover .thumb { top: -21%; }
             #file .card .thumb {
@@ -224,7 +219,7 @@
             #file .card .shortcut i { opacity: 0.6; }
             #file .card .shortcut i:hover { opacity: 1.0; }
             #file .card h4 { font-size: 1.2em; font-weight: 700; margin-top: 10px; color: #007bff; opacity: 0.8; }
-            #file .card hr { width: 10%; opacity: 0.8; margin: 10px auto; }
+            #file .card hr { width: 10%; opacity: 0.8; margin: 0px auto; }
             #file .card .descrip1 { margin: 0px; font-size: 0.8em; line-height: 20px; opacity: 0.8; }
             #file .card .descrip2 { margin: 10px 1px 1px 1px; font-size: 0.6em; line-height: 15px; opacity: 0.8; }
             #file .card .btn-draw { margin-bottom: 10px; }
@@ -244,6 +239,8 @@
             .chooser-margins { margin-top: 10px; margin-bottom: 15px; }
             .chooser-btn { height: 25px; line-height: 5px; border-color: #222; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3); }
             .chooser-input { height: 25px; margin-left: 0px; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3); }
+
+            .canvas-style { background-color: #dde; border: 1px solid black; }
 
             .form-group { line-height: 1em; margin-top: 0px; margin-top: 0px; margin-bottom: 0px; }
             #form-algorithm { text-align: center; }
@@ -297,6 +294,23 @@
     </head>
 
     <body>
+        <!-- Alerts -->
+        <div class="alert-common alert-red transform text-center rounded hidden">
+            <p class="alert-heading mb-0">ERROR</p><center><hr class="trim"/></center><p class="alert-body mt-2"></p>
+        </div>
+        <div class="alert-common alert-blue transform text-center rounded hidden">
+            <p class="alert-heading mb-0">NOTE</p><center><hr class="trim"/></center><p class="alert-body mt-2"></p>
+        </div>
+        <div class="alert-common alert-green transform text-center rounded hidden">
+            <p class="alert-heading mb-0">SUCCESS</p><center><hr class="trim"/></center><p class="alert-body mt-2"></p>
+        </div>
+        <div class="alert-common alert-yellow transform text-center rounded hidden">
+            <p class="alert-heading mb-0">WARNING</p><center><hr class="trim"/></center><p class="alert-body mt-2"></p>
+        </div>
+        <div class="alert-common alert-orange transform text-center rounded hidden">
+            <p class="alert-heading mb-0">UNKNOWN</p><center><hr class="trim hr"/></center><p class="alert-body mt-2"></p>
+        </div>
+
         <!-- NavBar code -->
         <nav class="nav navbar navbar-expand-lg navbar-dark bg-primary shadow2">
             <a class="navbar-brand" href="#">DrawBot</a>
@@ -589,13 +603,13 @@
                                 <div class="card draw-filemanager bg-primary shadow">
                                     <span data-toggle="collapse" href="#filemanager-body">
                                         <div class="card-header card-title-stripe text-white text-center shadow2" role="tab" id="filemanager-heading">
-                                            <h5 id="hahaha">File Manager</h5>
+                                            <h5>File Manager</h5>
                                         </div>
                                     </span>
 
                                     <div class="collapse show" role="tabpanel" data-parent="#accordion" id="filemanager-body">
                                         <div class="card-body">
-                                            <div class="row">
+                                        	<div class="row">
                                                 <div class="col icon-links icon-links-pos" id="filemanager-menu-sm">
                                                     <a href="#" class="dropdown-toggle ml-3" data-toggle="dropdown"><i class="fa fa-bars fa-lg fa-fw"></i></a>
                                                     <ul class="dropdown-menu shadow2">
@@ -626,12 +640,9 @@
                                                                 <input class="form-control trim" type="text" placeholder="Search query...">
                                                                 <span class="input-group-addon trim" id="searchBox"><i class="fa fa-search fa-xs fa-fw"></i></span>
                                                             </div>
-
                                                         </li>
                                                     </ul>
                                                 </div>
-
-
 
                                             </div>
                                             <div class="row">
@@ -679,22 +690,6 @@
                 </div> <!-- end tab-pane (Draw) -->
 
                 <div class="tab-pane pane-upload" id="Upload" role="tabpanel">
-                    <div class="alert-common alert-red transform text-center rounded">
-                        <p class="alert-heading mb-0">ERROR</p><center><hr class="trim"/></center><p class="alert-body mt-2">Incompatible file type.</p>
-                    </div>
-                    <div class="alert-common alert-blue transform text-center rounded hidden">
-                        <p class="alert-heading mb-0">NOTE</p><center><hr class="trim"/></center><p class="alert-body mt-2">I like you.</p>
-                    </div>
-                    <div class="alert-common alert-green transform text-center rounded hidden">
-                        <p class="alert-heading mb-0">SUCCESS</p><center><hr class="trim"/></center><p class="alert-body mt-2">The selected file has been loaded.</p>
-                    </div>
-                    <div class="alert-common alert-yellow transform text-center rounded hidden">
-                        <p class="alert-heading mb-0">WARNING</p><center><hr class="trim"/></center><p class="alert-body mt-2">Something may have gone wrong.</p>
-                    </div>
-                    <div class="alert-common alert-orange transform text-center rounded hidden">
-                        <p class="alert-heading mb-0">UNKNOWN</p><center><hr class="trim hr"/></center><p class="alert-body mt-2">This is your president speaking.</p>
-                    </div>
-
                     <div class="row">
                         <div class="col-md-7">
                             <div class="card bg-primary shadow pb-0" id="upload-viewport">
@@ -704,25 +699,25 @@
                                 <div class="card-body pb-0 mb-0">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="d-flex justify-content-center mt-0 mb-1" id="viewport-canvas-drawing" style="background-color: black">
+                                            <div class="d-flex justify-content-center canvas-style mt-0 mb-1 rounded shadow2" id="viewport-drawing">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <div class="d-flex justify-content-center mt-1 mb-0" id="viewport-canvas-energy" style="background-color: black">
+                                            <div class="d-flex justify-content-center canvas-style mt-1 mb-0 rounded shadow2" id="viewport-energy">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <p class="upload-status trim">Slowest Time: </p>
+                                            <p class="upload-status small trim mt-1">Slowest Time: </p>
                                         </div>
                                         <div class="col">
-                                            <p class="upload-status trim">Fastest Time: </p>
+                                            <p class="upload-status small trim mt-1">Fastest Time: </p>
                                         </div>
                                         <div class="col">
-                                            <p class="upload-status trim">Lowest Energy: </p>
+                                            <p class="upload-status small trim mt-1">Lowest Energy: </p>
                                         </div>
                                     </div>
                                 </div>
@@ -734,10 +729,10 @@
                                     <div class="d-flex chooser-margins">
                                         <label class="input-group-btn">
                                             <span class="btn btn-primary chooser-btn">
-                                                Browse&hellip; <input type="file" style="display: none;" >
+                                                Browse&hellip; <input type="file" id="fileInput" accept=".rob, image/*" style="display: none;" >
                                             </span>
                                         </label>
-                                        <input type="text" class="form-control chooser-input" placeholder="(No file selected)" readonly>
+                                        <input type="text" class="form-control chooser-input" id="fileInputText" placeholder="(No file selected)" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -811,12 +806,23 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="d-flex justify-content-center align-items-center">
-                                                                <!--<button class="btn btn-icon-white"><i class="fa fa-pause-circle fa-2x fa-fw"></i></button>
-                                                                <button class="btn btn-icon-white"><i class="fa fa-play-circle fa-4x fa-fw"></i></button>
-                                                                <button class="btn btn-icon-white"><i class="fa fa-stop-circle fa-2x fa-fw"></i></button>-->
-                                                                <a href="#" class="btn btn-icon-white"><i class="fa fa-pause-circle fa-2x fa-fw"></i></a>
-                                                                <a href="#" class="btn btn-icon-white" id="btn-upload-start"><i class="fa fa-play-circle fa-4x fa-fw"></i></a>
-                                                                <a href="#" class="btn btn-icon-white"><i class="fa fa-stop-circle fa-2x fa-fw"></i></a>
+                                                                <button class="btn btn-icon-white" id="btn-sort-pause"><i class="fa fa-pause-circle fa-2x fa-fw"></i></button>
+                                                                <button class="btn btn-icon-white" id="btn-sort-start"><i class="fa fa-play-circle fa-4x fa-fw"></i></button>
+                                                                <button class="btn btn-icon-white" id="btn-sort-stop"><i class="fa fa-stop-circle fa-2x fa-fw"></i></button>
+
+                                                                <!-- THIS IS FROM Queens.html, NOT SURE IF I NEED IT YET!!! 
+                                                                    function handleFileSelect(evt) {
+                                                                    var files = evt.target.files; // FileList object
+
+                                                                    // files is a FileList of File objects. List some properties.
+                                                                    var output = [];
+                                                                    output.push('<li><strong>', escape(files[0].name), '</strong> (', files[0].type || 'n/a', ') - ',
+                                                                        files[0].size, ' bytes, last modified: ',
+                                                                        files[0].lastModifiedDate ? files[0].lastModifiedDate.toLocaleDateString() : 'n/a',
+                                                                        '</li>');
+
+                                                                    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+                                                                -->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -833,9 +839,8 @@
                                             <h5>Results</h5>
                                         </div>
                                         <div class="card-body">
-                                            <div class="d-flex justify-content-center" id="form-algorithm">
-                                                <form>
-                                                </form>
+                                            <div class="d-flex justify-content-center" id="upload-results">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -857,6 +862,10 @@
         </div>
 
         <script type="text/javascript">
+        	var drawbot = new Drawbot();
+        	var drawing = new Drawing();
+        	var energy_graph = new Energy_Graph();
+
             $(document).ready(function(){
                 $('a[data-toggle=popover]').popover();
 
@@ -871,69 +880,45 @@
                 var temp_f = parseFloat(document.getElementById("form-input-freezeTemp").value);
                 var cool_f = parseFloat(document.getElementById("form-input-coolFactor").value);
 
-                Drawing_Graph.Initialize((temp_i - temp_f) / cool_f, 200);
-                Energy_Graph.Initialize((temp_i - temp_f) / cool_f, 100);
-            });
+                
 
+                //Drawing.Initialize((temp_i - temp_f) / cool_f, 200);
+                
+                drawing.Initialize(200, 200);
+
+                
+                energy_graph.Initialize((temp_i - temp_f) / cool_f, 100);
+
+                for (i = 0; i < 1000; i++) {
+                	energy_graph.DrawPoint(i/10);
+                }
+
+                var fileInput = document.getElementById('fileInput');
+                fileInput.addEventListener('change', loadNewFile);
+            });
             
             $(window).resize(function(){
                 showCorrectFilemanagerMenu();
             });
 
-            $(function() {
-                // We can attach the `fileselect` event to all file inputs on the page
-                $(document).on('change', ':file', function() {
-                var input = $(this),
-                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                input.trigger('fileselect', [numFiles, label]);
-                });
-
-                // We can watch for our custom `fileselect` event like this
-                $(document).ready( function() {
-                    $(':file').on('fileselect', function(event, numFiles, label) {
-
-                        var input = $(this).parents('.input-group').find(':text'),
-                          log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                        if( input.length ) {
-                            input.val(log);
-                        } else {
-                            if( log ) alert(log);
-                        }
-
-                    });
-                });
+            //
+            $('btn-sort-start').on('click', function (e) {
+                App.Start();
             });
 
-            function readFileForUpload() {
-                var textType = /text.*/;
-
-                if (file.type.match(textType)) {
-                    var reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        fileDisplayArea.innerText = reader.result;
-                    }
-
-                    reader.readAsText(file);
-                }
-                else {}
-            }
-
-            /* Shrink or expand the filemanager menu depending on the window size */
+            // Shrink or expand the filemanager menu depending on the window size (ALWAYS SHOWS HAMBURGER NOW) //
             function showCorrectFilemanagerMenu() {
                 if ($(window).width() < 1024) {
                     $('#filemanager-menu-lg').addClass("hidden");
                     $('#filemanager-menu-sm').removeClass("hidden");
                 }
                 else {
-                    $('#filemanager-menu-sm').addClass("hidden");
-                    $('#filemanager-menu-lg').removeClass("hidden");
+                    $('#filemanager-menu-lg').addClass("hidden");
+                    $('#filemanager-menu-sm').removeClass("hidden");
                 }
             }
 
-            /* Turn on popovers for all elements with a tooltip */
+            // Turn on popovers for all elements with a tooltip //
             $(function () {
                 $("#btn-upload-start").click(function(){
                     $('.transform').toggleClass('transform-active');
@@ -955,10 +940,61 @@
                     $('#file-delete-' + i).popover({ html: true, content: "<font color='white'>Delete</font>", trigger: 'hover', placement:'bottom' })
                 }
             });
-        </script>
 
-        <script type="text/javascript">
-            /* Initialize state for testing */
+            function loadNewFile() {
+            	var drawbot = new Drawbot();
+
+                var validFileTypes = ['rob', 'jpg', 'jpeg', 'png', 'bmp']; // --------- ADD SVG? ----------
+
+                if (fileInput.files && fileInput.files[0]) {
+                    var file = fileInput.files[0];
+                    var ext = file.name.split('.').pop().toLowerCase();
+                    
+                    if (validFileTypes.indexOf(ext) > -1) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            var lines = e.target.result.split(/[\r\n]+/g);
+                            for (i = 0; i < lines.length; i++) {
+                                if (i === 0) {
+                                    if (0) { // (!assertROBHeader(ext, lines[i].split(","))) {
+                                        alert("File header is corrupt.");
+                                        return;
+                                    }
+                                }
+                                else {
+                                    if (0) { //(!assertROBCommand(lines[i].split(","))) {
+                                        alert("File contains invalid commands.");
+                                        return;
+                                    }
+                                }
+                            }
+
+                            document.getElementById("fileInputText").placeholder = fileInput.files[0].name; 
+
+                            lines.forEach(function(line, index) {
+                                var words = line.split(',');
+                                if (words[0] === 'C12')
+                                    drawbot.AddPolygon(words);
+                            });
+
+                            drawbot.DrawLines(drawing);
+
+
+                        }
+
+                        reader.readAsText(file);
+                    }
+                    else {
+                        alert("Incompatible file type.");
+                    }
+                }
+                else {
+                    alert("There was a problem opening the file.")
+                }
+            }
+
+            // Initialize state for testing //
             function fillTestData() {
                 state.robotState = 2;
                 state.drawSpeed = 5;
@@ -980,7 +1016,62 @@
                 state.wifiGateway = "192.168.0.1";
             }
 
-            /* Fill in data from state object */
+            function assertROBHeader(extension, header) {
+                if (extension.toLowerCase() === 'rob') {
+                    if (header[0].toLowerCase() === 'c00') {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            function assertROBCommand(line) {
+                if (line[line.length-1] === 'STOP')
+                    return false;
+
+                if (line.indexOf("START") < 0)
+                    return false;
+
+                return true;
+            }
+
+            // Format:      Command(Arm), *([Setting][, value], ), START, *([point X], [point Y], ), STOP
+            // Example:     C12(0), START, 0, 0, 1, 0, 1, 1, 0, 1, STOP
+            //
+            // Command:     C00: File Header
+            //              C10(x): Line | C11: Line List | C12: Polygon | C13: Ellipse | C14: Arc | C15: Text
+            //              C20(x): Fill Previous Shape with Arm x (valid for Polygon, Ellipse, and Text) 
+            //
+            // Protocol:    START: Beginning of Location Data | STOP: End of Location Data
+            //
+            // Settings:    S00: Title | S01: Format Version | S02: File Creation Date | S03: Sorting Algorithm | S04: Comment
+            //              S10: Absolute Position (Default) | S11: Relative Position
+            //              S20: Fill Solid | S21: Fill Vertical Stripes | S22: Fill Horizontal Stripes | S23: Fill Diagonal Stripes | S24: Fill X Stripes | S25: Fill + Stripes
+            //
+            //              S30: Font Name | S31: Font Size | S32: Font Bold | S33: Font Italics | S34: Font Underline | S35: Font Crossed Out
+            function getCommandInfo(cmd, position, cmd_start) {
+                var validROBCommands = [    'c00', 
+                                            'c10', 'c11', 'c12', 'c13', 'c14', 'c15', 
+                                            'c20'];
+                var validROBProtocol = [    'START', 'STOP'];
+                var validROBSettings = [    's00', 's01', 's02', 's03', 's04', 
+                                            's10', 's11', 
+                                            's20', 's21', 's22', 's23', 's24', 's25', 
+                                            's30', 's31', 's32', 's33', 's34', 's35'];
+
+                if (position === 0) {
+                    if (validROBCommands.indexOf(cmd.toLowerCase()) < 0) {
+                        return -1;
+                    }
+                } else {
+                    if (validROBCommands.indexOf(cmd.toLowerCase()) >= 0) {
+                        return -1;
+                    }
+                }
+            }
+
+            // Fill in data from state object //
             function fillStateVariables() {
                 document.getElementById("idRobotState").innerHTML = (RobotStateEnum.properties[state.robotState] === undefined ? "&nbsp" : RobotStateEnum.properties[state.robotState].display);
                 document.getElementById("idRobotState").style.color = (RobotStateEnum.properties[state.robotState] === undefined ? "#007bff" : RobotStateEnum.properties[state.robotState].color);
@@ -1009,7 +1100,7 @@
                 document.getElementById("idWifiGateway").innerHTML = (state.wifiGateway == "" ? "&nbsp" : state.wifiGateway);
             }
 
-            /* Insert value unit types */
+            // Insert value unit types //
             function fillStateUnits() {
                 var elements = document.getElementsByClassName("unit-percent");
                 var count = elements.length;
@@ -1028,51 +1119,27 @@
                 for (i = 0; i < count; i++) { elements[i].innerHTML = "<small>MB</small>"; }
             }
 
-            /* Create cards for files in the file manager */
+            // Create cards for files in the file manager //
             function generateFileList() {
                 var fileHTML;
                 for (i = 0; i < fileList.count; i++) {
                     var month;
                     switch (fileList.file[i].date.month) {
-                        case 1:
-                            month = "January"
-                            break;
-                        case 2:
-                            month = "February"
-                            break;
-                        case 3:
-                            month = "March"
-                            break;
-                        case 4:
-                            month = "April"
-                            break;
-                        case 5:
-                            month = "May"
-                            break;
-                        case 6:
-                            month = "June"
-                            break;
-                        case 7:
-                            month = "July"
-                            break;
-                        case 8:
-                            month = "August"
-                            break;
-                        case 9:
-                            month = "September"
-                            break;
-                        case 10:
-                            month = "October"
-                            break;
-                        case 11:
-                            month = "November"
-                            break;
-                        case 12:
-                            month = "December"
-                            break;
+                        case 1: month = "January"; break;
+                        case 2: month = "February"; break;
+                        case 3: month = "March"; break;
+                        case 4: month = "April"; break;
+                        case 5: month = "May"; break;
+                        case 6: month = "June"; break;
+                        case 7: month = "July"; break;
+                        case 8: month = "August"; break;
+                        case 9: month = "September"; break;
+                        case 10: month = "October"; break;
+                        case 11: month = "November"; break;
+                        case 12: month = "December"; break;
                         default:
-                            month = "Invalid"
-                            break;
+                        	month = "Invalid";
+                        	break;
                     }
 
                     var drawTime = 0;

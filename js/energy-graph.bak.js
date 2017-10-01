@@ -15,7 +15,7 @@ var Energy_Graph = (function () {
         graphCurrentPos = 0.0;
         
         if (alreadyCreated) {
-            document.getElementById('viewport-canvas-energy').innerHTML = '';
+            document.getElementById('viewport-energy').innerHTML = '';
             alreadyCreated = false;
         }
         
@@ -34,9 +34,8 @@ var Energy_Graph = (function () {
         
         canvasContext.strokeStyle = 'rgb(0, 0, 0)';
         canvasContext.fillStyle = 'rgb(255, 255, 255)';
-        /*canvasContext.moveTo(0, canvasHeight);*/
-        canvasContext.moveTo(0, 0);
-        document.getElementById('viewport-canvas-energy').appendChild(canvasElement);
+        canvasContext.moveTo(0, canvasHeight);
+        document.getElementById('viewport-energy').appendChild(canvasElement);
         isSupported = true;
         alreadyCreated = true;
     }
@@ -58,4 +57,4 @@ var Energy_Graph = (function () {
             _drawPoint(value);
         }
     };
-})();
+});

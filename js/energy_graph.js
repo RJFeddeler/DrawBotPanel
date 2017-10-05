@@ -10,7 +10,7 @@ function Energy_Graph() {
     this.alreadyCreated  = false;
 
     this.Initialize = function(width, height) {
-        this.graphXdelta = this.canvasWidth / width;
+        this.graphXdelta = this.canvasWidth / width + 3; ///// TAKE OUT + 3!!!
         this.graphYscale = this.canvasHeight / height;
         this.graphCurrentPos = 0.0;
         

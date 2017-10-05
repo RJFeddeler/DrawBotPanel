@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
         <!-- Font Awesome CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <!-- Animate CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" integrity="sha256-j+P6EZJVrbXgwSR5Mx+eCS6FvP9Wq27MBRC/ogVriY0=" crossorigin="anonymous" />
 
         <!-- JQuery, Popper, and Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -81,11 +83,6 @@
                 75%  {top:50%; opacity:1;}
                 100% {top:55%; opacity:0;}
             }
-
-            /*.transform-active {
-                opacity: 0;
-                top: 55%;
-            }*/
         </style>
 
         <!-- CSS Design Classes - Navbar -->
@@ -98,12 +95,12 @@
         <style type="text/css">
             .pane-home {}
 
-            .home-system {}
-            .home-memorycard {}
-            .home-preview {}
-            .home-network {}
-            .home-arms {}
-            .home-progress {}
+            .home-system { padding-bottom: 10px; }
+            .home-memorycard { padding-bottom: 10px; }
+            .home-preview { padding-bottom: 10px; v}
+            .home-network { padding-bottom: 10px; }
+            .home-arms { padding-bottom: 10px; }
+            .home-progress { padding-bottom: 10px; }
 
             .list-name { color: white; background-color: #007bff; border-color: #007bff; text-align: right; }
             .list-name-size { min-width: 50%; max-width: 50%; padding-right: 20px; }
@@ -248,6 +245,11 @@
             #form-algorithm .form-select-algo { width: 175px; margin-top: 0px; margin-bottom: 0px; }
             #form-algorithm hr { margin-top: 5px; margin-bottom: 5px; }
 
+            .modal.modal-wide .modal-dialog { max-width: 70%; }
+            #modal-canvas { position: relative; background: #fff; border: 1px solid #222; min-width: 100%; max-width: 100%; }
+            #zoom-canvas { position: absolute; opacity: 0; background: #fff; border: 1px solid #222; left: 115px; min-width: 300px; min-height: 200px; z-index: 1001; 
+            				-webkit-animation-duration: 0.3s; animation-duration: 0.3s; -moz-animation-duration: 0.3s; -o-animation-duration: 0.3s; }
+
             .btn-sm-long { margin-top: 14px; padding: 0.05rem 0.5rem 0.05rem 0.5rem; font-size: 1.0rem; line-height: 1.5; border-radius: 0.2rem; width: 30%;}
             .btn-outline-white { color: white; border-color: white; border-width: 3px; background-color: transparent; }
             .btn-outline-white:hover { color: #007bff; background-color: white; }
@@ -342,7 +344,7 @@
                                         <div class="card-header card-title-stripe text-white text-center shadow2">
                                             <h5>System</h5>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body pb-0 pt-3">
                                             <div class="d-flex">
                                                 <!-- Names List Group -->
                                                 <ul class="list-group list-name-size">
@@ -400,7 +402,7 @@
                                         <div class="card-header card-title-stripe text-white text-center shadow2">
                                             <h5>Memory Card</h5>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body pb-0 pt-3">
                                             <div class="d-flex">
                                                 <!-- Names List Group -->
                                                 <ul class="list-group list-name-size">
@@ -465,7 +467,7 @@
                                 <div class="card-header card-title-stripe text-white text-center shadow2">
                                     <h5>Preview</h5>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body pb-0 pt-3">
                                     <div class="d-flex">
                                     </div>
                                 </div>
@@ -481,7 +483,7 @@
                                 <div class="card-header card-title-stripe text-white text-center shadow2">
                                     <h5>Network</h5>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body pb-0">
                                     <div class="d-flex">
                                         <!-- Names List Group -->
                                         <ul class="list-group list-name-size">
@@ -572,7 +574,7 @@
                                 <div class="card-header card-title-stripe text-white text-center shadow2">
                                     <h5>Arms</h5>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body pb-0 pt-3">
                                     <div class="d-flex">
                                     </div>
                                 </div>
@@ -585,7 +587,7 @@
                                 <div class="card-header card-title-stripe text-white text-center shadow2">
                                     <h5>Progress</h5>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body pb-0 pt-3">
                                     <div class="d-flex">
                                     </div>
                                 </div>
@@ -609,7 +611,7 @@
                                     <div class="collapse show" role="tabpanel" data-parent="#accordion" id="filemanager-body">
                                         <div class="card-body trim">
                                         	<div class="row">
-                                                <div class="col icon-links icon-links-pos" id="filemanager-menu-sm">
+                                                <div class="col icon-links icon-links-pos" id="filemanager-menu">
                                                     <a href="#" class="dropdown-toggle ml-3" data-toggle="dropdown"><i class="fa fa-bars fa-lg fa-fw"></i></a>
                                                     <ul class="dropdown-menu shadow2">
                                                         <li class="dropdown-item">
@@ -652,7 +654,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card draw-freedraw bg-primary shadow">
+                                <div class="card draw-freedraw bg-primary mt-5 shadow">
                                     <div class="card-header card-title-stripe text-white text-center shadow2" id="freedraw-heading" role="tab">
                                         <span class="collapsed" data-toggle="collapse" href="#freedraw-body">
                                             <h5>Free Draw</h5>
@@ -860,7 +862,37 @@
             </div>
         </div>
 
-        <script type="text/javascript">
+        <div class="modal modal-wide fade" id="imgFilterModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				 	<div class="modal-header">
+				    	<h5 class="modal-title">Image Filter Settings</h5>
+				    	<button type="button" class="close" data-dismiss="modal">
+				      		<span>&times;</span>
+				    	</button>
+				  	</div>
+                    <div class="modal-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-8" id="modal-col">
+									<canvas id="modal-canvas"></canvas>
+									<canvas class="rounded" id="zoom-canvas"></canvas>
+								</div>
+								<div class="col-md-4" id="imgFilterSettings">
+									SETTINGS
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+				    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				    	<button type="button" class="btn btn-primary">Save changes</button>
+				  	</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
         	var drawbot = new Drawbot();
         	var drawing = new Drawing();
         	var energy_graph = new Energy_Graph();
@@ -873,23 +905,18 @@
                 fillStateUnits();
 
                 generateFileList();
-                showCorrectFilemanagerMenu();
 
                 var temp_i = parseFloat(document.getElementById("form-input-initTemp").value);
                 var temp_f = parseFloat(document.getElementById("form-input-freezeTemp").value);
                 var cool_f = parseFloat(document.getElementById("form-input-coolFactor").value);
 
-                
-
                 //Drawing.Initialize((temp_i - temp_f) / cool_f, 200);
-                
                 drawing.Initialize(200, 200);
-
                 
                 energy_graph.Initialize((temp_i - temp_f) / cool_f, 100);
 
-                for (i = 0; i < 1000; i++) {
-                	energy_graph.DrawPoint(i/10);
+                for (i = 0; i < 125; i++) {
+                	energy_graph.DrawPoint(Math.random() * 100);
                 }
 
                 var fileInput = document.getElementById('fileInput');
@@ -897,32 +924,20 @@
             });
             
             $(window).resize(function(){
-                showCorrectFilemanagerMenu();
+                // Not being used now.
             });
 
-            //
+            $(".modal-wide").on("show.bs.modal", function() {
+				var height = $(window).height() - 200;
+  				$(this).find(".modal-body").css("max-height", height);
+			});
+
             $('btn-sort-start').on('click', function (e) {
                 App.Start();
             });
 
-            // Shrink or expand the filemanager menu depending on the window size (ALWAYS SHOWS HAMBURGER NOW) //
-            function showCorrectFilemanagerMenu() {
-                if ($(window).width() < 1024) {
-                    $('#filemanager-menu-lg').addClass("hidden");
-                    $('#filemanager-menu-sm').removeClass("hidden");
-                }
-                else {
-                    $('#filemanager-menu-lg').addClass("hidden");
-                    $('#filemanager-menu-sm').removeClass("hidden");
-                }
-            }
-
             // Turn on popovers for all elements with a tooltip //
             $(function () {
-                $("#btn-upload-start").click(function(){
-                    $('.transform').toggleClass('transform-active');
-                });
-
                 var showPopover = function () { $(this).popover('show'); }
                 , hidePopover = function () { $(this).popover('hide'); };
 
@@ -950,39 +965,127 @@
                     var ext = file.name.split('.').pop().toLowerCase();
                     
                     if (validFileTypes.indexOf(ext) > -1) {
-                        var reader = new FileReader();
+                    	if (ext === "rob") {
+	                        var reader = new FileReader();
 
-                        reader.onload = function(e) {
-                            var lines = e.target.result.split(/[\r\n]+/g);
-                            for (i = 0; i < lines.length; i++) {
-                                if (i === 0) {
-                                    if (0) { // (!assertROBHeader(ext, lines[i].split(","))) {
-                                        alert("File header is corrupt.");
-                                        return;
-                                    }
-                                }
-                                else {
-                                    if (0) { //(!assertROBCommand(lines[i].split(","))) {
-                                        alert("File contains invalid commands.");
-                                        return;
-                                    }
-                                }
-                            }
+	                        reader.onload = function(e) {
+	                            var lines = e.target.result.split(/[\r\n]+/g);
+	                            for (i = 0; i < lines.length; i++) {
+	                                if (i === 0) {
+	                                    if (0) { // (!assertROBHeader(ext, lines[i].split(","))) {
+	                                        alert("File header is corrupt.");
+	                                        return;
+	                                    }
+	                                }
+	                                else {
+	                                    if (0) { //(!assertROBCommand(lines[i].split(","))) {
+	                                        alert("File contains invalid commands.");
+	                                        return;
+	                                    }
+	                                }
+	                            }
 
-                            document.getElementById("fileInputText").placeholder = fileInput.files[0].name; 
+	                            document.getElementById("fileInputText").placeholder = fileInput.files[0].name; 
 
-                            lines.forEach(function(line, index) {
-                                var words = line.split(',');
-                                if (words[0] === 'C12')
-                                    drawbot.AddPolygon(words);
-                            });
+	                            lines.forEach(function(line, index) {
+	                                var words = line.split(',');
+	                                if (words[0] === 'C12')
+	                                    drawbot.AddPolygon(words);
+	                            });
 
-                            drawbot.DrawLines(drawing);
+	                            drawbot.DrawLines(drawing);
 
 
-                        }
+	                        }
 
-                        reader.readAsText(file);
+	                        reader.readAsText(file);
+	                    }
+	                    else {
+	                    	var canvas_full = document.createElement('canvas');
+	                    	var canvas_small = document.getElementById("modal-canvas");
+							var img = new Image();
+							var sWidth = 0, 
+								sHeight = 0;
+
+							var zoomCanvas = $("#zoom-canvas");
+							var zoomCtx = zoomCanvas[0].getContext('2d');
+
+					    	img.src = URL.createObjectURL(file);
+
+	                    	$('#imgFilterModal').modal({
+								keyboard: false
+							});
+
+	                    	function getRect(canvas) {
+	                    		return canvas.getBoundingClientRect();
+	                    	}
+							function getMousePos(canvas, evt) {
+						    	var rect = getRect(canvas);
+						        return {
+						        	x: evt.clientX - rect.left,
+						        	y: evt.clientY - rect.top
+						       	};
+						    }
+
+							img.onload = function() {
+					        	canvas_full.width = parseInt(img.width);
+					        	canvas_full.height = parseInt(img.height);
+
+					        	if (canvas_full.width > canvas_full.height) {
+					        		sWidth = 300;
+					        		sHeight	= (canvas_full.height / canvas_full.width) * sWidth;
+					        	}
+					        	else {
+					        		sHeight = 300;
+					        		sWidth = (canvas_full.width / canvas_full.height) * sHeight;
+					        	}
+
+					        	var ctx_full = canvas_full.getContext("2d");
+					        	ctx_full.drawImage(img, 0, 0);
+
+					        	resample_single(canvas_full, canvas_small, sWidth, sHeight);
+
+					        	var c = document.getElementById('modal-canvas');
+					        	c.addEventListener("mousemove", function(e) {
+					        		var mousePos = getMousePos(c, e);
+					        		var smRect = getRect(c);
+					        		var canvasPosX = (mousePos.x / (smRect.right - smRect.left)) * canvas_full.width - 150;
+					        		var canvasPosY = (mousePos.y / (smRect.bottom - smRect.top)) * canvas_full.height - 75;
+
+					        		if (canvasPosX < 0)
+					        			canvasPosX = 0;
+					        		if (canvasPosY < 0)
+					        			canvasPosY = 0;
+
+					        		if (canvasPosX > (canvas_full.width - 300))
+					        			canvasPosX = canvas_full.width - 300;
+					        		if (canvasPosY > (canvas_full.height - 150))
+					        			canvasPosY = canvas_full.height - 150;
+
+					        		zoomCtx.drawImage(img, -canvasPosX, -canvasPosY);
+					        	});
+					        };
+
+					        $('imgFilterModal').modal('show');
+
+					        $("#modal-canvas").on("mouseenter", function() {
+				            	var animationName = 'animated fadeIn'
+				            	var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
+				            	$('#zoom-canvas').addClass(animationName).one(animationEnd, function() {
+				            		$(this).css('opacity', '1');
+				            		$(this).removeClass(animationName);
+				            	});
+							});
+
+							$("#modal-canvas").on("mouseleave", function() {
+								var animationName = 'animated fadeOut'
+				            	var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
+				            	$('#zoom-canvas').addClass(animationName).one(animationEnd, function() {
+				            		$(this).css('opacity', '0');
+				            		$(this).removeClass(animationName);
+				            	});
+							});
+	                    }
                     }
                     else {
                         alert("Incompatible file type.");
@@ -1178,6 +1281,84 @@
                     $("#file-container").append(fileHTML);
                 }
             }
+
+            /**
+			*	Hermite resize - fast image resize/resample using Hermite filter. 1 cpu version!
+			* 
+			*	@param {HtmlElement} canvas
+			*	@param {int} width
+			*	@param {int} height
+			*/
+			function resample_single(canvasSrc, canvasDest, width, height) {
+				var width_source = canvasSrc.width;
+				var height_source = canvasSrc.height;
+
+				width = Math.round(width);
+				height = Math.round(height);
+
+				var ratio_w = width_source / width;
+				var ratio_h = height_source / height;
+				var ratio_w_half = Math.ceil(ratio_w / 2);
+				var ratio_h_half = Math.ceil(ratio_h / 2);
+
+				var ctxSrc = canvasSrc.getContext("2d");
+				var img = ctxSrc.getImageData(0, 0, width_source, height_source);
+				var img2 = ctxSrc.createImageData(width, height);
+				var data = img.data;
+				var data2 = img2.data;
+
+				for (var j = 0; j < height; j++) {
+					for (var i = 0; i < width; i++) {
+						var x2 = (i + j * width) * 4;
+						var weight = 0;
+						var weights = 0;
+						var weights_alpha = 0;
+						var gx_r = 0;
+						var gx_g = 0;
+						var gx_b = 0;
+						var gx_a = 0;
+						var center_y = (j + 0.5) * ratio_h;
+						var yy_start = Math.floor(j * ratio_h);
+						var yy_stop = Math.ceil((j + 1) * ratio_h);
+						for (var yy = yy_start; yy < yy_stop; yy++) {
+							var dy = Math.abs(center_y - (yy + 0.5)) / ratio_h_half;
+							var center_x = (i + 0.5) * ratio_w;
+							var w0 = dy * dy; //pre-calc part of w
+							var xx_start = Math.floor(i * ratio_w);
+							var xx_stop = Math.ceil((i + 1) * ratio_w);
+							for (var xx = xx_start; xx < xx_stop; xx++) {
+								var dx = Math.abs(center_x - (xx + 0.5)) / ratio_w_half;
+								var w = Math.sqrt(w0 + dx * dx);
+								if (w >= 1) {
+									//pixel too far
+									continue;
+								}
+								//hermite filter
+								weight = 2 * w * w * w - 3 * w * w + 1;
+								var pos_x = 4 * (xx + yy * width_source);
+								//alpha
+								gx_a += weight * data[pos_x + 3];
+								weights_alpha += weight;
+								//colors
+								if (data[pos_x + 3] < 255)
+									weight = weight * data[pos_x + 3] / 250;
+								gx_r += weight * data[pos_x];
+								gx_g += weight * data[pos_x + 1];
+								gx_b += weight * data[pos_x + 2];
+								weights += weight;
+							}
+						}
+						data2[x2] = gx_r / weights;
+						data2[x2 + 1] = gx_g / weights;
+						data2[x2 + 2] = gx_b / weights;
+						data2[x2 + 3] = gx_a / weights_alpha;
+					}
+				}
+				
+				//draw
+				var ctxDest = canvasDest.getContext("2d");
+				ctxDest.putImageData(img2, 0, 0);
+			}
         </script>
     </body>
 </html>

@@ -246,7 +246,7 @@
             #form-algorithm hr { margin-top: 5px; margin-bottom: 5px; }
 
             .modal.modal-wide .modal-dialog { max-width: 70%; }
-            #modal-canvas { position: relative; background: #fff; border: 1px solid #222; min-width: 100%; max-width: 100%; }
+            #modal-canvas { position: relative; background: #fff; border: 1px solid #222; width: 100%; height: 400px; }
             #zoom-canvas { position: absolute; opacity: 0; background: #fff; border: 1px solid #222; left: 115px; min-width: 300px; min-height: 200px; z-index: 1001; 
             				-webkit-animation-duration: 0.3s; animation-duration: 0.3s; -moz-animation-duration: 0.3s; -o-animation-duration: 0.3s; }
 
@@ -1033,11 +1033,11 @@
 
 					        	if (canvas_full.width > canvas_full.height) {
 					        		sWidth = 300;
-					        		sHeight	= (canvas_full.height / canvas_full.width) * sWidth;
+					        		sHeight	= 150; //(canvas_full.height / canvas_full.width) * sWidth;
 					        	}
 					        	else {
 					        		sHeight = 300;
-					        		sWidth = (canvas_full.width / canvas_full.height) * sHeight;
+					        		sWidth = 150; //(canvas_full.width / canvas_full.height) * sHeight;
 					        	}
 
 					        	var ctx_full = canvas_full.getContext("2d");

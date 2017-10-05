@@ -9,16 +9,24 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
         <!-- Font Awesome CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <!-- Animate CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" integrity="sha256-j+P6EZJVrbXgwSR5Mx+eCS6FvP9Wq27MBRC/ogVriY0=" crossorigin="anonymous" />
 
         <!-- JQuery, Popper, and Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
-        <!-- Robot State Object and Enums -->
-        <script type="text/javascript" src="js/state_data.js"></script>
+        <!-- Load program scripts and objects -->
+        <script language="JavaScript" src="js/point.js"></script>
+        <script language="JavaScript" src="js/line.js"></script>
+        <script language="JavaScript" src="js/energy_graph.js"></script>
+        <script language="JavaScript" src="js/drawing.js"></script>
+        <script language="JavaScript" src="js/simulated_annealing.js"></script>
+        <script language="JavaScript" src="js/drawbot.js"></script>
+        <script language="JavaScript" src="js/application.js"></script>
 
-        <!-- File list and descriptions to populate file manager -->
+        <script type="text/javascript" src="js/state_data.js"></script>
         <script type="text/javascript" src="js/file_list.js"></script>
 
         <!-- CSS Design Classes - General -->
@@ -27,39 +35,72 @@
             .shadow2 { box-shadow: 0px 3px 2px #222222; }
 
             .hidden { display: none; }
-            .not-hidden {}
 
             .margin-lg { margin: 0px 20px; }
             .margin-sm { margin: 0px 10px; }
             .margin-no { margin: 0px 0px; }
             .trim { margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; }
             .lineheight-sm { line-height: 1em; }
+            .font-sm { font-size: 0.7em; }
 
-            .card-gap-top { margin-top: 48px!important; }
+            .card { margin-bottom: 20px; padding-bottom: 30px; }
+            .card-gap-top { margin-top: 48px; }
             .card-height-full-pad { padding-bottom: 20px; }
             .card-height-full { height: 100%; padding-bottom: 20px; }
             .card-title-stripe { padding-top: 0.5em; height: 2.5em; background: repeating-linear-gradient(45deg, #288ade, #288ade 40px, #0275d8 40px, #0275d8 80px); }
-            .font-sm { font-size: 0.7em; }
 
-            .card { margin-bottom: 20px; }
+            .alert-red { background-color: #f8d7da; box-shadow: 0px 0px 25px 10px #e02222; }
+            .alert-blue { background-color: #bcdaf6; box-shadow: 0px 0px 25px 10px #2482e0; }
+            .alert-green { background-color: #d5f6d5; box-shadow: 0px 0px 25px 10px #31d331; }
+            .alert-yellow { background-color: #ffffe6; box-shadow: 0px 0px 25px 10px #ffff4d; }
+            .alert-orange { background-color: #f9e6d2; box-shadow: 0px 0px 25px 10px #e08224; }
+
+            .alert-heading { font-size: 1.2em; font-weight: bold; }
+            .alert-body { font-size: 1.0em; }
+            .alert-common hr { width: 70%; }
+            .alert-common {
+                position: absolute;
+                z-index: 1000;
+                left: 25%; width: 50%; height: 75px;
+                top: 55%;
+                opacity: 0;
+                animation-name: alert-anim;
+                animation-duration: 4s;
+            }
+
+            /* Standard syntax */
+            @keyframes alert-anim {
+                0%   {top:55%; opacity:0;}
+                25%  {top:50%; opacity:1;}
+                75%  {top:50%; opacity:1;}
+                100% {top:55%; opacity:0;}
+            }
+
+            /* Safari 4.0 - 8.0 */
+            @-webkit-keyframes alert-anim {
+                0%   {top:55%; opacity:0;}
+                25%  {top:50%; opacity:1;}
+                75%  {top:50%; opacity:1;}
+                100% {top:55%; opacity:0;}
+            }
         </style>
 
         <!-- CSS Design Classes - Navbar -->
         <style type="text/css">
-            .popover { background: #007bff!important; }
-            .popover.bs-popover-bottom .arrow::after { border-bottom-color: #007bff!important; }
+            .popover { background: #007bff; }
+            .popover.bs-popover-bottom .arrow::after { border-bottom-color: #007bff; }
         </style>
 
         <!-- CSS Design Classes - Home -->
         <style type="text/css">
             .pane-home {}
 
-            .home-system {}
-            .home-memorycard {}
-            .home-preview {}
-            .home-network {}
-            .home-arms {}
-            .home-progress {}
+            .home-system { padding-bottom: 10px; }
+            .home-memorycard { padding-bottom: 10px; }
+            .home-preview { padding-bottom: 10px; v}
+            .home-network { padding-bottom: 10px; }
+            .home-arms { padding-bottom: 10px; }
+            .home-progress { padding-bottom: 10px; }
 
             .list-name { color: white; background-color: #007bff; border-color: #007bff; text-align: right; }
             .list-name-size { min-width: 50%; max-width: 50%; padding-right: 20px; }
@@ -85,18 +126,69 @@
             /* Used on Col before <a> of first dropdown item */
             .icon-links a { color: white; opacity: 0.6; }
             .icon-links a:hover { color: white; opacity: 1.0; }
-            .icon-links-pos { top: -52px; position: relative; margin-right: 0; }
-
-            /* Built in dropdown container */
-            .dropdown-menu a { color: #aaa; background-color: #fff}
+            .icon-links-pos { top: -33px; position: relative; margin-right: 0; }
+ 
+            .dropdown-toggle::after { display: none; position: relative; }
+            .dropdown-menu a { color: #222; opacity: 0.4; background-color: #fff; }
             .dropdown-menu a:hover { color: #222; background-color: #f8f8f8; }
+            .dropdown-item:active { background-color: #f8f8f8; }
+            .dropdown-item:hover a { color: #222; opacity: 1.0; }
+            .dropdown-menu:hover a:hover { color: #222; opacity: 1.0; text-decoration: none; }
+            .dropdown-item:hover ul>li>a { color: #222; opacity: 0.4; }
+            
+            .input_with_unit input {
+                max-width: 50px;
+                padding-right: 35px;
+                text-align: right;
+            }
+            .input_with_unit span {
+                position: relative;
+                left: -35px;
+                font-size: 1em;
+            }
+
+            .search-sm { width: 150px; height: 20px; }
 
             #filemanager-heading .draw-filemanager {}
             #filemanager-body .draw-filemanager {}
 
+            .dropdown-submenu { position: relative; }
+            .dropdown-submenu>.dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-top: -6px;
+                margin-left: -1px;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+            }
+            .dropdown-submenu:hover>.dropdown-menu { display: block; }
+            .dropdown-submenu>a:after {
+                display: block;
+                content: " ";
+                float: right;
+                width: 0;
+                height: 0;
+                border-color: transparent;
+                border-style: solid;
+                border-width: 5px 0 5px 5px;
+                border-left-color: #ccc;
+                margin-top: 5px;
+                margin-right: -10px;
+            }
+            .dropdown-submenu:hover>a:after { border-left-color: #ccc; }
+            .dropdown-submenu.pull-left { float: none; }
+            .dropdown-submenu.pull-left>.dropdown-menu {
+                left: -100%;
+                margin-left: 10px;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+            }
+
+            #file-container { height: 350px; padding-top: 8px; overflow-y: scroll; }
+
             #file { margin-right: 25px; }
-            #file .shortcut {}
-            #file .shortcut a { margin-right: 10px; }
             #file .card { width: 100%; background: #ffffff; text-align: center; float: left; position: relative; border-radius: 5px; padding: 0 10px; margin-top: 45px; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3); }
             #file .display-shortcuts:hover .thumb { top: -21%; }
             #file .card .thumb {
@@ -119,11 +211,11 @@
               transition: 0.3s cubic-bezier(0.67, -0.12, 0.45, 1.5);
               box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
             }
-            #file .card .shortcut { height: 40px; margin: 40px auto 0 auto; }
+            #file .card .shortcut { height: 40px; margin: 50px auto 0 auto; }
             #file .card .shortcut i { opacity: 0.6; }
             #file .card .shortcut i:hover { opacity: 1.0; }
-            #file .card h4 { font-size: 1.2em; font-weight: 700; margin-top: 10px; color: #007bff; opacity: 0.8; }
-            #file .card hr { width: 10%; opacity: 0.8; margin: 10px auto; }
+            #file .card h4 { font-size: 1.2em; font-weight: 700; margin-top: 0px; color: #007bff; opacity: 0.8; }
+            #file .card hr { width: 10%; opacity: 0.8; margin: 0px auto; }
             #file .card .descrip1 { margin: 0px; font-size: 0.8em; line-height: 20px; opacity: 0.8; }
             #file .card .descrip2 { margin: 10px 1px 1px 1px; font-size: 0.6em; line-height: 15px; opacity: 0.8; }
             #file .card .btn-draw { margin-bottom: 10px; }
@@ -131,9 +223,60 @@
 
         <!-- CSS Design Classes - Upload -->
         <style type="text/css">
-            .pane-upload {}
+            .pane-upload .card {}
 
+            #upload-viewport .card-body {}
+            #upload-viewport-image { padding-top: 35%; padding-left: 100%; border-color: #222; background-color: white; opacity: 0.5; }
+            #upload-options {  min-height: 65%; }
+            #upload-summary {  min-height: 35%; }
 
+            .upload-status { color: white; }
+
+            .chooser-margins { margin-top: 10px; margin-bottom: 15px; }
+            .chooser-btn { height: 25px; line-height: 5px; border-color: #222; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3); }
+            .chooser-input { height: 25px; margin-left: 0px; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3); }
+
+            .canvas-style { background-color: #dde; border: 1px solid black; }
+
+            .form-group { line-height: 1em; margin-top: 0px; margin-top: 0px; margin-bottom: 0px; }
+            #form-algorithm { text-align: center; }
+            #form-algorithm .form-control-label { font-size: 0.6em; color: white; margin-top: 0px; margin-bottom: 0px; }
+            #form-algorithm .form-control { height: 20px; width: 100px; font-size: 0.8em; color: #007bff; margin-top: 0px; margin-bottom: 0px; }
+            #form-algorithm .form-select-algo { width: 175px; margin-top: 0px; margin-bottom: 0px; }
+            #form-algorithm hr { margin-top: 5px; margin-bottom: 5px; }
+
+            .modal.modal-wide .modal-dialog { max-width: 70%; }
+            #modal-canvas { position: relative; background: #fff; border: 1px solid #222; min-width: 100%; max-width: 100%; }
+            #zoom-canvas { position: absolute; opacity: 0; background: #fff; border: 1px solid #222; left: 115px; min-width: 300px; min-height: 200px; z-index: 1001; 
+            				-webkit-animation-duration: 0.3s; animation-duration: 0.3s; -moz-animation-duration: 0.3s; -o-animation-duration: 0.3s; }
+
+            .btn-sm-long { margin-top: 14px; padding: 0.05rem 0.5rem 0.05rem 0.5rem; font-size: 1.0rem; line-height: 1.5; border-radius: 0.2rem; width: 30%;}
+            .btn-outline-white { color: white; border-color: white; border-width: 3px; background-color: transparent; }
+            .btn-outline-white:hover { color: #007bff; background-color: white; }
+            .btn-outline-white:active { box-sizing: border-box; color: #007bff; background-color: white; border-color: #ddd; }
+
+            .btn-icon-white { color: white; opacity: 0.6; background-color: transparent; margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; }
+            .btn-icon-white:hover { color: white; opacity: 1.0; }
+
+            .btn-file {
+                position: relative;
+                overflow: hidden;
+            }
+            .btn-file input[type=file] {
+                position: absolute;
+                top: 0;
+                right: 0;
+                min-width: 100%;
+                min-height: 100%;
+                font-size: 100px;
+                text-align: right;
+                filter: alpha(opacity=0);
+                opacity: 0;
+                outline: none;
+                background: white;
+                cursor: inherit;
+                display: block;
+            }
         </style>
 
         <!-- CSS Design Classes - Wifi -->
@@ -152,46 +295,38 @@
     </head>
 
     <body>
+        <!-- Alerts -->
+        <div class="alert-common alert-red transform text-center rounded hidden">
+            <p class="alert-heading mb-0">ERROR</p><center><hr class="trim"/></center><p class="alert-body mt-2"></p>
+        </div>
+        <div class="alert-common alert-blue transform text-center rounded hidden">
+            <p class="alert-heading mb-0">NOTE</p><center><hr class="trim"/></center><p class="alert-body mt-2"></p>
+        </div>
+        <div class="alert-common alert-green transform text-center rounded hidden">
+            <p class="alert-heading mb-0">SUCCESS</p><center><hr class="trim"/></center><p class="alert-body mt-2"></p>
+        </div>
+        <div class="alert-common alert-yellow transform text-center rounded hidden">
+            <p class="alert-heading mb-0">WARNING</p><center><hr class="trim"/></center><p class="alert-body mt-2"></p>
+        </div>
+        <div class="alert-common alert-orange transform text-center rounded hidden">
+            <p class="alert-heading mb-0">UNKNOWN</p><center><hr class="trim hr"/></center><p class="alert-body mt-2"></p>
+        </div>
+
         <!-- NavBar code -->
         <nav class="nav navbar navbar-expand-lg navbar-dark bg-primary shadow2">
             <a class="navbar-brand" href="#">DrawBot</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <div class="navbar-nav mr-auto">
                     <a class="nav-item nav-link margin-lg active" data-toggle="tab" href="#Home" id="nav-home"><i class="fa fa-home fa-2x fa-fw theme-color1"></i></a>
-                    <!--
-                    <span data-toggle="tab">
-                        <a class="nav-item nav-link margin-lg active" href="#Home" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<font color='white'>Home</font>"><i class="fa fa-home fa-2x fa-fw theme-color1 "></i></a>
-                    </span>
-                    -->
                     <a class="nav-item nav-link margin-lg" data-toggle="tab" href="#Draw" id="nav-draw"><i class="fa fa-pencil-square-o fa-2x fa-fw theme-color1"></i></a>
-                    <!--
-                    <span data-toggle="tab">
-                    <a class="nav-item nav-link margin-lg" href="#Draw" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<font color='white'>Draw</font>"><i class="fa fa-pencil-square-o fa-2x fa-fw theme-color1"></i></a>
-                    </span>
-                    -->
                     <a class="nav-item nav-link margin-lg" data-toggle="tab" href="#Upload" id="nav-upload"><i class="fa fa-upload fa-2x fa-fw theme-color1"></i></a>
-                    <!--
-                    <span data-toggle="tab">
-                        <a class="nav-item nav-link margin-lg" href="#Upload" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<font color='white'>Upload</font>"><i class="fa fa-upload fa-2x fa-fw theme-color1"></i></a>
-                    </span>
-                    -->
                 </div>
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link margin-sm" data-toggle="tab" href="#Wifi" id="nav-wifi"><i class="fa fa-wifi fa-2x fa-fw theme-color1"></i></a>
-                    <!--
-                    <span data-toggle="tab">
-                        <a class="nav-item nav-link margin-sm" href="#Wifi" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<font color='white'>WiFi</font>"><i class="fa fa-wifi fa-2x fa-fw theme-color1"></i></a>
-                    </span>
-                    -->
                     <a class="nav-item nav-link margin-sm" data-toggle="tab" href="#Settings" id="nav-settings"><i class="fa fa-cog fa-2x fa-fw theme-color1"></i></a>
-                    <!--
-                    <span data-toggle="tab">
-                        <a class="nav-item nav-link margin-sm" href="#Settings" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<font color='white'>Settings</font>"><i class="fa fa-cog fa-2x fa-fw theme-color1"></i></a>
-                    </span>
-                    -->
                 </div>
             </div>
         </nav>
@@ -209,7 +344,7 @@
                                         <div class="card-header card-title-stripe text-white text-center shadow2">
                                             <h5>System</h5>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body pb-0 pt-3">
                                             <div class="d-flex">
                                                 <!-- Names List Group -->
                                                 <ul class="list-group list-name-size">
@@ -267,7 +402,7 @@
                                         <div class="card-header card-title-stripe text-white text-center shadow2">
                                             <h5>Memory Card</h5>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body pb-0 pt-3">
                                             <div class="d-flex">
                                                 <!-- Names List Group -->
                                                 <ul class="list-group list-name-size">
@@ -332,7 +467,7 @@
                                 <div class="card-header card-title-stripe text-white text-center shadow2">
                                     <h5>Preview</h5>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body pb-0 pt-3">
                                     <div class="d-flex">
                                     </div>
                                 </div>
@@ -348,7 +483,7 @@
                                 <div class="card-header card-title-stripe text-white text-center shadow2">
                                     <h5>Network</h5>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body pb-0">
                                     <div class="d-flex">
                                         <!-- Names List Group -->
                                         <ul class="list-group list-name-size">
@@ -439,7 +574,7 @@
                                 <div class="card-header card-title-stripe text-white text-center shadow2">
                                     <h5>Arms</h5>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body pb-0 pt-3">
                                     <div class="d-flex">
                                     </div>
                                 </div>
@@ -452,7 +587,7 @@
                                 <div class="card-header card-title-stripe text-white text-center shadow2">
                                     <h5>Progress</h5>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body pb-0 pt-3">
                                     <div class="d-flex">
                                     </div>
                                 </div>
@@ -469,90 +604,57 @@
                                 <div class="card draw-filemanager bg-primary shadow">
                                     <span data-toggle="collapse" href="#filemanager-body">
                                         <div class="card-header card-title-stripe text-white text-center shadow2" role="tab" id="filemanager-heading">
-                                            <h5 id="hahaha">File Manager</h5>
+                                            <h5>File Manager</h5>
                                         </div>
                                     </span>
 
                                     <div class="collapse show" role="tabpanel" data-parent="#accordion" id="filemanager-body">
-                                        <div class="card-body">
-                                            <div class="row">
-
-                                                <div class="col icon-links icon-links-pos" id="filemanager-menu-lg">
-                                                    <a href="#" class="ml-3"><i class="fa fa-search fa-lg fa-fw"></i></a>
-                                                    <div class="btn-group">
-                                                        <a href="#" class="ml-3" data-toggle="dropdown"><i class="fa fa-sort-amount-desc fa-lg fa-fw"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <h6 class="dropdown-header">Sort by</h6>
-                                                            <a class="dropdown-item" href="#">Name</a>
-                                                            <a class="dropdown-item" href="#">Date</a>
-                                                            <a class="dropdown-item" href="#">File Size</a>
-                                                            <a class="dropdown-item" href="#">Dimensions</a>
-                                                            <a class="dropdown-item" href="#">Time</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="btn-group">
-                                                        <a href="#" class="ml-3" data-toggle="dropdown"><i class="fa fa-sliders fa-lg fa-fw"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <h6 class="dropdown-header">View Options</h6>
-                                                            <a class="dropdown-item" href="#">Details</a>
-                                                            <a class="dropdown-item" href="#">Preview (Large)</a>
-                                                            <a class="dropdown-item" href="#">Preview (Medium)</a>
-                                                            <a class="dropdown-item" href="#">Preview (Small)</a>
-                                                            <a class="dropdown-item" href="#">Name</a>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="ml-3"><i class="fa fa-refresh fa-lg fa-fw"></i></a>
-                                                </div>
-
-                                                <div class="col icon-links icon-links-pos" id="filemanager-menu-sm">
-                                                    <a href="#" class="ml-3" data-toggle="dropdown"><i class="fa fa-chevron-down fa-lg fa-fw"></i></a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Refresh</a>
-                                                        <div id="dropdown-accordion" role="tablist">
-
-                                                            <div role="tab">
-                                                                <a class="dropdown-item" href="#filemanager-submenu-view" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-view">View Options <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
-                                                                <span class="collapse hide" role="tabpanel" id="filemanager-submenu-view" data-parent="#dropdown-accordion">
-                                                                    <a class="dropdown-item" href="#">Details</a>
-                                                                    <a class="dropdown-item" href="#">Preview (Large)</a>
-                                                                    <a class="dropdown-item" href="#">Preview (Medium)</a>
-                                                                    <a class="dropdown-item" href="#">Preview (Small)</a>
-                                                                    <a class="dropdown-item" href="#">Name</a>
-                                                                </span>
+                                        <div class="card-body trim">
+                                        	<div class="row">
+                                                <div class="col icon-links icon-links-pos" id="filemanager-menu">
+                                                    <a href="#" class="dropdown-toggle ml-3" data-toggle="dropdown"><i class="fa fa-bars fa-lg fa-fw"></i></a>
+                                                    <ul class="dropdown-menu shadow2">
+                                                        <li class="dropdown-item">
+                                                            <a href="#"><i class="fa fa-refresh fa-xs fa-fw"></i> Refresh</a>
+                                                        </li>
+                                                        <li class="dropdown-item dropdown-submenu">
+                                                            <a href="#"><i class="fa fa-sliders fa-xs fa-fw"></i> View</a>
+                                                            <ul class="dropdown-menu shadow2">
+                                                                <li><a href="#" class="dropdown-item interaction">Details</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Preview Large</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Preview Med</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Preview Small</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Name</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="dropdown-item dropdown-submenu">
+                                                            <a href="#"><i class="fa fa-sort-amount-desc fa-xs fa-fw"></i> Sort</a>
+                                                            <ul class="dropdown-menu shadow2">
+                                                                <li><a href="#" class="dropdown-item interaction">Date</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">File Size</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Dimensions</a></li>
+                                                                <li><a href="#" class="dropdown-item interaction">Time</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="dropdown-item">
+                                                            <div class="input-group search-sm">
+                                                                <input class="form-control trim" type="text" placeholder="Search query...">
+                                                                <span class="input-group-addon trim" id="searchBox"><i class="fa fa-search fa-xs fa-fw"></i></span>
                                                             </div>
-
-                                                            <div role="tab">
-                                                                <a class="dropdown-item" href="#filemanager-submenu-sort" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-sort">Sort by <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
-                                                                <span class="collapse hide" role="tabpanel" id="filemanager-submenu-sort" data-parent="#dropdown-accordion">
-                                                                    <a class="dropdown-item" href="#">Date</a>
-                                                                    <a class="dropdown-item" href="#">File Size</a>
-                                                                    <a class="dropdown-item" href="#">Dimensions</a>
-                                                                    <a class="dropdown-item" href="#">Time</a>
-                                                                </span>
-                                                            </div>
-
-                                                            <div role="tab">
-                                                                <a class="dropdown-item" href="#filemanager-submenu-search" data-keepOpenOnClick data-toggle="collapse" id="filemanager-menu-search">Search <i class="fa fa-caret-down fa-lg fa-fw"></i></a>
-                                                                <span class="collapse hide" role="tabpanel" id="filemanager-submenu-search" data-parent="#dropdown-accordion">
-                                                                    Search Box
-                                                                </span>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
 
                                             </div>
                                             <div class="row">
                                                 <div class="card-deck justify-content-center" id="file-container">
-                                                    <!-- Filled by javascript function: generateFileList() -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="card draw-freedraw bg-primary shadow">
+                                <div class="card draw-freedraw bg-primary mt-5 shadow">
                                     <div class="card-header card-title-stripe text-white text-center shadow2" id="freedraw-heading" role="tab">
                                         <span class="collapsed" data-toggle="collapse" href="#freedraw-body">
                                             <h5>Free Draw</h5>
@@ -560,14 +662,16 @@
                                     </div>
                                     <div class="collapse white-links" role="tabpanel" data-parent="#accordion" id="freedraw-body">
                                         <div class="card-body">
-                                            <div class="btn-group btn-group-sm mr-4" data-toggle="buttons">
-                                                <label class="btn btn-secondary active">
-                                                    <input type="radio" name="options" id="opt-position-absolute" autocomplete="off" checked> Absolute
-                                                </label>
-                                                <label class="btn btn-secondary">
-                                                    <input type="radio" name="options" id="opt-position-relative" autocomplete="off"> Relative
-                                                </label>
-                                            </div>
+                                            <!--
+                                                <div class="btn-group btn-group-sm mr-4" data-toggle="buttons">
+                                                    <label class="btn btn-secondary active">
+                                                        <input type="radio" name="options" id="opt-position-absolute" autocomplete="off" checked> Absolute
+                                                    </label>
+                                                    <label class="btn btn-secondary">
+                                                        <input type="radio" name="options" id="opt-position-relative" autocomplete="off"> Relative
+                                                    </label>
+                                                </div>
+                                            -->
 
                                             <a href="#"><i class="fa fa-minus fa-lg fa-fw"></i></a>
                                             <a href="#"><i class="fa fa-square-o fa-lg fa-fw"></i></a>
@@ -587,7 +691,164 @@
                 </div> <!-- end tab-pane (Draw) -->
 
                 <div class="tab-pane pane-upload" id="Upload" role="tabpanel">
-                    <h1>Upload</h1>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="card bg-primary shadow pb-0" id="upload-viewport">
+                                <div class="card-header card-title-stripe text-white text-center shadow2">
+                                    <h5>Viewport</h5>
+                                </div>
+                                <div class="card-body pb-0 mb-0">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="d-flex justify-content-center canvas-style mt-0 mb-1 rounded shadow2" id="viewport-drawing">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="d-flex justify-content-center canvas-style mt-1 mb-0 rounded shadow2" id="viewport-energy">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="upload-status small trim mt-1">Slowest Time: </p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="upload-status small trim mt-1">Fastest Time: </p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="upload-status small trim mt-1">Lowest Energy: </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex chooser-margins">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-primary chooser-btn">
+                                                Browse&hellip; <input type="file" id="fileInput" accept=".rob, image/*" style="display: none;" >
+                                            </span>
+                                        </label>
+                                        <input type="text" class="form-control chooser-input" id="fileInputText" placeholder="(No file selected)" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card bg-primary shadow pb-0" id="upload-options">
+                                        <div class="card-header card-title-stripe text-white text-center shadow2">
+                                            <h5>Options</h5>
+                                        </div>
+                                        <div class="card-body mb-0 pb-0">
+                                            <div class="d-flex justify-content-center" id="form-algorithm">
+                                                <form>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-control-label mr-sm-2" for="form-select-algorithm">Algorithm</label>
+                                                                <select id="form-select-algorithm" class="form-control form-control-sm form-select-algo">
+                                                                    <option>Simulated Annealing</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-control-label mr-sm-2" for="form-select-subalgorithm">Sub-Algorithm</label>
+                                                                <select id="form-select-subalgorithm" class="form-control form-control-sm form-select-algo">
+                                                                    <option>Hill Climbing</option>
+                                                                    <option>Genetic</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <hr class="mt-3 mb-2"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-control-label mr-sm-2" for="form-input-initTemp">Initial Temperature</label>
+                                                                <input type="text" id="form-input-initTemp" class="form-control form-control-sm" value="35.0">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label mr-sm-2" for="form-input-coolFactor">Cooling Factor</label>
+                                                                <input type="text" id="form-input-coolFactor" class="form-control form-control-sm" value="0.05">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-control-label mr-sm-2" for="form-input-initStab">Initial Stabilizer</label>
+                                                                <input type="text" id="form-input-initStab" class="form-control form-control-sm" value="35.0">
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                                <label class="form-control-label mr-sm-2" for="form-input-stabFactor">Stabilizing Factor</label>
+                                                                <input type="text" id="form-input-stabFactor" class="form-control form-control-sm" value="1.005">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label class="form-control-label mr-sm-2" for="form-input-freezeTemp">Freezing Temp</label>
+                                                                <input type="text" id="form-input-freezeTemp" class="form-control form-control-sm" value="0.0">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <hr class="mt-3 mb-0"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="d-flex justify-content-center align-items-center">
+                                                                <button class="btn btn-icon-white" id="btn-sort-pause"><i class="fa fa-pause-circle fa-2x fa-fw"></i></button>
+                                                                <button class="btn btn-icon-white" id="btn-sort-start"><i class="fa fa-play-circle fa-4x fa-fw"></i></button>
+                                                                <button class="btn btn-icon-white" id="btn-sort-stop"><i class="fa fa-stop-circle fa-2x fa-fw"></i></button>
+
+                                                                <!-- THIS IS FROM Queens.html, NOT SURE IF I NEED IT YET!!! 
+                                                                    function handleFileSelect(evt) {
+                                                                    var files = evt.target.files; // FileList object
+
+                                                                    // files is a FileList of File objects. List some properties.
+                                                                    var output = [];
+                                                                    output.push('<li><strong>', escape(files[0].name), '</strong> (', files[0].type || 'n/a', ') - ',
+                                                                        files[0].size, ' bytes, last modified: ',
+                                                                        files[0].lastModifiedDate ? files[0].lastModifiedDate.toLocaleDateString() : 'n/a',
+                                                                        '</li>');
+
+                                                                    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+                                                                -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card bg-primary shadow" id="upload-options">
+                                        <div class="card-header card-title-stripe text-white text-center shadow2">
+                                            <h5>Results</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-center" id="upload-results">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div> <!-- end tab-pane (Upload) -->
 
                 <div class="tab-pane pane-wifi" id="Wifi" role="tabpanel">
@@ -601,17 +862,41 @@
             </div>
         </div>
 
-        <!-- Choose File... -->
-        <!--
-        <form class="was-validated">
-          <label class="custom-file">
-            <input type="file" id="file" class="custom-file-input" required>
-            <span class="custom-file-control"></span>
-          </label>
-        </form>
-        -->
+        <div class="modal modal-wide fade" id="imgFilterModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				 	<div class="modal-header">
+				    	<h5 class="modal-title">Image Filter Settings</h5>
+				    	<button type="button" class="close" data-dismiss="modal">
+				      		<span>&times;</span>
+				    	</button>
+				  	</div>
+                    <div class="modal-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-8" id="modal-col">
+									<canvas id="modal-canvas"></canvas>
+									<canvas class="rounded" id="zoom-canvas"></canvas>
+								</div>
+								<div class="col-md-4" id="imgFilterSettings">
+									SETTINGS
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+				    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				    	<button type="button" class="btn btn-primary">Save changes</button>
+				  	</div>
+				</div>
+			</div>
+		</div>
 
-        <script type="text/javascript">
+		<script type="text/javascript">
+        	var drawbot = new Drawbot();
+        	var drawing = new Drawing();
+        	var energy_graph = new Energy_Graph();
+
             $(document).ready(function(){
                 $('a[data-toggle=popover]').popover();
 
@@ -620,35 +905,38 @@
                 fillStateUnits();
 
                 generateFileList();
-                showCorrectFilemanagerMenu();
-            });
 
+                var temp_i = parseFloat(document.getElementById("form-input-initTemp").value);
+                var temp_f = parseFloat(document.getElementById("form-input-freezeTemp").value);
+                var cool_f = parseFloat(document.getElementById("form-input-coolFactor").value);
+
+                //Drawing.Initialize((temp_i - temp_f) / cool_f, 200);
+                drawing.Initialize(200, 200);
+                
+                energy_graph.Initialize((temp_i - temp_f) / cool_f, 100);
+
+                for (i = 0; i < 125; i++) {
+                	energy_graph.DrawPoint(Math.random() * 100);
+                }
+
+                var fileInput = document.getElementById('fileInput');
+                fileInput.addEventListener('change', loadNewFile);
+            });
             
             $(window).resize(function(){
-                showCorrectFilemanagerMenu();
+                // Not being used now.
             });
 
-            /* Keep dropdown menus open when opening sub-lists */
-            $(function() {
-                $("div.dropdown-menu").on("click", "[data-keepOpenOnClick]", function(e) {
-                    e.stopPropagation();
-                    $( this ).collapse('toggle');
-                });
+            $(".modal-wide").on("show.bs.modal", function() {
+				var height = $(window).height() - 200;
+  				$(this).find(".modal-body").css("max-height", height);
+			});
+
+            $('btn-sort-start').on('click', function (e) {
+                App.Start();
             });
 
-            /* Shrink or expand the filemanager menu depending on the window size */
-            function showCorrectFilemanagerMenu() {
-                if ($(window).width() < 4024) { ///////////////////////////// CHANGE TO LOWER NUMBER!!!!
-                    $('#filemanager-menu-lg').addClass("hidden");
-                    $('#filemanager-menu-sm').removeClass("hidden");
-                }
-                else {
-                    $('#filemanager-menu-sm').addClass("hidden");
-                    $('#filemanager-menu-lg').removeClass("hidden");
-                }
-            }
-
-            /* Turn on popovers for all elements with a tooltip */
+            // Turn on popovers for all elements with a tooltip //
             $(function () {
                 var showPopover = function () { $(this).popover('show'); }
                 , hidePopover = function () { $(this).popover('hide'); };
@@ -666,10 +954,149 @@
                     $('#file-delete-' + i).popover({ html: true, content: "<font color='white'>Delete</font>", trigger: 'hover', placement:'bottom' })
                 }
             });
-        </script>
 
-        <script type="text/javascript">
-            /* Initialize state for testing */
+            function loadNewFile() {
+            	var drawbot = new Drawbot();
+
+                var validFileTypes = ['rob', 'jpg', 'jpeg', 'png', 'bmp']; // --------- ADD SVG? ----------
+
+                if (fileInput.files && fileInput.files[0]) {
+                    var file = fileInput.files[0];
+                    var ext = file.name.split('.').pop().toLowerCase();
+                    
+                    if (validFileTypes.indexOf(ext) > -1) {
+                    	if (ext === "rob") {
+	                        var reader = new FileReader();
+
+	                        reader.onload = function(e) {
+	                            var lines = e.target.result.split(/[\r\n]+/g);
+	                            for (i = 0; i < lines.length; i++) {
+	                                if (i === 0) {
+	                                    if (0) { // (!assertROBHeader(ext, lines[i].split(","))) {
+	                                        alert("File header is corrupt.");
+	                                        return;
+	                                    }
+	                                }
+	                                else {
+	                                    if (0) { //(!assertROBCommand(lines[i].split(","))) {
+	                                        alert("File contains invalid commands.");
+	                                        return;
+	                                    }
+	                                }
+	                            }
+
+	                            document.getElementById("fileInputText").placeholder = fileInput.files[0].name; 
+
+	                            lines.forEach(function(line, index) {
+	                                var words = line.split(',');
+	                                if (words[0] === 'C12')
+	                                    drawbot.AddPolygon(words);
+	                            });
+
+	                            drawbot.DrawLines(drawing);
+
+
+	                        }
+
+	                        reader.readAsText(file);
+	                    }
+	                    else {
+	                    	var canvas_full = document.createElement('canvas');
+	                    	var canvas_small = document.getElementById("modal-canvas");
+							var img = new Image();
+							var sWidth = 0, 
+								sHeight = 0;
+
+							var zoomCanvas = $("#zoom-canvas");
+							var zoomCtx = zoomCanvas[0].getContext('2d');
+
+					    	img.src = URL.createObjectURL(file);
+
+	                    	$('#imgFilterModal').modal({
+								keyboard: false
+							});
+
+	                    	function getRect(canvas) {
+	                    		return canvas.getBoundingClientRect();
+	                    	}
+							function getMousePos(canvas, evt) {
+						    	var rect = getRect(canvas);
+						        return {
+						        	x: evt.clientX - rect.left,
+						        	y: evt.clientY - rect.top
+						       	};
+						    }
+
+							img.onload = function() {
+					        	canvas_full.width = parseInt(img.width);
+					        	canvas_full.height = parseInt(img.height);
+
+					        	if (canvas_full.width > canvas_full.height) {
+					        		sWidth = 300;
+					        		sHeight	= (canvas_full.height / canvas_full.width) * sWidth;
+					        	}
+					        	else {
+					        		sHeight = 300;
+					        		sWidth = (canvas_full.width / canvas_full.height) * sHeight;
+					        	}
+
+					        	var ctx_full = canvas_full.getContext("2d");
+					        	ctx_full.drawImage(img, 0, 0);
+
+					        	resample_single(canvas_full, canvas_small, sWidth, sHeight);
+
+					        	var c = document.getElementById('modal-canvas');
+					        	c.addEventListener("mousemove", function(e) {
+					        		var mousePos = getMousePos(c, e);
+					        		var smRect = getRect(c);
+					        		var canvasPosX = (mousePos.x / (smRect.right - smRect.left)) * canvas_full.width - 150;
+					        		var canvasPosY = (mousePos.y / (smRect.bottom - smRect.top)) * canvas_full.height - 75;
+
+					        		if (canvasPosX < 0)
+					        			canvasPosX = 0;
+					        		if (canvasPosY < 0)
+					        			canvasPosY = 0;
+
+					        		if (canvasPosX > (canvas_full.width - 300))
+					        			canvasPosX = canvas_full.width - 300;
+					        		if (canvasPosY > (canvas_full.height - 150))
+					        			canvasPosY = canvas_full.height - 150;
+
+					        		zoomCtx.drawImage(img, -canvasPosX, -canvasPosY);
+					        	});
+					        };
+
+					        $('imgFilterModal').modal('show');
+
+					        $("#modal-canvas").on("mouseenter", function() {
+				            	var animationName = 'animated fadeIn'
+				            	var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
+				            	$('#zoom-canvas').addClass(animationName).one(animationEnd, function() {
+				            		$(this).css('opacity', '1');
+				            		$(this).removeClass(animationName);
+				            	});
+							});
+
+							$("#modal-canvas").on("mouseleave", function() {
+								var animationName = 'animated fadeOut'
+				            	var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
+				            	$('#zoom-canvas').addClass(animationName).one(animationEnd, function() {
+				            		$(this).css('opacity', '0');
+				            		$(this).removeClass(animationName);
+				            	});
+							});
+	                    }
+                    }
+                    else {
+                        alert("Incompatible file type.");
+                    }
+                }
+                else {
+                    alert("There was a problem opening the file.")
+                }
+            }
+
+            // Initialize state for testing //
             function fillTestData() {
                 state.robotState = 2;
                 state.drawSpeed = 5;
@@ -691,7 +1118,62 @@
                 state.wifiGateway = "192.168.0.1";
             }
 
-            /* Fill in data from state object */
+            function assertROBHeader(extension, header) {
+                if (extension.toLowerCase() === 'rob') {
+                    if (header[0].toLowerCase() === 'c00') {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            function assertROBCommand(line) {
+                if (line[line.length-1] === 'STOP')
+                    return false;
+
+                if (line.indexOf("START") < 0)
+                    return false;
+
+                return true;
+            }
+
+            // Format:      Command(Arm), *([Setting][, value], ), START, *([point X], [point Y], ), STOP
+            // Example:     C12(0), START, 0, 0, 1, 0, 1, 1, 0, 1, STOP
+            //
+            // Command:     C00: File Header
+            //              C10(x): Line | C11: Line List | C12: Polygon | C13: Ellipse | C14: Arc | C15: Text
+            //              C20(x): Fill Previous Shape with Arm x (valid for Polygon, Ellipse, and Text) 
+            //
+            // Protocol:    START: Beginning of Location Data | STOP: End of Location Data
+            //
+            // Settings:    S00: Title | S01: Format Version | S02: File Creation Date | S03: Sorting Algorithm | S04: Comment
+            //              S10: Absolute Position (Default) | S11: Relative Position
+            //              S20: Fill Solid | S21: Fill Vertical Stripes | S22: Fill Horizontal Stripes | S23: Fill Diagonal Stripes | S24: Fill X Stripes | S25: Fill + Stripes
+            //
+            //              S30: Font Name | S31: Font Size | S32: Font Bold | S33: Font Italics | S34: Font Underline | S35: Font Crossed Out
+            function getCommandInfo(cmd, position, cmd_start) {
+                var validROBCommands = [    'c00', 
+                                            'c10', 'c11', 'c12', 'c13', 'c14', 'c15', 
+                                            'c20'];
+                var validROBProtocol = [    'START', 'STOP'];
+                var validROBSettings = [    's00', 's01', 's02', 's03', 's04', 
+                                            's10', 's11', 
+                                            's20', 's21', 's22', 's23', 's24', 's25', 
+                                            's30', 's31', 's32', 's33', 's34', 's35'];
+
+                if (position === 0) {
+                    if (validROBCommands.indexOf(cmd.toLowerCase()) < 0) {
+                        return -1;
+                    }
+                } else {
+                    if (validROBCommands.indexOf(cmd.toLowerCase()) >= 0) {
+                        return -1;
+                    }
+                }
+            }
+
+            // Fill in data from state object //
             function fillStateVariables() {
                 document.getElementById("idRobotState").innerHTML = (RobotStateEnum.properties[state.robotState] === undefined ? "&nbsp" : RobotStateEnum.properties[state.robotState].display);
                 document.getElementById("idRobotState").style.color = (RobotStateEnum.properties[state.robotState] === undefined ? "#007bff" : RobotStateEnum.properties[state.robotState].color);
@@ -720,7 +1202,7 @@
                 document.getElementById("idWifiGateway").innerHTML = (state.wifiGateway == "" ? "&nbsp" : state.wifiGateway);
             }
 
-            /* Insert value unit types */
+            // Insert value unit types //
             function fillStateUnits() {
                 var elements = document.getElementsByClassName("unit-percent");
                 var count = elements.length;
@@ -739,51 +1221,27 @@
                 for (i = 0; i < count; i++) { elements[i].innerHTML = "<small>MB</small>"; }
             }
 
-            /* Create cards for files in the file manager */
+            // Create cards for files in the file manager //
             function generateFileList() {
                 var fileHTML;
                 for (i = 0; i < fileList.count; i++) {
                     var month;
                     switch (fileList.file[i].date.month) {
-                        case 1:
-                            month = "January"
-                            break;
-                        case 2:
-                            month = "February"
-                            break;
-                        case 3:
-                            month = "March"
-                            break;
-                        case 4:
-                            month = "April"
-                            break;
-                        case 5:
-                            month = "May"
-                            break;
-                        case 6:
-                            month = "June"
-                            break;
-                        case 7:
-                            month = "July"
-                            break;
-                        case 8:
-                            month = "August"
-                            break;
-                        case 9:
-                            month = "September"
-                            break;
-                        case 10:
-                            month = "October"
-                            break;
-                        case 11:
-                            month = "November"
-                            break;
-                        case 12:
-                            month = "December"
-                            break;
+                        case 1: month = "January"; break;
+                        case 2: month = "February"; break;
+                        case 3: month = "March"; break;
+                        case 4: month = "April"; break;
+                        case 5: month = "May"; break;
+                        case 6: month = "June"; break;
+                        case 7: month = "July"; break;
+                        case 8: month = "August"; break;
+                        case 9: month = "September"; break;
+                        case 10: month = "October"; break;
+                        case 11: month = "November"; break;
+                        case 12: month = "December"; break;
                         default:
-                            month = "Invalid"
-                            break;
+                        	month = "Invalid";
+                        	break;
                     }
 
                     var drawTime = 0;
@@ -823,6 +1281,84 @@
                     $("#file-container").append(fileHTML);
                 }
             }
+
+            /**
+			*	Hermite resize - fast image resize/resample using Hermite filter. 1 cpu version!
+			* 
+			*	@param {HtmlElement} canvas
+			*	@param {int} width
+			*	@param {int} height
+			*/
+			function resample_single(canvasSrc, canvasDest, width, height) {
+				var width_source = canvasSrc.width;
+				var height_source = canvasSrc.height;
+
+				width = Math.round(width);
+				height = Math.round(height);
+
+				var ratio_w = width_source / width;
+				var ratio_h = height_source / height;
+				var ratio_w_half = Math.ceil(ratio_w / 2);
+				var ratio_h_half = Math.ceil(ratio_h / 2);
+
+				var ctxSrc = canvasSrc.getContext("2d");
+				var img = ctxSrc.getImageData(0, 0, width_source, height_source);
+				var img2 = ctxSrc.createImageData(width, height);
+				var data = img.data;
+				var data2 = img2.data;
+
+				for (var j = 0; j < height; j++) {
+					for (var i = 0; i < width; i++) {
+						var x2 = (i + j * width) * 4;
+						var weight = 0;
+						var weights = 0;
+						var weights_alpha = 0;
+						var gx_r = 0;
+						var gx_g = 0;
+						var gx_b = 0;
+						var gx_a = 0;
+						var center_y = (j + 0.5) * ratio_h;
+						var yy_start = Math.floor(j * ratio_h);
+						var yy_stop = Math.ceil((j + 1) * ratio_h);
+						for (var yy = yy_start; yy < yy_stop; yy++) {
+							var dy = Math.abs(center_y - (yy + 0.5)) / ratio_h_half;
+							var center_x = (i + 0.5) * ratio_w;
+							var w0 = dy * dy; //pre-calc part of w
+							var xx_start = Math.floor(i * ratio_w);
+							var xx_stop = Math.ceil((i + 1) * ratio_w);
+							for (var xx = xx_start; xx < xx_stop; xx++) {
+								var dx = Math.abs(center_x - (xx + 0.5)) / ratio_w_half;
+								var w = Math.sqrt(w0 + dx * dx);
+								if (w >= 1) {
+									//pixel too far
+									continue;
+								}
+								//hermite filter
+								weight = 2 * w * w * w - 3 * w * w + 1;
+								var pos_x = 4 * (xx + yy * width_source);
+								//alpha
+								gx_a += weight * data[pos_x + 3];
+								weights_alpha += weight;
+								//colors
+								if (data[pos_x + 3] < 255)
+									weight = weight * data[pos_x + 3] / 250;
+								gx_r += weight * data[pos_x];
+								gx_g += weight * data[pos_x + 1];
+								gx_b += weight * data[pos_x + 2];
+								weights += weight;
+							}
+						}
+						data2[x2] = gx_r / weights;
+						data2[x2 + 1] = gx_g / weights;
+						data2[x2 + 2] = gx_b / weights;
+						data2[x2 + 3] = gx_a / weights_alpha;
+					}
+				}
+				
+				//draw
+				var ctxDest = canvasDest.getContext("2d");
+				ctxDest.putImageData(img2, 0, 0);
+			}
         </script>
     </body>
 </html>

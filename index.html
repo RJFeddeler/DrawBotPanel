@@ -11,20 +11,25 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <!-- Animate CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" integrity="sha256-j+P6EZJVrbXgwSR5Mx+eCS6FvP9Wq27MBRC/ogVriY0=" crossorigin="anonymous" />
+        <!-- Bootstrap-Slider CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.9.0/css/bootstrap-slider.css" integrity="sha256-ojWMuaS8gb0NLkgeKWnsdM24QKxM+UWOq3r+VrKgv68=" crossorigin="anonymous" />
 
         <!-- JQuery, Popper, and Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.9.0/bootstrap-slider.js" integrity="sha256-17b/iGtqUrqcCSivVVRYvREag1R2ka4j3rIDlhw3J0g=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
         <!-- Load program scripts and objects -->
-        <script language="JavaScript" src="js/point.js"></script>
-        <script language="JavaScript" src="js/line.js"></script>
-        <script language="JavaScript" src="js/energy_graph.js"></script>
-        <script language="JavaScript" src="js/drawing.js"></script>
-        <script language="JavaScript" src="js/simulated_annealing.js"></script>
-        <script language="JavaScript" src="js/drawbot.js"></script>
-        <script language="JavaScript" src="js/application.js"></script>
+        <!--<script type="text/javascript" src="js/filters.js"></script>-->
+	    <script type="text/javascript" src="js/canny.js"></script>
+        <script type="text/javaScript" src="js/point.js"></script>
+        <script type="text/javaScript" src="js/line.js"></script>
+        <script type="text/javaScript" src="js/energy_graph.js"></script>
+        <script type="text/javaScript" src="js/drawing.js"></script>
+        <script type="text/javaScript" src="js/simulated_annealing.js"></script>
+        <script type="text/javaScript" src="js/drawbot.js"></script>
+        <script type="text/javaScript" src="js/application.js"></script>
 
         <script type="text/javascript" src="js/state_data.js"></script>
         <script type="text/javascript" src="js/file_list.js"></script>
@@ -245,10 +250,18 @@
             #form-algorithm .form-select-algo { width: 175px; margin-top: 0px; margin-bottom: 0px; }
             #form-algorithm hr { margin-top: 5px; margin-bottom: 5px; }
 
+            .lbl-sm { line-height: 0.8em; font-size: 0.8em; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; }
+            .applyCard-width { width: 270px; border-style: none; }
+            .slider-selection { background: #bcdaf6; }
+            #filter_sliderHysteresis .slider-track-low { background: #f8d7da; }
+            #filter_sliderHysteresis .slider-selection { background: #ffffcc; }
+            #filter_sliderHysteresis .slider-track-high { background: #d5f6d5; }
+
             .modal.modal-wide .modal-dialog { max-width: 70%; }
-            #modal-canvas { position: relative; background: #fff; border: 1px solid #222; width: 100%; height: 400px; }
-            #zoom-canvas { position: absolute; opacity: 0; background: #fff; border: 1px solid #222; left: 115px; min-width: 300px; min-height: 200px; z-index: 1001; 
-            				-webkit-animation-duration: 0.3s; animation-duration: 0.3s; -moz-animation-duration: 0.3s; -o-animation-duration: 0.3s; }
+            #modal-canvas { position: relative; background: #fff; border: 1px solid #222; width: 100%; height: 400px; z-index: 101; }
+            #zoom-canvas { position: absolute; opacity: 0; background: #fff; border: 1px solid #222; top: 100px; left: 614px; width: 300px; height: 200px; z-index: -1; 
+            				box-shadow: 0px 70px 100px #eee, 0px -70px 100px #eee;
+            				-webkit-animation-duration: 0.5s; animation-duration: 0.5s; -moz-animation-duration: 0.5s; -o-animation-duration: 0.5s; }
 
             .btn-sm-long { margin-top: 14px; padding: 0.05rem 0.5rem 0.05rem 0.5rem; font-size: 1.0rem; line-height: 1.5; border-radius: 0.2rem; width: 30%;}
             .btn-outline-white { color: white; border-color: white; border-width: 3px; background-color: transparent; }
@@ -730,7 +743,7 @@
                                     <div class="d-flex chooser-margins">
                                         <label class="input-group-btn">
                                             <span class="btn btn-primary chooser-btn">
-                                                Browse&hellip; <input type="file" id="fileInput" accept=".rob, image/*" style="display: none;" >
+                                                Browse&hellip; <input type="file" id="fileInput" accept=".rob, .png, .jpg, .jpeg, .bmp, .svg" style="display: none;" >
                                             </span>
                                         </label>
                                         <input type="text" class="form-control chooser-input" id="fileInputText" placeholder="(No file selected)" readonly>
@@ -879,14 +892,73 @@
 									<canvas class="rounded" id="zoom-canvas"></canvas>
 								</div>
 								<div class="col-md-4" id="imgFilterSettings">
-									SETTINGS
+									<div class="row">
+										<div class="card pb-0">
+										  	<div class="card-header pt-0 pb-0">
+										    	Gaussian Blur
+										  	</div>
+										  	<div class="card-body pt-0 pb-1">
+										    	<div>
+			                                        <label class="lbl-sm">Kernel Size: <strong id="sliderVal_blurKernel">0</strong></label><br>
+			                                        <input id="filter_blurKernel" data-slider-id='filter_slider1' type="text" data-slider-min="3" data-slider-max="21" data-slider-step="2" data-slider-value="3">
+			                                    </div>
+			                                    <div>
+				                                    <label class="lbl-sm">Sigma: <strong id="sliderVal_blurSigma">0</strong></label><br>
+			                                        <input id="filter_blurSigma" data-slider-id='filter_slider2' type="text" data-slider-precision="1" data-slider-min="1.0" data-slider-max="10.0" data-slider-step=".1" data-slider-value="1.5">
+			                                    </div>
+										  	</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="card pb-0 mb-1">
+										  	<div class="card-header pt-0 pb-0">
+										    	Edge Detection
+										  	</div>
+										  	<div class="card-body pt-2 pb-1">
+										  		<center>
+											  		<div class="btn-group btn-group-sm mb-1" id="form-input-cannyAlgorithm" data-toggle="buttons">
+													  	<label class="btn btn-secondary active">
+													    	<input type="radio" name="options" id="edgeAlgoSobel" autocomplete="off" checked> Sobel
+													  	</label>
+													  	<label class="btn btn-secondary">
+													    	<input type="radio" name="options" id="edgeAlgoRoberts" autocomplete="off"> Roberts
+													  	</label>
+													  	<label class="btn btn-secondary">
+													    	<input type="radio" name="options" id="edgeAlgoPrewitt" autocomplete="off"> Prewitt
+													  	</label>
+													</div>
+												</center>
+										    	<div>
+			                                        <label class="lbl-sm">Kernel Size: <strong id="sliderVal_edgeKernel">0</strong></label><br>
+			                                        <input id="filter_edgeKernel" data-slider-id='filter_slider3' type="text" data-slider-min="3" data-slider-max="7" data-slider-step="2" data-slider-ticks="[3, 5, 7]" data-slider-value="3">
+			                                    </div>
+			                                    <div>
+			                                        <label class="lbl-sm">Canny Hysteresis: <strong id="sliderVal_hysteresis1">0</strong>, <strong id="sliderVal_hysteresis2">0</strong></label><br>
+			                                        <input id="filter_cannyHysteresis" data-slider-id='filter_sliderHysteresis' type="text" class="span2" data-slider-min="0" data-slider-max="255" data-slider-step="5" data-slider-value="[50,100]">
+			                                    </div>
+			                                    <div class="form-check mt-3">
+													<label class="form-check-label">
+												    	<input id="filter_invert" class="form-check-input" type="checkbox" value="" checked> Invert Image
+												  	</label>
+												</div>
+										  	</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="card applyCard-width pb-0">
+										  	<div class="card-body mt-1 pt-0 pb-1 ml-auto">
+										  		<button type="button" id="btn_filter_defaults" class="btn btn-sm btn-secondary mr-1">Defaults</button>
+										  		<button type="button" id="btn_filter_apply" class="btn btn-sm btn-primary">Apply</button>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
-				    	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				    	<button type="button" class="btn btn-primary">Save changes</button>
+				    	<button type="button" id="btn_filter_close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				    	<button type="button" id="btn_filter_save" class="btn btn-primary">Save changes</button>
 				  	</div>
 				</div>
 			</div>
@@ -927,7 +999,7 @@
                 // Not being used now.
             });
 
-            $(".modal-wide").on("show.bs.modal", function() {
+            $(".modal-wide").on("show.bs.modal", function() { /////////////////// CHECK THIS OUT
 				var height = $(window).height() - 200;
   				$(this).find(".modal-body").css("max-height", height);
 			});
@@ -958,7 +1030,7 @@
             function loadNewFile() {
             	var drawbot = new Drawbot();
 
-                var validFileTypes = ['rob', 'jpg', 'jpeg', 'png', 'bmp']; // --------- ADD SVG? ----------
+                var validFileTypes = ['rob', 'jpg', 'jpeg', 'png', 'bmp', 'svg'];
 
                 if (fileInput.files && fileInput.files[0]) {
                     var file = fileInput.files[0];
@@ -1000,15 +1072,23 @@
 
 	                        reader.readAsText(file);
 	                    }
+	                    else if (ext === 'svg') {
+
+	                    }
 	                    else {
+	                    	var canvas_offscreen = document.createElement('canvas');
 	                    	var canvas_full = document.createElement('canvas');
 	                    	var canvas_small = document.getElementById("modal-canvas");
+
 							var img = new Image();
 							var sWidth = 0, 
 								sHeight = 0;
 
+							var imgData;
+
 							var zoomCanvas = $("#zoom-canvas");
 							var zoomCtx = zoomCanvas[0].getContext('2d');
+							var zoomShowing = false;
 
 					    	img.src = URL.createObjectURL(file);
 
@@ -1028,6 +1108,9 @@
 						    }
 
 							img.onload = function() {
+								canvas_offscreen.width = parseInt(img.width);
+								canvas_offscreen.height = parseInt(img.height);
+
 					        	canvas_full.width = parseInt(img.width);
 					        	canvas_full.height = parseInt(img.height);
 
@@ -1043,7 +1126,11 @@
 					        	var ctx_full = canvas_full.getContext("2d");
 					        	ctx_full.drawImage(img, 0, 0);
 
-					        	resample_single(canvas_full, canvas_small, sWidth, sHeight);
+					        	HermiteDownsample(canvas_full, canvas_small, sWidth, sHeight);
+
+					        	//window.canny = CannyJS.canny(canvas_full, 100, 50, 1.5, 9);
+
+					        	imgData = new GrayImageData(canvas_full.width, canvas_full.height);
 
 					        	var c = document.getElementById('modal-canvas');
 					        	c.addEventListener("mousemove", function(e) {
@@ -1061,30 +1148,136 @@
 					        			canvasPosX = canvas_full.width - 300;
 					        		if (canvasPosY > (canvas_full.height - 150))
 					        			canvasPosY = canvas_full.height - 150;
-
-					        		zoomCtx.drawImage(img, -canvasPosX, -canvasPosY);
+					        		
+					        		zoomCtx.drawImage(canvas_offscreen, -canvasPosX, -canvasPosY);
 					        	});
+
+					        	$('imgFilterModal').modal('show');
+					        	updateFilteredImg();
 					        };
 
-					        $('imgFilterModal').modal('show');
+					        $("#filter_blurKernel").slider({});
+					        $("#sliderVal_blurKernel").text($('#filter_blurKernel').slider("getValue"));
+					        $("#filter_blurKernel").on("slide", function(slideEvt) {
+								$("#sliderVal_blurKernel").text(slideEvt.value);
+							});
+							$("#filter_blurKernel").on("change", function(slideEvt) {
+								$("#sliderVal_blurKernel").text($(this).val());
+							});
 
-					        $("#modal-canvas").on("mouseenter", function() {
-				            	var animationName = 'animated fadeIn'
+					        $("#filter_blurSigma").slider({});
+					        $("#sliderVal_blurSigma").text($('#filter_blurSigma').slider("getValue"));
+					        $("#filter_blurSigma").on("slide", function(slideEvt) {
+								$("#sliderVal_blurSigma").text(slideEvt.value);
+							});
+							$("#filter_blurSigma").on("change", function(slideEvt) {
+								$("#sliderVal_blurSigma").text($(this).val());
+							});
+
+					        $("#filter_edgeKernel").slider({});
+					        $("#sliderVal_edgeKernel").text($('#filter_edgeKernel').slider("getValue"));
+					        $("#filter_edgeKernel").on("slide", function(slideEvt) {
+								$("#sliderVal_edgeKernel").text(slideEvt.value);
+							});
+							$("#filter_edgeKernel").on("change", function(slideEvt) {
+								$("#sliderVal_edgeKernel").text($(this).val());
+							});
+
+					        $("#filter_cannyHysteresis").slider({});
+					        var tuple = $("#filter_cannyHysteresis").slider("getValue");
+					        $("#sliderVal_hysteresis1").text(tuple[0]);
+					        $("#sliderVal_hysteresis2").text(tuple[1]);
+					        $("#filter_cannyHysteresis").on("slide", function(slideEvt) {
+								$("#sliderVal_hysteresis1").text(slideEvt.value[0]);
+								$("#sliderVal_hysteresis2").text(slideEvt.value[1]);
+							});
+
+					        var showZoomCanvas = function() {
+					        	var animationName = 'animated fadeIn'
 				            	var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
+				            	$('#zoom-canvas').css('z-index', 100);
 				            	$('#zoom-canvas').addClass(animationName).one(animationEnd, function() {
 				            		$(this).css('opacity', '1');
 				            		$(this).removeClass(animationName);
+				            		zoomShowing = true;
 				            	});
-							});
+					        }
 
-							$("#modal-canvas").on("mouseleave", function() {
-								var animationName = 'animated fadeOut'
+					        var hideZoomCanvas = function() {
+					        	var animationName = 'animated fadeOut'
 				            	var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
 				            	$('#zoom-canvas').addClass(animationName).one(animationEnd, function() {
 				            		$(this).css('opacity', '0');
+				            		$(this).css('z-index', -1);
 				            		$(this).removeClass(animationName);
+				            		zoomShowing = false;
 				            	});
+					        }
+
+					        var updateFilteredImg = function() {
+					        	var valBlurKernel, valBlurSigma, valEdgeAlgo, valEdgeKernel, valHyst, valHystHigh, valHystLow, valInvert;
+					        	var blur, sobel, nms, hyst, invert;
+
+					        	valBlurKernel = $('#filter_blurKernel').slider("getValue");
+					        	valBlurSigma = $('#filter_blurSigma').slider("getValue");
+					        	valEdgeKernel = $('#filter_edgeKernel').slider("getValue");
+					        	valHyst = $("#filter_cannyHysteresis").slider("getValue");
+					        	valHystLow = (valHyst[0] <= valHyst[1]) ? valHyst[0] : valHyst[1];
+					        	valHystHigh = (valHyst[0] <= valHyst[1]) ? valHyst[1] : valHyst[0];
+
+					        	if ($("#edgeAlgoRoberts").is(":checked"))
+					        		valEdgeAlgo = "Roberts";
+					        	else if ($("#edgeAlgoPrewitt").is(":checked"))
+					        		valEdgeAlgo = "Prewitt";
+					        	else
+					        		valEdgeAlgo = "Sobel";
+
+					        	if ($("#filter_invert").is(":checked"))
+					        		valInvert = true;
+					        	else
+					        		valInvert = false;
+
+					        	imgData.loadCanvas(canvas_full);
+							    blur = CannyJS.gaussianBlur(imgData, valBlurSigma, valBlurKernel);
+
+							    switch (valEdgeAlgo) {
+							    	case "Roberts":
+							    		algo = CannyJS.roberts(blur, valEdgeKernel);
+							    		break;
+							    	case "Prewitt":
+							    		algo = CannyJS.prewitt(blur, valEdgeKernel);
+							    		break;
+							    	default:
+							    		algo = CannyJS.sobel(blur, valEdgeKernel);
+							    		break;
+							    }
+
+							    nms = CannyJS.nonMaximumSuppression(algo);
+							    hyst = CannyJS.hysteresis(nms, valHystHigh, valHystLow);
+
+							    if (valInvert)
+							    	invert = CannyJS.invert(hyst);
+							    else
+							    	invert = hyst;
+
+							    invert.drawOn(canvas_offscreen);
+
+							    alert("Finished!");
+					        }
+
+					        $("#modal-canvas").on("mouseenter", function() {
+					        	showZoomCanvas();
+					        });
+							
+							$("#modal-canvas").on("mouseleave", function() {
+								hideZoomCanvas();
 							});
+
+							$("#btn_filter_apply").on('click', function () {
+				                updateFilteredImg();
+				            });
+
+							//$('imgFilterModal').modal('show');
 	                    }
                     }
                     else {
@@ -1282,14 +1475,7 @@
                 }
             }
 
-            /**
-			*	Hermite resize - fast image resize/resample using Hermite filter. 1 cpu version!
-			* 
-			*	@param {HtmlElement} canvas
-			*	@param {int} width
-			*	@param {int} height
-			*/
-			function resample_single(canvasSrc, canvasDest, width, height) {
+           function HermiteDownsample(canvasSrc, canvasDest, width, height) {
 				var width_source = canvasSrc.width;
 				var height_source = canvasSrc.height;
 

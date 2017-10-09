@@ -5,7 +5,7 @@
  */
 
 (function() {
-  var CannyJS, GrayImageData, Util;
+  var CannyJS, GrayImageData, Util, GrayImageSettings;
 
   Util = {};
 
@@ -21,6 +21,37 @@
     return matrix;
   };
 
+
+  GrayImageSettings = (function() {
+
+    function GrayImageSettings() {
+      /*
+      this.blurKernel = blurKernel;
+      this.blurSigma = blurSigma;
+      this.edgeAlgo = edgeAlgo;
+      this.edgeKernel = edgeKernel;
+      this.hystHigh = hystHigh;
+      this.hystLow = hystLow;
+      this.invert = invert;
+      */
+      this;
+    }
+
+    GrayImageSettings.prototype.updateSettings = function(blurKernel, blurSigma, edgeAlgo, edgeKernel, hystHigh, hystLow, invert) {
+      this.blurKernel = blurKernel;
+      this.blurSigma = blurSigma;
+      this.edgeAlgo = edgeAlgo;
+      this.edgeKernel = edgeKernel;
+      this.hystHigh = hystHigh;
+      this.hystLow = hystLow;
+      this.invert = invert;
+
+      return this;
+    };
+
+    return GrayImageSettings;
+
+  })();
 
   /**
    * Class that represents gray-scaled image data
@@ -63,6 +94,20 @@
           y += 1;
         } else {
           x += 1;
+        }
+      }
+      return this;
+    };
+
+
+    /**
+     * load image data from other data and store it as a matrix of gray-scaled pixels
+     * @param {object} data object (2D array)
+     */
+    GrayImageData.prototype.loadData = function(data) {
+      for (x = 0; x < this.width; x++) {
+        for (y = 0; y < this.height; y++) {
+          this.data[x][y] = data[x][y];
         }
       }
       return this;
@@ -253,10 +298,7 @@
 
     copy = imgData.copy();
     imgData.eachPixel(1, function(x, y) {
-      if (copy.data[x][y] === 0)
-        copy.data[x][y] = 255;
-      else if (copy.data[x][y] === 255)
-        copy.data[x][y] = 0;
+      copy.data[x][y] = (255 - copy.data[x][y]);
     });
 
     return copy;
@@ -511,8 +553,10 @@
     return CannyJS.invert(hyst);
   };
 
-  window.CannyJS = CannyJS;
+  this.CannyJS = CannyJS;
 
-  window.GrayImageData = GrayImageData;
+  this.GrayImageData = GrayImageData;
+
+  this.GrayImageSettings = GrayImageSettings;
 
 }).call(this);

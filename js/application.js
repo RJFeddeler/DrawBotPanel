@@ -14,6 +14,7 @@ var App = (function () {
 
     return {
         Start: function() {
+            alert("test");
             if (alreadyRunning) {
                 clearInterval(intervalId);
             }

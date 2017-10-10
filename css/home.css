@@ -1,0 +1,21 @@
+.pane-home {}
+
+.home-system { padding-bottom: 10px; }
+.home-memorycard { padding-bottom: 10px; }
+.home-preview { padding-bottom: 10px; v}
+.home-network { padding-bottom: 10px; }
+.home-arms { padding-bottom: 10px; }
+.home-progress { padding-bottom: 10px; }
+
+.list-name { color: white; background-color: #007bff; border-color: #007bff; text-align: right; }
+.list-name-size { min-width: 50%; max-width: 50%; padding-right: 20px; }
+.list-divider { color: #B0B0B0; padding-left: 8px; padding-right: 8px; }
+.list-value { color: #007bff; }
+.list-value-size { min-width: 50%; max-width: 50%; }
+.list-units { color: #222222; padding-left: 3px; }
+
+.unit-percent {}
+.unit-length {}
+.unit-speed {}
+.unit-storage {}
+.unit-sigstrength {}

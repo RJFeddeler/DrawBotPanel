@@ -1,8 +1,38 @@
-var App = (function () {
-    var intervalId     = 0,
-        alreadyRunning = false;
+"use strict";
 
-    function GetOptions () {
+class App {
+    constructor() {
+        this.intervalId         = 0;
+        this.alreadyRunning     = false;
+        this.lines              = [];
+
+        this.xScale             = 1.0;
+        this.yScale             = 1.0;
+    }
+
+    start() {
+        if (this.alreadyRunning)
+            clearInterval(this.intervalId);
+
+        //Energy_Graph.Initialize((options.initialTemperature - options.freezingTemperature) / options.coolingFactor, Constants.MAX_POSSIBLE_ATTACKS);
+        var anneal = new SimulatedAnnealing(this.options.coolingFactor, this.options.stabilizingFactor, this.options.freezingTemperature, this.options.initialTemperature, this.options.initialStabilizer);
+
+        this.intervalId = setInterval(function () {
+            var done = false; //anneal.Step();
+            //Draw.DrawBoard(GetCurrentPositions());
+            //Graph.Point(anneal.GetCurrentEnergy());
+            
+            if (done === true) {
+                clearInterval(this.intervalId);
+                this.alreadyRunning = false;
+            }
+
+        }, 50);
+
+        this.alreadyRunning = true;
+    }
+
+    get options() {
         return {
             initialTemperature:  parseFloat(document.getElementById('initial_temperature').value),
             initialStabilizer:   parseFloat(document.getElementById('initial_stabilizer').value),
@@ -12,42 +42,54 @@ var App = (function () {
         };
     }
 
-    return {
-        Start: function() {
-            alert("test");
-            if (alreadyRunning) {
-                clearInterval(intervalId);
-            }
+    GenerateRandomPositions() {
+    }
 
-            var options = GetOptions();
+    CalculateAttacks(board) {
+    }
 
-            options.generateNewSolution = Drawbot.GenerateRandomPositions;
-            options.generateNeighbor    = Drawbot.GenerateNeighbor;
-            options.acceptNeighbor      = Drawbot.AcceptNeighbor;
+    GenerateNeighbor() {
+    }
 
-            Drawing.Initialize();
-            Energy_Graph.Initialize((options.initialTemperature - options.freezingTemperature) / options.coolingFactor, Constants.MAX_POSSIBLE_ATTACKS);
-            SimulatedAnnealing.Initialize(options);
-            Energy_Graph.Point(SimulatedAnnealing.GetCurrentEnergy());
+    CheckRepetitions(board) {
+    }
 
-            intervalId = setInterval(function () {
-                var done = SimulatedAnnealing.Step();
-                Draw.DrawBoard(Queens.GetCurrentPositions());
-                Console.Print('System energy: ', SimulatedAnnealing.GetCurrentEnergy(),
-                              '&nbsp;&nbsp;&nbsp;',
-                              'System temperature:', SimulatedAnnealing.GetCurrentTemperature(),
-                              '&nbsp;&nbsp;&nbsp;',
-                              'Line Length:', linesLength);
-                Graph.Point(SimulatedAnnealing.GetCurrentEnergy());
+    AcceptNeighbor() {
+    }
 
-                if (done === true) {
-                    clearInterval(intervalId);
-                    alreadyRunning = false;
-                }
+    GetCurrentPositions() {
+    }
 
-            }, 50);
+    addLineList(points, closed = false) {
+        for (i = 0; i < points.length; i++)
+            points[i] = trimStr(points[i]);
 
-            alreadyRunning = true;
+        var start = points.indexOf('START');
+        var line = new Line(points[start+1], points[start+2]);
+
+        for (i = start+3; i < points.length - 2; i+=2) {
+            line.addPoint(points[i], points[i+1]);
         }
+
+        line.setClosed(closed);
+        this.lines.push(line);
     };
-});
+
+    addPolygon(points) {
+        addLineList(points, true);
+    };
+
+    findLineScale() {
+
+    }
+
+    drawLines() {
+        this.lines.forEach(function(line) {
+            preview.drawLine(line);
+        });
+    };
+}
+
+function trimStr(text) {
+    return text.replace(/ /g,'');
+}

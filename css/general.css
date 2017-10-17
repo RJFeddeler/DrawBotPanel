@@ -2,6 +2,9 @@
 .popover { background: #007bff; }
 .popover.bs-popover-bottom .arrow::after { border-bottom-color: #007bff; }
 
+.ml-nav { margin-left: 100px; }
+.logo { position: absolute; height: 100%; }
+
 .shadow { box-shadow: 8px 8px 10px #606060; }
 .shadow2 { box-shadow: 0px 3px 2px #222222; }
 
@@ -15,7 +18,9 @@
 .font-sm { font-size: 0.7em; }
 
 .card { margin-bottom: 20px; padding-bottom: 30px; }
-.card-gap-top { margin-top: 48px; }
+.card-no-bottom { margin-bottom: 0px; padding-bottom: 0px; }
+.card-no-pad-bottom { padding-bottom: 0px; }
+.card-gap-top { margin-top: 46px; }
 .card-height-full-pad { padding-bottom: 20px; }
 .card-height-full { height: 100%; padding-bottom: 20px; }
 .card-title-stripe { padding-top: 0.5em; height: 2.5em; background: repeating-linear-gradient(45deg, #288ade, #288ade 40px, #0275d8 40px, #0275d8 80px); }

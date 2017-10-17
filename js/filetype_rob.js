@@ -27,7 +27,7 @@ function assertROBCommand(line) {
 //
 // Protocol:    START: Beginning of Location Data | STOP: End of Location Data
 //
-// Settings:    S00: Title | S01: Format Version | S02: File Creation Date | S03: Sorting Algorithm | S04: Comment
+// Settings:    S00: Title | S01: Format Version | S02: File Creation Date | S03: Sorting Algorithm | S04: Width | S05: Height | S06: Line Count | S07: Comment
 //              S10: Absolute Position (Default) | S11: Relative Position
 //              S20: Fill Solid | S21: Fill Vertical Stripes | S22: Fill Horizontal Stripes | S23: Fill Diagonal Stripes | S24: Fill X Stripes | S25: Fill + Stripes
 //

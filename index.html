@@ -39,17 +39,17 @@
         <script type="text/javascript" src="js/effects.js"></script>
         <script type="text/javascript" src="js/my_filters.js"></script>
 	    <script type="text/javascript" src="js/canny.js"></script>
+	    <script type="text/javascript" src="js/trace.js"></script>
 
         <script type="text/javaScript" src="js/point.js"></script>
         <script type="text/javaScript" src="js/line.js"></script>
-        <script type="text/javaScript" src="js/energy_graph.js"></script>
-        <script type="text/javaScript" src="js/drawing.js"></script>
-        <script type="text/javaScript" src="js/simulated_annealing.js"></script>
-        <script type="text/javaScript" src="js/drawbot.js"></script>
         <script type="text/javaScript" src="js/application.js"></script>
+        <script type="text/javaScript" src="js/energy_graph.js"></script>
+        <script type="text/javaScript" src="js/preview.js"></script>
+        <script type="text/javaScript" src="js/simulated_annealing.js"></script>
 
-        <script type="text/javascript" src="js/state_data.js"></script>
         <script type="text/javascript" src="js/file_list.js"></script>
+        <script type="text/javascript" src="js/state_data.js"></script>
     </head>
 
     <body>
@@ -60,13 +60,13 @@
 
         <!-- NavBar code -->
         <nav class="nav navbar navbar-expand-lg navbar-dark bg-primary shadow2">
-            <a class="navbar-brand" href="#">DrawBot</a>
+            <img class="logo" src="images/logo.png" />
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link margin-lg active" data-toggle="tab" href="#Home" id="nav-home"><i class="fa fa-home fa-2x fa-fw theme-color1"></i></a>
+                <div class="navbar-nav ml-nav mr-auto">
+                    <a class="nav-item nav-link margin-lg" data-toggle="tab" href="#Home" id="nav-home"><i class="fa fa-home fa-2x fa-fw theme-color1"></i></a>
                     <a class="nav-item nav-link margin-lg" data-toggle="tab" href="#Draw" id="nav-draw"><i class="fa fa-pencil-square-o fa-2x fa-fw theme-color1"></i></a>
                     <a class="nav-item nav-link margin-lg" data-toggle="tab" href="#Upload" id="nav-upload"><i class="fa fa-upload fa-2x fa-fw theme-color1"></i></a>
                 </div>
@@ -80,7 +80,7 @@
         <div class="container card-gap-top">
             <div class="tab-content">
 
-                <div class="tab-pane pane-home active" id="Home" role="tabpanel">
+                <div class="tab-pane pane-home" id="Home" role="tabpanel">
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="row">
@@ -159,13 +159,10 @@
                                                         <div class="card-list font-sm">Label:</div>
                                                     </li>
                                                     <li class="list-group-item list-name flex-column lineheight-sm trim">
-                                                        <div class="card-list font-sm">Capacity:</div>
+                                                        <div class="card-list font-sm">Free Space:</div>
                                                     </li>
                                                     <li class="list-group-item list-name flex-column lineheight-sm trim">
                                                         <div class="card-list font-sm">Used Space:</div>
-                                                    </li>
-                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
-                                                        <div class="card-list font-sm">Free Space:</div>
                                                     </li>
                                                 </ul>
                                                 <!-- Values List Group -->
@@ -182,6 +179,9 @@
                                                     </li>
                                                     <li class="list-group-item list-value flex-column lineheight-sm trim">
                                                         <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idMemCardFreeSpace"></div>
+                                                            <div class="list-units unit-storage font-sm"></div>
+                                                            <div class="card-list list-divider font-sm" id="idMemCardSeparator"></div>
                                                             <div class="card-list font-sm" id="idMemCardCapacity"></div>
                                                             <div class="list-units unit-storage font-sm"></div>
                                                         </div>
@@ -189,12 +189,6 @@
                                                     <li class="list-group-item list-value flex-column lineheight-sm trim">
                                                         <div class="d-flex ml-2">
                                                             <div class="card-list font-sm" id="idMemCardUsedSpace"></div>
-                                                            <div class="list-units unit-storage font-sm"></div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
-                                                        <div class="d-flex ml-2">
-                                                            <div class="card-list font-sm" id="idMemCardFreeSpace"></div>
                                                             <div class="list-units unit-storage font-sm"></div>
                                                         </div>
                                                     </li>
@@ -255,9 +249,6 @@
                                                 <div class="card-list font-sm">IP Address:</div>
                                             </li>
                                             <li class="list-group-item list-name flex-column lineheight-sm trim">
-                                                <div class="card-list font-sm">Netmask:</div>
-                                            </li>
-                                            <li class="list-group-item list-name flex-column lineheight-sm trim">
                                                 <div class="card-list font-sm">Gateway:</div>
                                             </li>
                                         </ul>
@@ -296,11 +287,6 @@
                                             <li class="list-group-item list-value flex-column lineheight-sm trim">
                                                 <div class="d-flex ml-2">
                                                     <div class="card-list font-sm" id="idWifiIP"></div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item list-value flex-column lineheight-sm trim">
-                                                <div class="d-flex ml-2">
-                                                     <div class="card-list font-sm" id="idWifiNetmask"></div>
                                                 </div>
                                             </li>
                                             <li class="list-group-item list-value flex-column lineheight-sm trim">
@@ -345,18 +331,16 @@
                 <div class="tab-pane pane-draw" id="Draw" role="tabpanel">
                     <div class="row">
                         <div class="col-md-12">
-
                             <div id="accordion" role="tablist">
-                                <div class="card draw-filemanager bg-primary shadow">
+                                <div class="card card-no-pad-bottom draw-filemanager bg-primary shadow">
                                     <span data-toggle="collapse" href="#filemanager-body">
                                         <div class="card-header card-title-stripe text-white text-center shadow2" role="tab" id="filemanager-heading">
                                             <h5>File Manager</h5>
                                         </div>
                                     </span>
-
                                     <div class="collapse show" role="tabpanel" data-parent="#accordion" id="filemanager-body">
                                         <div class="card-body trim">
-                                        	<div class="row">
+                                        	<div class="row no-height">
                                                 <div class="col icon-links icon-links-pos" id="filemanager-menu">
                                                     <a href="#" class="dropdown-toggle ml-3" data-toggle="dropdown"><i class="fa fa-bars fa-lg fa-fw"></i></a>
                                                     <ul class="dropdown-menu shadow2">
@@ -390,7 +374,6 @@
                                                         </li>
                                                     </ul>
                                                 </div>
-
                                             </div>
                                             <div class="row">
                                                 <div class="card-deck justify-content-center" id="file-container">
@@ -399,8 +382,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="card draw-freedraw bg-primary mt-5 shadow">
+                                <div class="card card-no-bottom draw-freedraw bg-primary trim shadow">
                                     <div class="card-header card-title-stripe text-white text-center shadow2" id="freedraw-heading" role="tab">
                                         <span class="collapsed" data-toggle="collapse" href="#freedraw-body">
                                             <h5>Free Draw</h5>
@@ -444,6 +426,23 @@
                                     <h5>Viewport</h5>
                                 </div>
                                 <div class="card-body pb-0 mb-0">
+                                	<div class="scale_input scale-fade rounded shadow2" id="input-group-scale">
+                                		<div class="input-group input-group-sm">
+                                			<input type="text" class="form-control" id="preview_scale" maxlength="3" value="100">
+                                			<div class="input-group-btn" id="scale_group_btn">
+                                				<button type="button" class="btn btn-secondary" style="opacity: 1" disabled>%</button>
+										        <button type="button" class="btn btn-primary dropdown-toggle" id="btn_scale_dropdown" data-toggle="dropdown">
+										        	<i class="fa fa-caret-down"></i>
+										        </button>
+										        <div class="dropdown-menu dropdown-menu-right" id="scale_dropdown">
+										          	<a class="dropdown-item" id="scale_100" href="#">100%</a>
+          											<a class="dropdown-item" id="scale_75" href="#">75%</a>
+          											<a class="dropdown-item" id="scale_50" href="#">50%</a>
+          											<a class="dropdown-item" id="scale_25" href="#">25%</a>
+										        </div>
+										   	</div>
+                                		</div>
+                                	</div>
                                     <div class="row">
                                         <div class="col">
                                             <div class="d-flex justify-content-center canvas-style mt-0 mb-1 rounded shadow2" id="viewport-drawing">
@@ -519,29 +518,29 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label class="form-control-label mr-sm-2" for="form-input-initTemp">Initial Temperature</label>
-                                                                <input type="text" id="form-input-initTemp" class="form-control form-control-sm" value="35.0">
+                                                                <label class="form-control-label mr-sm-2" for="initial_temperature">Initial Temperature</label>
+                                                                <input type="text" id="initial_temperature" class="form-control form-control-sm" value="35.0">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="form-control-label mr-sm-2" for="form-input-coolFactor">Cooling Factor</label>
-                                                                <input type="text" id="form-input-coolFactor" class="form-control form-control-sm" value="0.05">
+                                                                <label class="form-control-label mr-sm-2" for="cooling_factor">Cooling Factor</label>
+                                                                <input type="text" id="cooling_factor" class="form-control form-control-sm" value="0.05">
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label class="form-control-label mr-sm-2" for="form-input-initStab">Initial Stabilizer</label>
-                                                                <input type="text" id="form-input-initStab" class="form-control form-control-sm" value="35.0">
+                                                                <label class="form-control-label mr-sm-2" for="initial_stabilizer">Initial Stabilizer</label>
+                                                                <input type="text" id="initial_stabilizer" class="form-control form-control-sm" value="35.0">
                                                             </div>
                                                             
                                                             <div class="form-group">
-                                                                <label class="form-control-label mr-sm-2" for="form-input-stabFactor">Stabilizing Factor</label>
-                                                                <input type="text" id="form-input-stabFactor" class="form-control form-control-sm" value="1.005">
+                                                                <label class="form-control-label mr-sm-2" for="stabilizing_factor">Stabilizing Factor</label>
+                                                                <input type="text" id="stabilizing_factor" class="form-control form-control-sm" value="1.005">
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label class="form-control-label mr-sm-2" for="form-input-freezeTemp">Freezing Temp</label>
-                                                                <input type="text" id="form-input-freezeTemp" class="form-control form-control-sm" value="0.0">
+                                                                <label class="form-control-label mr-sm-2" for="freezing_temperature">Freezing Temp</label>
+                                                                <input type="text" id="freezing_temperature" class="form-control form-control-sm" value="0.0">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -653,7 +652,7 @@
 			                                    </div>
 			                                    <div>
 			                                        <label class="lbl-sm">Canny Hysteresis: <strong id="sliderVal_hysteresis1">0</strong>, <strong id="sliderVal_hysteresis2">0</strong></label><br>
-			                                        <input id="filter_cannyHysteresis" data-slider-id='filter_sliderHysteresis' type="text" class="span2" data-slider-min="0" data-slider-max="255" data-slider-step="5" data-slider-value="[50,100]">
+			                                        <input id="filter_cannyHysteresis" data-slider-id='filter_sliderHysteresis' type="text" class="span2" data-slider-min="1" data-slider-max="255" data-slider-step="1" data-slider-value="[50,100]">
 			                                    </div>
 			                                    <div class="form-check mt-3">
 													<label class="form-check-label">
@@ -688,35 +687,130 @@
 		</div>
 
 		<script type="text/javascript">
-        	var drawbot = new Drawbot();
-        	var drawing = new Drawing();
-        	var energy_graph = new Energy_Graph();
+			var app = new App();
+			var preview = new Preview('viewport-drawing', 500, 400);
+        	var graph = new Energy_Graph();
 
-            $(document).ready(function(){
+            $(function () {
+                switch (window.location.hash.toLowerCase()) {
+                    case "#draw":
+                        $('#Draw').tab('show');
+                        $('#nav-draw').addClass("active");
+                        break;
+                    case "#upload":
+                        $('#Upload').tab('show');
+                        $('#nav-upload').addClass("active");
+                        break;
+                    case "#wifi":
+                        $('#Wifi').tab('show');
+                        $('#nav-wifi').addClass("active");
+                        break;
+                    case "#settings":
+                        $('#Settings').tab('show');
+                        $('#nav-sesttings').addClass("active");
+                        break;
+                    case "#home":
+                    case "":
+                    default:
+                        $('#Home').tab('show');
+                        $('#nav-home').addClass("active");
+                        break;
+                }
+            });
+
+            $(document).ready(function() {
                 $('a[data-toggle=popover]').popover();
                 spawnNavPopovers();
-                generateFileList();
+                fileList_GenerateHTML();
                 spawnFileShortcutPopovers();
 
                 fillTestData();
                 fillStateData();
                 fillStateUnits();
 
-                //spawnHomeEventListeners();
-                //spawnDrawEventListeners();
-                spawnUploadEventListeners();
+                graph.Initialize(75, 100);
+                for (var i = 0; i < 125; i++)
+                    graph.DrawPoint(Math.random() * 100);
 
-                drawing.Initialize(200, 200);
-                energy_graph.Initialize(75, 100);
-
-                for (i = 0; i < 125; i++) { energy_graph.DrawPoint(Math.random() * 100); }
-
+                // --- EVENT LISTENERS --- //
                 document.getElementById('fileInput').addEventListener("change", loadNewFile);
+            	document.getElementById("btn-anneal-start").addEventListener("click", annealStart);
+                document.getElementById("btn-anneal-pause").addEventListener("click", annealPause);
+                document.getElementById("btn-anneal-stop").addEventListener("click", annealStop);
+
+                // #input-group-scale -> #preview_scale (text) -> #scale_group_btn -> #scale_dropdown
+                $('#scale_group_btn').on("hidden.bs.dropdown", setImageScaleBoxInactive);
+                document.getElementById("preview_scale").addEventListener("keyup", setImageScaleBoxActive);
+                document.getElementById("input-group-scale").addEventListener("mouseenter", setImageScaleBoxActive);
+                document.getElementById("scale_dropdown").addEventListener("mouseenter", setImageScaleBoxActive);
+
+            	document.getElementById("scale_100").addEventListener("click", function() { setImageScale(100); });
+            	document.getElementById("scale_75").addEventListener("click", function() { setImageScale(75); });
+            	document.getElementById("scale_50").addEventListener("click", function() { setImageScale(50); });
+            	document.getElementById("scale_25").addEventListener("click", function() { setImageScale(25); });
+
+                document.getElementById("preview_scale").addEventListener("blur", function() {
+                    setImageScaleBoxInactive();
+                });
+                document.getElementById("input-group-scale").addEventListener("mouseleave", function() {
+                    if (!$("#preview_scale").is(':focus') && !$("#scale_dropdown").hasClass("show")) {
+                        setImageScaleBoxInactive();
+                    }
+                });
+                document.getElementById("scale_dropdown").addEventListener("mouseleave", function() {
+                    if (!$("#scale_dropdown").hasClass("show")) {
+                        setImageScaleBoxInactive();
+                    }
+                });
+                document.getElementById("preview_scale").addEventListener("keydown", function(e) {
+                    if (e.key === 'Enter') {
+                        setImageScale(parseInt(document.getElementById("preview_scale").value));
+                        $('#preview_scale').trigger("blur");
+                    }
+                });
+
+                var current_page = 0;
+                var page_scroll_limit = 500;
+                var last_update = Date.now();
+                var top1, top2, top_count = 0;
+
+                top1 = top2 = $('#file-0').offset().top;
+                while (top2 === top1 ) { top2 = $('#file-' + ++top_count).offset().top; }
+                var page_cols = top_count;
+                var page_row_height = $('#file-' + page_cols).offset().top - $('#file-0').offset().top;
+                var page_rows = parseInt($('#file-container')[0].scrollHeight / page_row_height);
+
+                $('#file-container').bind('mousewheel', function(e){
+                    e.preventDefault();
+
+                    var changed = false;
+                    if (e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < -80) {
+                        if ((current_page < page_rows - 1) && ((Date.now() - last_update) > page_scroll_limit)) {
+                            current_page++;
+                            changed = true;
+                            last_update = Date.now();
+                        }
+                    } 
+                    else if (e.originalEvent.wheelDelta > 80) {
+                        if ((current_page > 0) && ((Date.now() - last_update) > page_scroll_limit)) {
+                            current_page--;
+                            changed = true;
+                            last_update = Date.now();
+                        }
+                    }
+
+                    if (changed) {
+                        var start = $('#file-container').scrollTop();
+                        var delta = -(start - (current_page * page_row_height)) / 50;
+                        var curr = 1;
+
+                        var animateScroll = setInterval(function() { $('#file-container').scrollTop(start + (curr++ * delta)); }, 5);
+                        setTimeout(function() { clearInterval(animateScroll); $('#file-container').scrollTop(current_page * page_row_height); }, 250);
+                    }
+                });
             });
             
-            $(window).resize(function(){
-            });
-
+            //$(window).resize(function(){ });
             //$(function () {});
 
             function fillTestData() {

@@ -13,6 +13,15 @@
 
 .canvas-style { background-color: #dde; border: 1px solid black; }
 
+#scale_dropdown { min-width: 10px; max-width: 160%; }
+.scale_input { position: absolute; max-width: 100px; top: 65px; left: 80%; z-index: 50; }
+#input-group-scale { -webkit-animation-duration: 0.75s; animation-duration: 0.75s; -moz-animation-duration: 0.75s; -o-animation-duration: 0.75s; }
+
+.scale-fade {
+    opacity: 0.3;
+    transition: opacity 0.5s; -webkit-transition: opacity 0.5s; -moz-transition: opacity 0.5s; -ms-transition: opacity 0.5s; -o-transition: opacity 0.5s;
+}
+
 .form-group { line-height: 1em; margin-top: 0px; margin-top: 0px; margin-bottom: 0px; }
 #form-algorithm { text-align: center; }
 #form-algorithm .form-control-label { font-size: 0.6em; color: white; margin-top: 0px; margin-bottom: 0px; }

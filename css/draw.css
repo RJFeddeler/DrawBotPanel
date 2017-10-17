@@ -32,6 +32,7 @@
 #filemanager-heading .draw-filemanager {}
 #filemanager-body .draw-filemanager {}
 
+.no-height { height: 3px; }
 .dropdown-submenu { position: relative; }
 .dropdown-submenu>.dropdown-menu {
     top: 0;
@@ -66,12 +67,12 @@
     border-radius: 4px;
 }
 
-#file-container { height: 350px; padding-top: 8px; overflow-y: scroll; }
+#file-container { height: 350px; margin: 0px 20px 0px 20px; padding-top: 8px; overflow-y: hidden; }
 
-#file { margin-right: 25px; }
-#file .card { width: 100%; background: #ffffff; text-align: center; float: left; position: relative; border-radius: 5px; padding: 0 10px; margin-top: 45px; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3); }
-#file .display-shortcuts:hover .thumb { top: -21%; }
-#file .card .thumb {
+.file { margin-right: 25px; }
+.file .card { width: 100%; background: #ffffff; text-align: center; float: left; position: relative; border-radius: 5px; padding: 0 10px; margin-top: 50px; margin-bottom: 60px; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4); }
+.file .display-shortcuts:hover .thumb { top: -21%; }
+.file .card .thumb {
   width: 90%;
   height: 100px;
   background: #000;
@@ -91,11 +92,11 @@
   transition: 0.3s cubic-bezier(0.67, -0.12, 0.45, 1.5);
   box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
 }
-#file .card .shortcut { height: 40px; margin: 50px auto 0 auto; }
-#file .card .shortcut i { opacity: 0.6; }
-#file .card .shortcut i:hover { opacity: 1.0; }
-#file .card h4 { font-size: 1.2em; font-weight: 700; margin-top: 0px; color: #007bff; opacity: 0.8; }
-#file .card hr { width: 10%; opacity: 0.8; margin: 0px auto; }
-#file .card .descrip1 { margin: 0px; font-size: 0.8em; line-height: 20px; opacity: 0.8; }
-#file .card .descrip2 { margin: 10px 1px 1px 1px; font-size: 0.6em; line-height: 15px; opacity: 0.8; }
-#file .card .btn-draw { margin-bottom: 10px; }
+.file .card .shortcut { height: 40px; margin: 50px auto 0 auto; }
+.file .card .shortcut i { opacity: 0.6; }
+.file .card .shortcut i:hover { opacity: 1.0; }
+.file .card h4 { font-size: 1.2em; font-weight: 700; margin-top: 0px; color: #007bff; opacity: 0.8; }
+.file .card hr { width: 10%; opacity: 0.8; margin: 0px auto; }
+.file .card .descrip1 { margin: 0px; font-size: 0.8em; line-height: 20px; opacity: 0.8; }
+.file .card .descrip2 { margin: 10px 1px 1px 1px; font-size: 0.6em; line-height: 15px; opacity: 0.8; }
+.file .card .btn-draw { margin-bottom: 10px; }

@@ -1,3 +1,5 @@
+var draw_firstShow = true;
+
 var fileList = {
     count: 0,
     file: []
@@ -66,6 +68,49 @@ function fileList_GenerateHTML() {
 
         $("#file-container").append(fileHTML);
     }
+}
+
+function init_scroller() {
+    var current_page = 0;
+    var page_scroll_limit = 500;
+    var last_update = Date.now();
+    var top1, top2, top_count = 0;
+
+    top1 = top2 = $('#file-0').offset().top;
+    console.log($('#file-0').offset().top);
+    while (top2 === top1 ) { top2 = $('#file-' + ++top_count).offset().top; }
+    var page_cols = top_count;
+    var page_row_height = $('#file-' + page_cols).offset().top - $('#file-0').offset().top;
+    var page_rows = parseInt($('#file-container')[0].scrollHeight / page_row_height);
+
+    $('#file-container').bind('mousewheel', function(e){
+        e.preventDefault();
+
+        var changed = false;
+        if (e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < -80) {
+            if ((current_page < page_rows - 1) && ((Date.now() - last_update) > page_scroll_limit)) {
+                current_page++;
+                changed = true;
+                last_update = Date.now();
+            }
+        } 
+        else if (e.originalEvent.wheelDelta > 80) {
+            if ((current_page > 0) && ((Date.now() - last_update) > page_scroll_limit)) {
+                current_page--;
+                changed = true;
+                last_update = Date.now();
+            }
+        }
+
+        if (changed) {
+            var start = $('#file-container').scrollTop();
+            var delta = -(start - (current_page * page_row_height)) / 50;
+            var curr = 1;
+
+            var animateScroll = setInterval(function() { $('#file-container').scrollTop(start + (curr++ * delta)); }, 5);
+            setTimeout(function() { clearInterval(animateScroll); $('#file-container').scrollTop(current_page * page_row_height); }, 250);
+        }
+    });
 }
 
 function spawnFileShortcutPopovers() {

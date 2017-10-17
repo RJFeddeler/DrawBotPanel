@@ -1,15 +1,17 @@
 function annealStart() {
-	showAlertError("Please load a file first.");
+	scaleBoxError();
+}
+
+function annealPause() {
 
 }
 
-function spawnUploadEventListeners() {
-	document.getElementById("btn-anneal-start").addEventListener("click", annealStart);
+function annealStop() {
+
 }
 
 function loadNewFile() {
 	var validFileTypes = ['rob', 'jpg', 'jpeg', 'png', 'bmp', 'svg'];
-	var drawbot = new Drawbot();
 
 	if (fileInput.files && fileInput.files[0]) {
 	    var file = fileInput.files[0];
@@ -58,13 +60,13 @@ function loadFiletypeROB(file) {
 
         lines.forEach(function(line, index) {
             var words = line.split(',');
+            if (words[0] === 'C11')
+            	app.addLineList(words);
             if (words[0] === 'C12')
-                drawbot.AddPolygon(words);
+                app.addPolygon(words);
         });
 
-        drawbot.DrawLines(drawing);
-
-
+        app.drawLines();
     }
 
     reader.readAsText(file);
@@ -92,9 +94,10 @@ function LoadFiletypeRaster(file) {
 	document.getElementById("modal-canvas").addEventListener("mouseenter", showZoomCanvas);
 	document.getElementById("modal-canvas").addEventListener("mouseleave", hideZoomCanvas);
 	document.getElementById("btn_filter_apply").addEventListener("click", updateFilteredImg);
+	document.getElementById("btn_filter_save").addEventListener("click", function() { traceCanvas(getCanvasData(canvas_offscreen)); });
 
 	loadSliders();
-	$("#imgFilterModal").on("show.bs.modal", function() { var height = $(window).height() - 200; $(this).find(".modal-body").css("max-height", height); });
+	$("#imgFilterModal").on("show.bs.modal", function() { var height = 732; $(this).find(".modal-body").css("max-height", height); }); //var height = $(window).height() - 200;
 	$('#imgFilterModal').modal({ keyboard: false });
 
 	img.addEventListener("load", onloadImage);
@@ -103,6 +106,13 @@ function LoadFiletypeRaster(file) {
 	if (typeof(Worker) !== "undefined") {
 		worker = new Worker('js/worker.js');
 	  	worker.addEventListener('message', workerCallback, false);
+	}
+
+	function getCanvasData(canvas) {
+		var ctx = canvas.getContext("2d");
+		var data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+		return data;
 	}
 
 	function onloadImage() {
@@ -265,4 +275,56 @@ function LoadFiletypeRaster(file) {
 		$("#sliderVal_hysteresis2").text(tuple[1]);
 		$("#filter_cannyHysteresis").on("slide", function(slideEvt) { $("#sliderVal_hysteresis1").text(slideEvt.value[0]); $("#sliderVal_hysteresis2").text(slideEvt.value[1]); });
     }
+}
+
+var scale_value 			= 100;
+var scale_opacity_active 	= 1.0;
+var scale_opacity_inactive 	= 0.3;
+var timeOut;
+
+function setImageScale(scale) {
+	var minVal = 1, maxVal = 200;
+
+    if (scale && scale >= minVal && scale <= maxVal)
+        document.getElementById("preview_scale").value = scale_value = scale;
+    else
+        showAlertError("Please choose an integer in the range of " + minVal + " - " + maxVal + "%");
+	
+    setImageScaleBoxInactive();
+}
+
+function scaleBoxError() {
+	var animationName = 'animated rubberBand';
+	var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+	$('#input-group-scale').addClass(animationName).one(animationEnd, function() {
+		$(this).removeClass(animationName);
+	});
+
+	showAlertError("Please choose a valid integer in the range.");
+}
+
+function scaleBoxChange(animOut = 'zoomOut', animIn = 'bounceIn') {
+	var animationName = 'animated ' + animOut;
+	var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+	$('#input-group-scale').addClass(animationName).one(animationEnd, function() {
+		$(this).removeClass(animationName);
+
+		animationName = 'animated ' + animIn;
+		$('#input-group-scale').addClass(animationName).one(animationEnd, function() {
+			$(this).removeClass(animationName);
+		});
+	});
+}
+
+function setImageScaleBoxActive() {
+	clearTimeout(timeOut);
+	$('#input-group-scale').css("opacity", scale_opacity_active);
+}
+
+function setImageScaleBoxInactive(milliseconds = 1000) {
+	clearTimeout(timeOut);
+	timeOut = setTimeout(function() {
+		$('#input-group-scale').css("opacity", scale_opacity_inactive);
+		$('#preview_scale').val(scale_value);
+	}, milliseconds);
 }

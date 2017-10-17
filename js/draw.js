@@ -1,5 +1,14 @@
+var fileList = {
+    count: 0,
+    file: []
+}
+
+function fileList_GenerateList() {
+
+}
+
 // Create cards for files in the file manager //
-function generateFileList() {
+function fileList_GenerateHTML() {
     var fileHTML;
     for (i = 0; i < fileList.count; i++) {
         var month;
@@ -33,7 +42,7 @@ function generateFileList() {
             formattedDate = month + " " + fileList.file[i].date.day + ", " + fileList.file[i].date.year;
         }
 
-        fileHTML =  '<div id="file">' +
+        fileHTML =  '<div class="file" id="file-' + i + '">' + 
                         '<div class="card">' +
                             '<span class="display-shortcuts">' +
                                 '<div class="thumb" style="background-image: url(\'images/preview/' + fileList.file[i].image + '\')"></div>' +

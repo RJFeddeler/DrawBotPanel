@@ -2,7 +2,7 @@ var fileList = {
 	count : 15,
 	file: [
 		{ 	fname : "MonaLisa_01",
-			image : "monalisa.png",
+			image : "default.png",
 			fileSize : 1.2,
 			width : 100,
 			height : 50,
@@ -15,7 +15,7 @@ var fileList = {
 			}
 		},
 		{ 	fname : "MonaLisa_02",
-			image : "monalisa.png",
+			image : "default.png",
 			fileSize : 1.2,
 			width : 100,
 			height : 50,

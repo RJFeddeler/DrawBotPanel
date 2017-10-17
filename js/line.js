@@ -1,36 +1,34 @@
-function Line(startX, startY) {
-	this.startPoint = new Point(startX, startY);
-	this.endPoint = this.startPoint;
-	this.closed = false;
-	this.offset = 0;
+class Line {
+	constructor(x, y) {
+		this.startPoint = new Point(x, y);
+		this.endPoint = this.startPoint;
+		this.closed = false;
+	}
 
-	this.addPoint = function(x, y) {
-		var point = new Point(x, y);
+	addPoint(x, y) {
+		var p = new Point(x, y);
 
-		this.endPoint.next = point;
+		this.endPoint.next = p;
 		this.endPoint = this.endPoint.next;
 	}
 
-	this.getLength = function() {
+	get length() {
 		var length = 0.0;
 		p = this.startPoint;
 
 		while (p.next) {
-			length += p.getDistanceToNext();
+			length += p.distanceToNext;
 			p = p.next;
 		}
 
 		return length;
 	}
 
-	this.isClosed = function() {
-		if (this.closed)
-			return true;
-
-		return false;
+	getClosed() {
+		return this.closed;
 	}
 
-	this.setClosed = function(value) {
+	setClosed(value) {
 		this.closed = value;
 	}
 }

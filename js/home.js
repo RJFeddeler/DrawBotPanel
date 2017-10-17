@@ -12,6 +12,8 @@ function fillStateData() {
     document.getElementById("idMemCardLabel").innerHTML = (state.memCardLabel == "" ? "&nbsp" : state.memCardLabel);
     document.getElementById("idMemCardCapacity").innerHTML = (state.memCardCapacity == "" ? "&nbsp" : state.memCardCapacity);
     document.getElementById("idMemCardUsedSpace").innerHTML = (((state.memCardCapacity == "") || (state.memCardFreeSpace == "")) ? "&nbsp" : (state.memCardCapacity - state.memCardFreeSpace));
+    document.getElementById("idMemCardSeparator").innerHTML = (state.printAreaWidth == "" ? "&nbsp" : "of");
+    document.getElementById("idMemCardCapacity").innerHTML = (state.memCardCapacity == "" ? "&nbsp" : state.memCardCapacity);
     document.getElementById("idMemCardFreeSpace").innerHTML = (state.memCardFreeSpace == "" ? "&nbsp" : state.memCardFreeSpace);
 
     document.getElementById("idWifiStatus").innerHTML = (WifiStatusEnum.properties[state.wifiStatus] === undefined ? "&nbsp" : WifiStatusEnum.properties[state.wifiStatus].display);
@@ -23,7 +25,6 @@ function fillStateData() {
     document.getElementById("idWifiDHCP").innerHTML = (BooleanEnum.properties[state.wifiDHCP] === undefined ? "&nbsp" : BooleanEnum.properties[state.wifiDHCP].display_alt1);
     document.getElementById("idWifiDHCP").style.color = (BooleanEnum.properties[state.wifiDHCP] === undefined ? "#007bff" : BooleanEnum.properties[state.wifiDHCP].color);
     document.getElementById("idWifiIP").innerHTML = (state.wifiIP == "" ? "&nbsp" : state.wifiIP);
-    document.getElementById("idWifiNetmask").innerHTML = (state.wifiNetmask == "" ? "&nbsp" : state.wifiNetmask);
     document.getElementById("idWifiGateway").innerHTML = (state.wifiGateway == "" ? "&nbsp" : state.wifiGateway);
 }
 

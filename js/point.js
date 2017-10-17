@@ -1,19 +1,22 @@
-function Point(x, y) {
- 	this.x = x;
- 	this.y = y;
- 	this.next = null;
+class Point {
+	constructor(x, y) {
+		this.x = x;
+	 	this.y = y;
 
- 	this.getDistanceToPoint = function(v) {
-  		if (v == null)
+	 	this.next = null;
+	}
+
+ 	distanceToPoint(p) {
+  		if (p === null)
   			return 0.0;
 
-  		var delta_x = this.x - v.x;
-		var delta_y = this.y - v.y;
+  		var deltaX = this.x - p.x;
+		var deltaY = this.y - p.y;
 
-		return Math.sqrt(delta_x * delta_x + delta_y * delta_y);
+		return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
   	}
 
-  	this.getDistanceToNext = function() {
-  		return this.getDistanceToPoint(this.next);
+  	get distanceToNext() {
+  		return this.distanceToPoint(this.next);
   	}
 }

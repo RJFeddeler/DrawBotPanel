@@ -26,6 +26,10 @@ function fillStateData() {
     document.getElementById("idWifiDHCP").style.color = (BooleanEnum.properties[state.wifiDHCP] === undefined ? "#007bff" : BooleanEnum.properties[state.wifiDHCP].color);
     document.getElementById("idWifiIP").innerHTML = (state.wifiIP == "" ? "&nbsp" : state.wifiIP);
     document.getElementById("idWifiGateway").innerHTML = (state.wifiGateway == "" ? "&nbsp" : state.wifiGateway);
+
+    elements = document.getElementsByClassName("progress-separator");
+    count = elements.length;
+    for (i = 0; i < count; i++) { elements[i].innerHTML = (state.printAreaWidth == "" ? "&nbsp" : "and"); }
 }
 
 // Insert value unit types //
@@ -45,4 +49,16 @@ function fillStateUnits() {
     elements = document.getElementsByClassName("unit-storage");
     count = elements.length;
     for (i = 0; i < count; i++) { elements[i].innerHTML = "<small>MB</small>"; }
+
+    elements = document.getElementsByClassName("unit-time-hr");
+    count = elements.length;
+    for (i = 0; i < count; i++) { elements[i].innerHTML = "<small>h</small>"; }
+
+    elements = document.getElementsByClassName("unit-time-min");
+    count = elements.length;
+    for (i = 0; i < count; i++) { elements[i].innerHTML = "<small>m</small>"; }
+
+    elements = document.getElementsByClassName("unit-time-sec");
+    count = elements.length;
+    for (i = 0; i < count; i++) { elements[i].innerHTML = "<small>s</small>"; }
 }

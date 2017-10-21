@@ -15,7 +15,9 @@
 .margin-no { margin: 0px 0px; }
 .trim { margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; }
 .lineheight-sm { line-height: 1em; }
+.lineheight-xs { line-height: 0.8em; }
 .font-sm { font-size: 0.7em; }
+.font-xs { font-size: 0.5em; }
 
 .card { margin-bottom: 20px; padding-bottom: 30px; }
 .card-no-bottom { margin-bottom: 0px; padding-bottom: 0px; }

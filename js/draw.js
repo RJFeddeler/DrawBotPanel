@@ -70,33 +70,37 @@ function fileList_GenerateHTML() {
     }
 }
 
-function init_scroller() {
-    var current_page = 0;
+var scroll_page_rows = 0;
+var scroll_page_height = 0;
+var scroll_current_page = 0;
+
+function set_scroller() {
+    set_scroller.top_count = 0;
+    set_scroller.top1 = set_scroller.top2 = $('#file-0').offset().top;
+    while (set_scroller.top2 === set_scroller.top1 ) { set_scroller.top2 = $('#file-' + ++set_scroller.top_count).offset().top; }
+    scroll_page_height = $('#file-' + set_scroller.top_count).offset().top - $('#file-0').offset().top;
+    scroll_page_rows = parseInt($('#file-container')[0].scrollHeight / scroll_page_height);
+    console.log("scroll_page_rows: " + scroll_page_rows);
+}
+
+function scroller() {
     var page_scroll_limit = 500;
     var last_update = Date.now();
-    var top1, top2, top_count = 0;
-
-    top1 = top2 = $('#file-0').offset().top;
-    console.log($('#file-0').offset().top);
-    while (top2 === top1 ) { top2 = $('#file-' + ++top_count).offset().top; }
-    var page_cols = top_count;
-    var page_row_height = $('#file-' + page_cols).offset().top - $('#file-0').offset().top;
-    var page_rows = parseInt($('#file-container')[0].scrollHeight / page_row_height);
-
+    
     $('#file-container').bind('mousewheel', function(e){
         e.preventDefault();
 
         var changed = false;
         if (e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < -80) {
-            if ((current_page < page_rows - 1) && ((Date.now() - last_update) > page_scroll_limit)) {
-                current_page++;
+            if ((scroll_current_page < scroll_page_rows - 1) && ((Date.now() - last_update) > page_scroll_limit)) {
+                scroll_current_page++;
                 changed = true;
                 last_update = Date.now();
             }
         } 
         else if (e.originalEvent.wheelDelta > 80) {
-            if ((current_page > 0) && ((Date.now() - last_update) > page_scroll_limit)) {
-                current_page--;
+            if ((scroll_current_page > 0) && ((Date.now() - last_update) > page_scroll_limit)) {
+                scroll_current_page--;
                 changed = true;
                 last_update = Date.now();
             }
@@ -104,20 +108,30 @@ function init_scroller() {
 
         if (changed) {
             var start = $('#file-container').scrollTop();
-            var delta = -(start - (current_page * page_row_height)) / 50;
+            var delta = -(start - (scroll_current_page * scroll_page_height)) / 50;
             var curr = 1;
 
             var animateScroll = setInterval(function() { $('#file-container').scrollTop(start + (curr++ * delta)); }, 5);
-            setTimeout(function() { clearInterval(animateScroll); $('#file-container').scrollTop(current_page * page_row_height); }, 250);
+            setTimeout(function() { clearInterval(animateScroll); $('#file-container').scrollTop(scroll_current_page * scroll_page_height); }, 250);
         }
     });
 }
 
 function spawnFileShortcutPopovers() {
     for (i = 1; i <= fileList.count; i++) {
-        $('#file-copy-' + i).popover({ html: true, content: "<font color='white'>Copy</font>", trigger: 'hover', placement:'bottom' })
-        $('#file-refactor-' + i).popover({ html: true, content: "<font color='white'>Refactor</font>", trigger: 'hover', placement:'bottom' })
-        $('#file-rename-' + i).popover({ html: true, content: "<font color='white'>Rename</font>", trigger: 'hover', placement:'bottom' })
-        $('#file-delete-' + i).popover({ html: true, content: "<font color='white'>Delete</font>", trigger: 'hover', placement:'bottom' })
+        $('#file-copy-' + i).popover({ html: true, content: "<font color='white'>Copy</font>", trigger: 'hover', placement:'bottom' });
+        $('#file-refactor-' + i).popover({ html: true, content: "<font color='white'>Refactor</font>", trigger: 'hover', placement:'bottom' });
+        $('#file-rename-' + i).popover({ html: true, content: "<font color='white'>Rename</font>", trigger: 'hover', placement:'bottom' });
+        $('#file-delete-' + i).popover({ html: true, content: "<font color='white'>Delete</font>", trigger: 'hover', placement:'bottom' });
     }
+}
+
+function spawnFreeDrawPopovers() {
+    $('#draw_line').popover({ html: true, content: "<font color='white'>Line</font>", trigger: 'hover', placement:'bottom' });
+    $('#draw_square').popover({ html: true, content: "<font color='white'>Rectangle</font>", trigger: 'hover', placement:'bottom' });
+    $('#draw_circle').popover({ html: true, content: "<font color='white'>Ellipse</font>", trigger: 'hover', placement:'bottom' });
+    $('#draw_htext').popover({ html: true, content: "<font color='white'>Horizontal Text</font>", trigger: 'hover', placement:'bottom' });
+    $('#draw_vtext').popover({ html: true, content: "<font color='white'>Vertical Text</font>", trigger: 'hover', placement:'bottom' });
+    $('#draw_pencil').popover({ html: true, content: "<font color='white'>Pencil</font>", trigger: 'hover', placement:'bottom' });
+    $('#draw_undo').popover({ html: true, content: "<font color='white'>Undo</font>", trigger: 'hover', placement:'bottom' });
 }

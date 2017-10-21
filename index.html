@@ -60,6 +60,7 @@
 
         <!-- NavBar code -->
         <nav class="nav navbar navbar-expand-lg navbar-dark bg-primary shadow2">
+            <a class="navbar-brand" href="#"></a>
             <img class="logo" src="images/logo.png" />
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText">
                 <span class="navbar-toggler-icon"></span>
@@ -181,14 +182,14 @@
                                                         <div class="d-flex ml-2">
                                                             <div class="card-list font-sm" id="idMemCardFreeSpace"></div>
                                                             <div class="list-units unit-storage font-sm"></div>
-                                                            <div class="card-list list-divider font-sm" id="idMemCardSeparator"></div>
-                                                            <div class="card-list font-sm" id="idMemCardCapacity"></div>
-                                                            <div class="list-units unit-storage font-sm"></div>
                                                         </div>
                                                     </li>
                                                     <li class="list-group-item list-value flex-column lineheight-sm trim">
                                                         <div class="d-flex ml-2">
                                                             <div class="card-list font-sm" id="idMemCardUsedSpace"></div>
+                                                            <div class="list-units unit-storage font-sm"></div>
+                                                            <div class="card-list list-divider font-sm" id="idMemCardSeparator"></div>
+                                                            <div class="card-list font-sm" id="idMemCardCapacity"></div>
                                                             <div class="list-units unit-storage font-sm"></div>
                                                         </div>
                                                     </li>
@@ -197,130 +198,340 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                        </div>
-
-                        <!-- Card: Preview -->
-                        <div class="col-lg-8 card-height-full-pad">
-                            <div class="card home-preview bg-primary card-height-full shadow">
-                                <div class="card-header card-title-stripe text-white text-center shadow2">
-                                    <h5>Preview</h5>
-                                </div>
-                                <div class="card-body pb-0 pt-3">
-                                    <div class="d-flex">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                        <!-- Card: Network -->
-                        <div class="col-lg-4">
-                            <div class="card home-network bg-primary shadow">
-                                <div class="card-header card-title-stripe text-white text-center shadow2">
-                                    <h5>Network</h5>
-                                </div>
-                                <div class="card-body pb-0">
-                                    <div class="d-flex">
-                                        <!-- Names List Group -->
-                                        <ul class="list-group list-name-size">
-                                            <li class="list-group-item list-name flex-column lineheight-sm trim">
-                                                <div class="card-list font-sm">Connection Status:</div>
-                                            </li>
-                                            <li class="list-group-item list-name flex-column lineheight-sm trim">
-                                                <div class="card-list font-sm">Mode:</div>
-                                            </li>
-                                            <li class="list-group-item list-name flex-column lineheight-sm trim">
-                                                <div class="card-list font-sm">SSID:</div>
-                                            </li>
-                                            <li class="list-group-item list-name flex-column lineheight-sm trim">
-                                                <div class="card-list font-sm">Signal Strength:</div>
-                                            </li>
-                                            <li class="list-group-item list-name flex-column lineheight-sm trim">
-                                                <div class="card-list font-sm">Security:</div>
-                                            </li>
-                                            <li class="list-group-item list-name flex-column lineheight-sm trim">
-                                                <div class="card-list font-sm">DHCP:</div>
-                                            </li>
-                                            <li class="list-group-item list-name flex-column lineheight-sm trim">
-                                                <div class="card-list font-sm">IP Address:</div>
-                                            </li>
-                                            <li class="list-group-item list-name flex-column lineheight-sm trim">
-                                                <div class="card-list font-sm">Gateway:</div>
-                                            </li>
-                                        </ul>
-                                        <!-- Values List Group -->
-                                        <ul class="list-group list-value-size">
-                                            <li class="list-group-item list-value flex-column lineheight-sm trim">
-                                                <div class="d-flex ml-2">
-                                                    <div class="card-list font-sm" id="idWifiStatus"></div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item list-value flex-column lineheight-sm trim">
-                                                <div class="d-flex ml-2">
-                                                    <div class="card-list font-sm" id="idWifiMode"></div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item list-value flex-column lineheight-sm trim">
-                                                <div class="d-flex ml-2">
-                                                    <div class="card-list font-sm" id="idWifiSSID"></div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item list-value flex-column lineheight-sm trim">
-                                                <div class="d-flex ml-2">
-                                                    <div class="card-list font-sm" id="idWifiSignalStrength"></div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item list-value flex-column lineheight-sm trim">
-                                                <div class="d-flex ml-2">
-                                                    <div class="card-list font-sm" id="idWifiSecurity"></div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item list-value flex-column lineheight-sm trim">
-                                                <div class="d-flex ml-2">
-                                                    <div class="card-list font-sm" id="idWifiDHCP"></div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item list-value flex-column lineheight-sm trim">
-                                                <div class="d-flex ml-2">
-                                                    <div class="card-list font-sm" id="idWifiIP"></div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item list-value flex-column lineheight-sm trim">
-                                                <div class="d-flex ml-2">
-                                                    <div class="card-list font-sm" id="idWifiGateway"></div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                            <div class="row">
+                                <!-- Card: Network -->
+                                <div class="col">
+                                    <div class="card home-network bg-primary shadow">
+                                        <div class="card-header card-title-stripe text-white text-center shadow2">
+                                            <h5>Network</h5>
+                                        </div>
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex">
+                                                <!-- Names List Group -->
+                                                <ul class="list-group list-name-size">
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">Connection Status:</div>
+                                                    </li>
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">Mode:</div>
+                                                    </li>
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">SSID:</div>
+                                                    </li>
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">Signal Strength:</div>
+                                                    </li>
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">Security:</div>
+                                                    </li>
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">DHCP:</div>
+                                                    </li>
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">IP Address:</div>
+                                                    </li>
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">Gateway:</div>
+                                                    </li>
+                                                </ul>
+                                                <!-- Values List Group -->
+                                                <ul class="list-group list-value-size">
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idWifiStatus"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idWifiMode"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idWifiSSID"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idWifiSignalStrength"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idWifiSecurity"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idWifiDHCP"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idWifiIP"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idWifiGateway"></div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Card: Arms -->
-                        <div class="col-lg-2 card-height-full-pad">
-                            <div class="card home-arms bg-primary card-height-full shadow">
+                        <div class="col-lg-2">
+                            <!-- Card: Arms -->
+                            <div class="card home-arms bg-primary shadow">
                                 <div class="card-header card-title-stripe text-white text-center shadow2">
                                     <h5>Arms</h5>
                                 </div>
-                                <div class="card-body pb-0 pt-3">
-                                    <div class="d-flex">
+                                <div class="card-body pt-2 pb-0">
+                                    <div class="row">
+                                        <div class="col-12 text-center lineheight-xs mb-2 mt-2">
+                                            <span class="badge badge-common badge-color1">Arm 1</span>
+                                            <span class="badge badge-common badge-color2">Arm 2</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 trim">
+                                            <div class="card arms_arm">
+                                                <div class="card-header card-title-arm text-center rounded pt-0 mt-0">
+                                                    <strong>Shoulder</strong>
+                                                </div>
+                                                <div class="card-body trim" id="arms_stepper1">
+                                                    <div class="text-center lineheight-xs">
+                                                        <div class="arms-text">Range:</div>
+                                                        <span class="badge badge-common badge-color1">2000</span>
+                                                        <span class="badge badge-common badge-color2">2000</span>
+                                                        <div class="arms-text">Steps per Rev:</div>
+                                                        <span class="badge badge-common badge-color1">400</span>
+                                                        <span class="badge badge-common badge-color2">400</span>
+                                                        <div class="arms-text">Microstep:</div>
+                                                        <span class="badge badge-common badge-color1">32</span>
+                                                        <span class="badge badge-common badge-color2">32</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 trim">
+                                            <div class="card arms_arm">
+                                                <div class="card-header card-title-arm text-center rounded pt-0 mt-0">
+                                                    <strong>Elbow</strong>
+                                                </div>
+                                                <div class="card-body trim" id="arms_stepper1">
+                                                    <div class="text-center lineheight-xs">
+                                                        <div class="arms-text">Range:</div>
+                                                        <span class="badge badge-common badge-color1">2500</span>
+                                                        <span class="badge badge-common badge-color2">2500</span>
+                                                        <div class="arms-text">Steps per Rev:</div>
+                                                        <span class="badge badge-common badge-color1">400</span>
+                                                        <span class="badge badge-common badge-color2">400</span>
+                                                        <div class="arms-text">Microstep:</div>
+                                                        <span class="badge badge-common badge-color1">32</span>
+                                                        <span class="badge badge-common badge-color2">32</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 trim">
+                                            <div class="card arms_arm">
+                                                <div class="card-header card-title-arm text-center rounded pt-0 mt-0">
+                                                    <strong>Hand</strong>
+                                                </div>
+                                                <div class="card-body trim" id="arms_stepper1">
+                                                    <div class="text-center lineheight-xs">
+                                                        <div class="arms-text">Range:</div>
+                                                        <span class="badge badge-common badge-color1">200</span>
+                                                        <span class="badge badge-common badge-color2">200</span>
+                                                        <div class="arms-text">Down Position:</div>
+                                                        <span class="badge badge-common badge-color1">160</span>
+                                                        <span class="badge badge-common badge-color2">160</span>
+                                                        <div class="arms-text">Up Position:</div>
+                                                        <span class="badge badge-common badge-color1">90</span>
+                                                        <span class="badge badge-common badge-color2">90</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Card: Progress -->
-                        <div class="col-lg-6 card-height-full-pad">
-                            <div class="card home-progress bg-primary card-height-full shadow">
-                                <div class="card-header card-title-stripe text-white text-center shadow2">
-                                    <h5>Progress</h5>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <!-- Card: preview -->
+                                <div class="col">
+                                    <div class="card home-preview bg-primary shadow">
+                                        <div class="card-header card-title-stripe text-white text-center shadow2">
+                                            <h5>Preview</h5>
+                                        </div>
+                                        <div class="card-body pb-2 pt-3">
+                                            <div class="d-flex" style="height: 235px">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body pb-0 pt-3">
-                                    <div class="d-flex">
+                            </div>
+                            <div class="row">
+                                <!-- Card: Progress -->
+                                <div class="col">
+                                    <div class="card home-progress bg-primary pb-2 shadow">
+                                        <div class="card-header card-title-stripe text-white text-center shadow2">
+                                            <h5>Progress</h5>
+                                        </div>
+                                        <div class="card-body pb-0 pt-3">
+                                            <div id="home_progress" class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 50%"><strong>50%</strong></div>
+                                            </div>
+
+                                            <div class="d-flex mt-2">
+                                                <!-- Names List Group -->
+                                                <ul class="list-group list-prog-sm list-prog-name">
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">Elapsed Time:</div>
+                                                    </li>
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">Lines Drawn:</div>
+                                                    </li>
+                                                </ul>
+                                                <!-- Values List Group -->
+                                                <ul class="list-group list-prog-md">
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idProgressTime1A">88</div>
+                                                            <div class="list-units unit-time-hr font-sm" id="idProgressTimeUnit1A"></div>
+                                                            <div class="card-list list-divider font-sm progress-separator"></div>
+                                                            <div class="card-list font-sm" id="idProgressTime1B">88</div>
+                                                            <div class="list-units unit-time-min font-sm" id="idProgressTimeUnit1B"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idProgressLine1">88</div>
+                                                            <div class="list-units unit-length font-sm"></div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <!-- Names List Group -->
+                                                <ul class="list-group list-prog-lg list-prog-name">
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">Time Remaining:</div>
+                                                    </li>
+                                                    <li class="list-group-item list-name flex-column lineheight-sm trim">
+                                                        <div class="card-list font-sm">Lines Remaining:</div>
+                                                    </li>
+                                                </ul>
+                                                <!-- Values List Group -->
+                                                <ul class="list-group list-prog-md">
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idProgressTime2A">88</div>
+                                                            <div class="list-units unit-time-hr font-sm" id="idProgressTimeUnit2A"></div>
+                                                            <div class="card-list list-divider font-sm progress-separator"></div>
+                                                            <div class="card-list font-sm" id="idProgressTime2B">88</div>
+                                                            <div class="list-units unit-time-min font-sm" id="idProgressTimeUnit2B"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                        <div class="d-flex ml-2">
+                                                            <div class="card-list font-sm" id="idProgressLine2">88</div>
+                                                            <div class="list-units unit-length font-sm"></div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="row">
+                                                <div class="card progress_arm pb-0 mr-auto">
+                                                    <div class="card-header card-title-arm text-center rounded pt-0 mt-0">
+                                                        <strong>Arm 1</strong>
+                                                    </div>
+                                                    <div class="card-body trim" id="prog_arm1">
+                                                        <div class="d-flex">
+                                                            <!-- Names List Group -->
+                                                            <ul class="list-group list-name-size2">
+                                                                <li class="list-group-item list-name flex-column lineheight-sm py-0 pr-2">
+                                                                    <div class="card-list font-sm">Position:</div>
+                                                                </li>
+                                                                <li class="list-group-item list-name flex-column lineheight-sm py-0 pr-2">
+                                                                    <div class="card-list font-sm">Lines Drawn:</div>
+                                                                </li>
+                                                                <li class="list-group-item list-name flex-column lineheight-sm py-0 pr-2">
+                                                                    <div class="card-list font-sm">Pen Position:</div>
+                                                                </li>
+                                                            </ul>
+                                                            <!-- Values List Group -->
+                                                            <ul class="list-group list-value-size">
+                                                                <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                                    <div class="d-flex ml-2">
+                                                                        <div class="card-list font-sm" id="arm1_1">1000, 2000</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                                    <div class="d-flex ml-2">
+                                                                        <div class="card-list font-sm" id="arm1_2">455 of 1200</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                                    <div class="d-flex ml-2">
+                                                                        <div class="card-list font-sm" id="arm1_4">Up</div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card progress_arm pb-0 ml-auto">
+                                                    <div class="card-header card-title-arm text-center rounded pt-0 mt-0">
+                                                        <strong>Arm 2</strong>
+                                                    </div>
+                                                    <div class="card-body trim" id="prog_arm2">
+                                                        <div class="d-flex">
+                                                            <!-- Names List Group -->
+                                                            <ul class="list-group list-name-size2">
+                                                                <li class="list-group-item list-name flex-column lineheight-sm py-0 pr-2">
+                                                                    <div class="card-list font-sm">Position:</div>
+                                                                </li>
+                                                                <li class="list-group-item list-name flex-column lineheight-sm py-0 pr-2">
+                                                                    <div class="card-list font-sm">Lines Drawn:</div>
+                                                                </li>
+                                                                <li class="list-group-item list-name flex-column lineheight-sm py-0 pr-2">
+                                                                    <div class="card-list font-sm">Pen Position:</div>
+                                                                </li>
+                                                            </ul>
+                                                            <!-- Values List Group -->
+                                                            <ul class="list-group list-value-size">
+                                                                <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                                    <div class="d-flex ml-2">
+                                                                        <div class="card-list font-sm" id="arm1_1">1000, 2000</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                                    <div class="d-flex ml-2">
+                                                                        <div class="card-list font-sm" id="arm1_2">455 of 1200</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="list-group-item list-value flex-column lineheight-sm trim">
+                                                                    <div class="d-flex ml-2">
+                                                                        <div class="card-list font-sm" id="arm1_4">Down</div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -389,7 +600,7 @@
                                         </span>
                                     </div>
                                     <div class="collapse white-links" role="tabpanel" data-parent="#accordion" id="freedraw-body">
-                                        <div class="card-body">
+                                        <div class="card-body text-center">
                                             <!--
                                                 <div class="btn-group btn-group-sm mr-4" data-toggle="buttons">
                                                     <label class="btn btn-secondary active">
@@ -401,14 +612,13 @@
                                                 </div>
                                             -->
 
-                                            <a href="#"><i class="fa fa-minus fa-lg fa-fw"></i></a>
-                                            <a href="#"><i class="fa fa-square-o fa-lg fa-fw"></i></a>
-                                            <a href="#"><i class="fa fa-circle-thin fa-lg fa-fw"></i></a>
-                                            <a href="#"><i class="fa fa-star-o fa-lg fa-fw"></i></a>
-                                            <a href="#"><i class="fa fa-heart-o fa-lg fa-fw"></i></a>
-                                            <a href="#"><i class="fa fa-text-width fa-lg fa-fw"></i></a>
-                                            <a href="#"><i class="fa fa-text-height fa-lg fa-fw"></i></a>
-                                            <a href="#"><i class="fa fa-pencil fa-lg fa-fw"></i></a>
+                                            <a href="#"><i id="draw_line" class="fa fa-minus fa-lg fa-fw"></i></a>
+                                            <a href="#"><i id="draw_square" class="fa fa-square-o fa-lg fa-fw"></i></a>
+                                            <a href="#"><i id="draw_circle" class="fa fa-circle-thin fa-lg fa-fw"></i></a>
+                                            <a href="#"><i id="draw_htext" class="fa fa-text-width fa-lg fa-fw"></i></a>
+                                            <a href="#"><i id="draw_vtext" class="fa fa-text-height fa-lg fa-fw"></i></a>
+                                            <a href="#"><i id="draw_pencil" class="fa fa-pencil fa-lg fa-fw"></i></a>
+                                            <a href="#"><i id="draw_undo" class="fa fa-undo fa-lg fa-fw"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -716,13 +926,12 @@
                         $('#nav-home').addClass("active");
                         break;
                 }
-            });
 
-            $(document).ready(function() {
                 $('a[data-toggle=popover]').popover();
                 spawnNavPopovers();
                 fileList_GenerateHTML();
                 spawnFileShortcutPopovers();
+                spawnFreeDrawPopovers();
 
                 fillTestData();
                 fillStateData();
@@ -769,11 +978,13 @@
                     }
                 });
 
-                $('#nav-draw').on("shown.bs.tab", function(e) { if (draw_firstShow) { init_scroller(); draw_firstShow = false; } });
+                $('#nav-draw').on("shown.bs.tab", function(e) { if (draw_firstShow) { set_scroller(); scroller(); draw_firstShow = false; } });
+                //document.getElementById('file-container').addEventListener("scroll", function() { alert("SCROLLED"); });
             });
             
-            //$(window).resize(function(){ });
-            //$(function () {});
+            $(window).resize(function(){
+                set_scroller();
+            });
 
             function fillTestData() {
                 state.robotState = 2; state.drawSpeed = 5; state.moveSpeed = 10; state.printAreaWidth = 250; state.printAreaHeight = 200; state.memCardType = 4; state.memCardLabel = "SDLabel";

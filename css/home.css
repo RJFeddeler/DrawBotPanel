@@ -1,21 +1,38 @@
 .pane-home {}
 
-.home-system { padding-bottom: 10px; }
+.home-system { padding-bottom: 10px; }    /* CAN I COMBINE THESE??? */
 .home-memorycard { padding-bottom: 10px; }
 .home-preview { padding-bottom: 10px; v}
 .home-network { padding-bottom: 10px; }
-.home-arms { padding-bottom: 10px; }
-.home-progress { padding-bottom: 10px; }
+.home-arms { padding-bottom: 0px; margin-bottom: 0px; }
+.home-progress { padding-bottom: 0px; margin-bottom: 0px; }
 
 .list-name { color: white; background-color: #007bff; border-color: #007bff; text-align: right; }
 .list-name-size { min-width: 50%; max-width: 50%; padding-right: 20px; }
+.list-name-size2 { min-width: 50%; max-width: 50%; padding-right: 0px; }
 .list-divider { color: #B0B0B0; padding-left: 8px; padding-right: 8px; }
 .list-value { color: #007bff; }
 .list-value-size { min-width: 50%; max-width: 50%; }
 .list-units { color: #222222; padding-left: 3px; }
+.list-prog-sm { min-width: 20%; max-width: 20%; }
+.list-prog-md { min-width: 25%; max-width: 25%; }
+.list-prog-lg { min-width: 30%; max-width: 30%; }
+.list-prog-name { padding-right: 20px; }
+.list-min { min-width: 50%; max-width: 50%; padding-right: 5px; }
+.list-min-value { min-width: 25%; max-width: 25%; padding-right: 5px; }
 
-.unit-percent {}
+.unit-percent {}  /* DO I NEED ALL THESE?? */
 .unit-length {}
 .unit-speed {}
 .unit-storage {}
 .unit-sigstrength {}
+
+.arms-text { color: white; font-size: 0.7em; font-weight: 500; margin-top: 8px; line-height: 1.2em; }
+.badge-common { font-size: 0.6em; font-weight: 500; line-height: 1.4em; width: 45%; height: 1.6em; margin-top: 3px; padding-left: 3px; padding-right: 3px; }
+.badge-color1 { background-color: #ddd; color: #222; }
+.badge-color2 { background-color: #bbb; color: #222; }
+
+.arms_arm { margin: 0px 5px 10px 5px; background-color: #007bff; border-color: #222; padding-bottom: 5px; }
+#home_progress { background-color: #fff; box-shadow: 0px 0px 1px 2px #222; }
+.progress_arm { margin: 10px 15px 0px 10px; width: 44%; background-color: #007bff; border-color: #222; } /* TOP RIGHT BOTTOM LEFT */
+.card-title-arm { padding-top: 0px; margin-top: 10px; height: 1.5em; font-size: 0.8em; background-color: #0275d8; color: #fff; border-color: #222; }

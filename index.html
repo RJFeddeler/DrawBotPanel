@@ -984,12 +984,8 @@
                 //document.getElementById('file-container').addEventListener("scroll", function() { alert("SCROLLED"); });
 
                 setTimeout(function() {
-                    if (overview != 'undefined')
-                        overview.loadOverviewComponents();
+                    overview.loadOverviewComponents();
                 }, 800);
-                // DELETE BELOW (AND MAYBE ABOVE)
-                //document.getElementById("arm_dont_need_this").addEventListener("click", function() { overview.updateOverview(0, 0, 0, 0); });
-                document.getElementById("arm_dont_need_this").addEventListener("click", function() { overview.test(); });
             });
             
             $(window).resize(function(){

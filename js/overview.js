@@ -96,6 +96,8 @@ class Overview {
         that.canvasContext.rect(that.drawingX, that.drawingY, that.offscreenWidth, that.offscreenHeight);
         that.canvasContext.fillStyle = 'white';
         that.canvasContext.fill();
+
+        this.updateOverview(190, 80, 60, 120);
     }
 
     loadOverviewComponents() {
@@ -120,10 +122,6 @@ class Overview {
         }).catch(function(e) {
             console.log("Error loading UI component [" + e + "]");
         });
-    }
-
-    test() {
-        this.updateOverview(190, 80, 60, 120);
     }
 
     updateOverview(x1, y1, x2, y2) {

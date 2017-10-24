@@ -46,6 +46,7 @@
         <script type="text/javaScript" src="js/application.js"></script>
         <script type="text/javaScript" src="js/energy_graph.js"></script>
         <script type="text/javaScript" src="js/preview.js"></script>
+        <script type="text/javaScript" src="js/overview.js"></script>
         <script type="text/javaScript" src="js/simulated_annealing.js"></script>
 
         <script type="text/javascript" src="js/file_list.js"></script>
@@ -294,7 +295,7 @@
                                 <div class="card-body pt-2 pb-0">
                                     <div class="row">
                                         <div class="col-12 text-center lineheight-xs mb-2 mt-2">
-                                            <span class="badge badge-common badge-color1">Arm 1</span>
+                                            <span class="badge badge-common badge-color1" id="arm_dont_need_this">Arm 1</span>
                                             <span class="badge badge-common badge-color2">Arm 2</span>
                                         </div>
                                     </div>
@@ -370,14 +371,14 @@
 
                         <div class="col-lg-6">
                             <div class="row">
-                                <!-- Card: preview -->
+                                <!-- Card: Overview -->
                                 <div class="col">
-                                    <div class="card home-preview bg-primary shadow">
+                                    <div class="card home-overview bg-primary shadow">
                                         <div class="card-header card-title-stripe text-white text-center shadow2">
-                                            <h5>Preview</h5>
+                                            <h5>Overview</h5>
                                         </div>
-                                        <div class="card-body pb-2 pt-3">
-                                            <div class="d-flex" style="height: 235px">
+                                        <div class="card-body pb-1 pt-2">
+                                            <div id="home-overview" class="text-center mt-2" style="width: 500px; height: 240px">
                                             </div>
                                         </div>
                                     </div>
@@ -484,7 +485,7 @@
                                                                 </li>
                                                                 <li class="list-group-item list-value flex-column lineheight-sm trim">
                                                                     <div class="d-flex ml-2">
-                                                                        <div class="card-list font-sm" id="arm1_4">Up</div>
+                                                                        <div class="card-list font-sm" id="arm1_3">Up</div>
                                                                     </div>
                                                                 </li>
                                                             </ul>
@@ -523,7 +524,7 @@
                                                                 </li>
                                                                 <li class="list-group-item list-value flex-column lineheight-sm trim">
                                                                     <div class="d-flex ml-2">
-                                                                        <div class="card-list font-sm" id="arm1_4">Down</div>
+                                                                        <div class="card-list font-sm" id="arm1_3">Down</div>
                                                                     </div>
                                                                 </li>
                                                             </ul>
@@ -655,7 +656,7 @@
                                 	</div>
                                     <div class="row">
                                         <div class="col">
-                                            <div class="d-flex justify-content-center canvas-style mt-0 mb-1 rounded shadow2" id="viewport-drawing">
+                                            <div class="d-flex justify-content-center canvas-style mt-0 mb-1 rounded shadow2" id="viewport-drawing" style="height: 320px">
                                             </div>
                                         </div>
                                     </div>
@@ -897,9 +898,14 @@
 		</div>
 
 		<script type="text/javascript">
-			var app = new App();
-			var preview = new Preview('viewport-drawing', 500, 400);
-        	var graph = new Energy_Graph();
+            fillTestData();
+            fillStateData();
+            fillStateUnits();
+
+            let app = new App();
+            let overview = new Overview('#home-overview');
+			let preview = new Preview('#viewport-drawing');
+        	let graph = new Energy_Graph();
 
             $(function () {
                 switch (window.location.hash.toLowerCase()) {
@@ -932,10 +938,6 @@
                 fileList_GenerateHTML();
                 spawnFileShortcutPopovers();
                 spawnFreeDrawPopovers();
-
-                fillTestData();
-                fillStateData();
-                fillStateUnits();
 
                 graph.Initialize(75, 100);
                 for (var i = 0; i < 125; i++)
@@ -980,10 +982,19 @@
 
                 $('#nav-draw').on("shown.bs.tab", function(e) { if (draw_firstShow) { set_scroller(); scroller(); draw_firstShow = false; } });
                 //document.getElementById('file-container').addEventListener("scroll", function() { alert("SCROLLED"); });
+
+                setTimeout(function() {
+                    if (overview != 'undefined')
+                        overview.loadOverviewComponents();
+                }, 800);
+                // DELETE BELOW (AND MAYBE ABOVE)
+                //document.getElementById("arm_dont_need_this").addEventListener("click", function() { overview.updateOverview(0, 0, 0, 0); });
+                document.getElementById("arm_dont_need_this").addEventListener("click", function() { overview.test(); });
             });
             
             $(window).resize(function(){
-                set_scroller();
+                if (!draw_firstShow)
+                    set_scroller();
             });
 
             function fillTestData() {

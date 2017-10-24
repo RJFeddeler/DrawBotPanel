@@ -2,14 +2,14 @@ class Preview {
     constructor(divContainerID, width, height) {
         this.canvasElement   = null;
         this.canvasContext   = null;
-        this.canvasWidth     = width;
-        this.canvasHeight    = height;
+        this.canvasWidth     = 0;
+        this.canvasHeight    = 0;
         this.isSupported     = false;
         this.alreadyCreated  = false;
         this.lineStarted     = false;
 
         if (this.alreadyCreated) {
-            document.getElementById(divContainerID).innerHTML = '';
+            $(divContainerID).html('');
             this.alreadyCreated = false;
         }
         
@@ -20,6 +20,9 @@ class Preview {
         else
             return;
         
+        this.canvasWidth = $(divContainerID).width();
+        this.canvasHeight = $(divContainerID).height();
+        
         this.canvasElement.setAttribute('width', this.canvasWidth);
         this.canvasElement.setAttribute('height', this.canvasHeight);
         
@@ -28,7 +31,7 @@ class Preview {
         //this.canvasContext.translate(0.5, 0.5); // Used to get a line width of 1
         this.canvasContext.fillStyle = 'rgb(255, 255, 255)';
         this.canvasContext.moveTo(0, this.canvasHeight);
-        document.getElementById(divContainerID).appendChild(this.canvasElement);
+        $(divContainerID).append(this.canvasElement);
         this.isSupported = true;
         this.alreadyCreated = true;
     }

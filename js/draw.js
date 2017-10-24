@@ -84,21 +84,21 @@ function set_scroller() {
 }
 
 function scroller() {
-    var page_scroll_limit = 500;
+    var page_scroll_limit = 600;
     var last_update = Date.now();
     
     $('#file-container').bind('mousewheel', function(e){
         e.preventDefault();
 
         var changed = false;
-        if (e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < -80) {
+        if (e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < -200) {
             if ((scroll_current_page < scroll_page_rows - 1) && ((Date.now() - last_update) > page_scroll_limit)) {
                 scroll_current_page++;
                 changed = true;
                 last_update = Date.now();
             }
         } 
-        else if (e.originalEvent.wheelDelta > 80) {
+        else if (e.originalEvent.wheelDelta > 200) {
             if ((scroll_current_page > 0) && ((Date.now() - last_update) > page_scroll_limit)) {
                 scroll_current_page--;
                 changed = true;
